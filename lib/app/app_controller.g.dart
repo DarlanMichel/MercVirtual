@@ -8,8 +8,8 @@ part of 'app_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$AppController on _AppBase, Store {
-  final _$valueAtom = Atom(name: '_AppBase.value');
+mixin _$AppController on _AppControllerBase, Store {
+  final _$valueAtom = Atom(name: '_AppControllerBase.value');
 
   @override
   int get value {
@@ -26,15 +26,16 @@ mixin _$AppController on _AppBase, Store {
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
-  final _$_AppBaseActionController = ActionController(name: '_AppBase');
+  final _$_AppControllerBaseActionController =
+      ActionController(name: '_AppControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_AppBaseActionController.startAction();
+    final _$actionInfo = _$_AppControllerBaseActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$_AppBaseActionController.endAction(_$actionInfo);
+      _$_AppControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_screen_controller.dart';
+part of 'cadastro_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'login_screen_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$LoginScreenController on _LoginScreenBase, Store {
-  final _$valueAtom = Atom(name: '_LoginScreenBase.value');
+mixin _$CadastroController on _CadastroControllerBase, Store {
+  final _$valueAtom = Atom(name: '_CadastroControllerBase.value');
 
   @override
   int get value {
@@ -26,16 +26,17 @@ mixin _$LoginScreenController on _LoginScreenBase, Store {
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
-  final _$_LoginScreenBaseActionController =
-      ActionController(name: '_LoginScreenBase');
+  final _$_CadastroControllerBaseActionController =
+      ActionController(name: '_CadastroControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_LoginScreenBaseActionController.startAction();
+    final _$actionInfo =
+        _$_CadastroControllerBaseActionController.startAction();
     try {
       return super.increment();
     } finally {
-      _$_LoginScreenBaseActionController.endAction(_$actionInfo);
+      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
