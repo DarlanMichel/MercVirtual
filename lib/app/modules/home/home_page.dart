@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_widget.dart';
+import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -11,20 +13,18 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ModularState<HomePage, HomeController> {
+
   int _selectedIndex = 0;
 
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final _widgetOptions = List<Widget>.unmodifiable([
     PromocaoScreenWidget(),
     SectionScreenWidget(),
     Text(
       'Index 2: Carrinho',
-      style: optionStyle,
     ),
     Text(
       'Index 3: Perfil',
-      style: optionStyle,
     ),
   ]);
 

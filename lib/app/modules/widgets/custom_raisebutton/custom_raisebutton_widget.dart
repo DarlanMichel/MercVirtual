@@ -4,7 +4,7 @@ class CustomRaisebuttonWidget extends StatelessWidget {
   final String text;
   final Color cor;
   final Color textcolor;
-  final Widget nav;
+  final String nav;
 
   const CustomRaisebuttonWidget({Key key,@required this.text,@required this.cor,@required this.textcolor,@required this.nav}) : super(key: key);
 
@@ -23,7 +23,8 @@ class CustomRaisebuttonWidget extends StatelessWidget {
             )
         ),
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> nav));
+          Navigator.pushNamed(context, nav);
+          //Navigator.push(context, MaterialPageRoute(builder: (context)=> nav));
         },
         color: cor,
         child: Text(
