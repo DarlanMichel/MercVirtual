@@ -17,45 +17,50 @@ class SectionScreenWidget extends StatelessWidget {
             ),
           ),
         ),
-        Table(
-          children: [
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
+        Expanded(
+          child: Container(
+            //height: MediaQuery.of(context).size.height,
+            child: Table(
+              children: [
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      CustomCardSectionWidget(),
+                      CustomCardSectionWidget(),
+                    ]
+                ),
+              ],
             ),
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
-            ),
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
-            ),
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
-            ),
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
-            ),
-            TableRow(
-                children: [
-                  CustomCardSectionWidget(),
-                  CustomCardSectionWidget(),
-                ]
-            ),
-          ],
+          ),
         ),
       ],
     );

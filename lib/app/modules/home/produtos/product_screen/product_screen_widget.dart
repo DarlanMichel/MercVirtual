@@ -3,16 +3,10 @@ import 'package:mercadovirtual/app/modules/widgets/custom_card_produto/custom_ca
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
 
 class ProductScreenWidget extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Salgados"),
-        backgroundColor: Theme.of(context).accentColor,
-      ),
-
-      body: Column(
+    return Column(
         children: <Widget>[
           Container(
             child: CustomTextfieldWidget(text: "Procurar", pass: false, keyboard: TextInputType.text, icon: Icons.search,),
@@ -41,15 +35,10 @@ class ProductScreenWidget extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 80,
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.shopping_cart),
-        backgroundColor: Theme.of(context).accentColor,
-      ),
-    );
+      );
   }
 }

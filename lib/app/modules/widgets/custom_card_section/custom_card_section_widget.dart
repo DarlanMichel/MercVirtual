@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
 
 class CustomCardSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductScreenWidget()));
+        Navigator.of(context).pushNamed("/produto");
       },
       child: Card(
         shape: RoundedRectangleBorder(
