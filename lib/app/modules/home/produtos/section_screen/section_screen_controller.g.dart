@@ -9,39 +9,26 @@ part of 'section_screen_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SectionScreenController on _SectionScreenBase, Store {
-  final _$valueAtom = Atom(name: '_SectionScreenBase.value');
+  final _$listaCategoriaAtom = Atom(name: '_SectionScreenBase.listaCategoria');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  ObservableStream<List<CategoriaModel>> get listaCategoria {
+    _$listaCategoriaAtom.context.enforceReadPolicy(_$listaCategoriaAtom);
+    _$listaCategoriaAtom.reportObserved();
+    return super.listaCategoria;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
-  }
-
-  final _$_SectionScreenBaseActionController =
-      ActionController(name: '_SectionScreenBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_SectionScreenBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_SectionScreenBaseActionController.endAction(_$actionInfo);
-    }
+  set listaCategoria(ObservableStream<List<CategoriaModel>> value) {
+    _$listaCategoriaAtom.context.conditionallyRunInAction(() {
+      super.listaCategoria = value;
+      _$listaCategoriaAtom.reportChanged();
+    }, _$listaCategoriaAtom, name: '${_$listaCategoriaAtom.name}_set');
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'listaCategoria: ${listaCategoria.toString()}';
     return '{$string}';
   }
 }

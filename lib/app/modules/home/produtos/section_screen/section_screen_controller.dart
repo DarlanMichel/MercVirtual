@@ -1,16 +1,18 @@
+import 'package:mercadovirtual/app/modules/home/models/categoria_model.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'section_screen_controller.g.dart';
 
-class SectionScreenController = _SectionScreenBase
-    with _$SectionScreenController;
+class SectionScreenController = _SectionScreenBase with _$SectionScreenController;
 
 abstract class _SectionScreenBase with Store {
-  @observable
-  int value = 0;
-
-  @action
-  void increment() {
-    value++;
+  final CategoriaRepository _repository;
+  _SectionScreenBase(this._repository){
+    listaCategoria = ObservableStream(_repository.getCategoria());
   }
+
+  @observable
+  ObservableStream<List<CategoriaModel>> listaCategoria;
+
 }

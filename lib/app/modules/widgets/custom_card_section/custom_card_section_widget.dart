@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomCardSectionWidget extends StatelessWidget {
+  final String nomeCategoria;
+
+  const CustomCardSectionWidget({Key key,@required this.nomeCategoria}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -27,12 +31,19 @@ class CustomCardSectionWidget extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "Salgados",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).accentColor,
-                  ),
+                Wrap(
+                  spacing: 5,
+                  runSpacing: 5,
+                  direction: Axis.vertical,
+                  children: <Widget>[
+                    Text(
+                      nomeCategoria,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

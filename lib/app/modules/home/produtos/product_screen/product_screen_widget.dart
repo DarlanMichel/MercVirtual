@@ -17,21 +17,12 @@ class ProductScreenWidget extends StatelessWidget {
           Expanded(
             child: Container(
               //height: MediaQuery.of(context).size.height,
-              child: ListView(
+              child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
-                children: <Widget>[
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                  CustomCardProdutoWidget(),
-                ],
+                itemCount: 12,
+                itemBuilder: (_, index){
+                  return CustomCardProdutoWidget();
+                },
               ),
             ),
           ),

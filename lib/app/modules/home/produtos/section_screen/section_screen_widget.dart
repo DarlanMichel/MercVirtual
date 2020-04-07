@@ -1,7 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_section/custom_card_section_widget.dart';
 
-class SectionScreenWidget extends StatelessWidget {
+class SectionScreenWidget extends StatefulWidget {
+  @override
+  _SectionScreenWidgetState createState() => _SectionScreenWidgetState();
+}
+
+class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,SectionScreenController> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,49 +29,49 @@ class SectionScreenWidget extends StatelessWidget {
         Expanded(
           child: Container(
             //height: MediaQuery.of(context).size.height,
-            child: Table(
-              children: [
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      CustomCardSectionWidget(),
-                      CustomCardSectionWidget(),
-                    ]
-                ),
-              ],
-            ),
+            //Gridview.count
+              child: Observer(
+                  builder: (BuildContext context){
+                    if(controller.listaCategoria.hasError){
+                      return Center(
+                        child: Text("Ocorreu um erro ao realizar essa requisição."),
+                      );
+                    }
+                    if(controller.listaCategoria.value == null){
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CustomScrollView(
+                      slivers: List.generate(
+                          1,
+                              (item) => SliverGrid(
+                            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 250,
+                                mainAxisSpacing: 5,
+                                crossAxisSpacing: 5,
+                                childAspectRatio: 1.5
+                            ),
+                            delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index){
+                                  return CustomCardSectionWidget(
+                                    nomeCategoria: controller.listaCategoria.value[index].desc,
+                                  );
+                                },
+                                childCount: controller.listaCategoria.value.length
+                            ),
+                          )
+                      ),
+                    );
+                  }
+              )
           ),
         ),
+        SizedBox(
+          height: 80,
+        )
       ],
     );
   }
 }
+

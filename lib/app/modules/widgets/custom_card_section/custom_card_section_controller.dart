@@ -6,6 +6,7 @@ class CustomCardSectionController = _CustomCardSectionBase
     with _$CustomCardSectionController;
 
 abstract class _CustomCardSectionBase with Store {
+
   @observable
   int value = 0;
 

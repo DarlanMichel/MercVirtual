@@ -1,4 +1,4 @@
-import 'package:mercadovirtual/app/modules/home/home_page.dart';
+import 'package:mercadovirtual/app/modules/home/home_module.dart';
 import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_controller.dart';
 import 'package:mercadovirtual/app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,7 +19,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router(Modular.initialRoute, module: HomeloginModule()),
-        Router("/Home", child: (_, args) => HomePage()),
+        Router("/Home", module: HomeModule()),
       ];
 
   @override

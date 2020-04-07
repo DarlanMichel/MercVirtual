@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_module.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_module.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_module.dart';
 
 class TabpageprodWidget extends StatefulWidget {
   @override
@@ -10,7 +12,6 @@ class TabpageprodWidget extends StatefulWidget {
 
 class _TabpageprodWidgetState extends State<TabpageprodWidget> {
   final PageController _pageController = PageController( initialPage: 0);
-
 
   @override
   Widget build(BuildContext context) {

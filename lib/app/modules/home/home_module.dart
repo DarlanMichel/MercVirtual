@@ -1,3 +1,4 @@
+import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_module.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
