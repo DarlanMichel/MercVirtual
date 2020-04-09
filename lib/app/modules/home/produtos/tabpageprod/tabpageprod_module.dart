@@ -8,17 +8,19 @@ import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 
 import '../../home_page.dart';
 
 class TabpageprodModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController()),
+    Bind((i) => ProductScreenController(i.get<ProdutoRepository>())),
     Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
     Bind((i) => TabpageprodController()),
     ///repositories
     Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
+    Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
     ///Outros
     Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];
@@ -26,7 +28,7 @@ class TabpageprodModule extends ModuleWidget {
   @override
   List<Router> get routers => [
     Router('/', child: (_, args) => TabpageprodWidget()),
-    Router("/produto", child: (_, args) => ProductScreenWidget()),
+    Router("/produto/:categoria", child: (_, args) => ProductScreenWidget(categoria: args.params['categoria'])),
     Router("/secao", child: (_, args) => SectionScreenWidget()),
   ];
 

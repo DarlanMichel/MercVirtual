@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CustomCardSectionWidget extends StatelessWidget {
   final String nomeCategoria;
-
-  const CustomCardSectionWidget({Key key,@required this.nomeCategoria}) : super(key: key);
+  final int codCategoria;
+  const CustomCardSectionWidget({Key key,@required this.nomeCategoria,@required this.codCategoria}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).pushNamed("/produto");
+        Navigator.pushNamed(context, "/produto/$codCategoria");
+        //Modular.to.pushNamed('/categoria/produto/$codCategoria');
       },
       child: Card(
         shape: RoundedRectangleBorder(

@@ -48,14 +48,15 @@ class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,Section
                               (item) => SliverGrid(
                             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                                 maxCrossAxisExtent: 250,
-                                mainAxisSpacing: 5,
-                                crossAxisSpacing: 5,
-                                childAspectRatio: 1.5
+                                mainAxisSpacing: 3,
+                                crossAxisSpacing: 3,
+                                childAspectRatio: 1.3
                             ),
                             delegate: SliverChildBuilderDelegate(
                                     (BuildContext context, int index){
                                   return CustomCardSectionWidget(
                                     nomeCategoria: controller.listaCategoria.value[index].desc,
+                                    codCategoria: controller.listaCategoria.value[index].codSecao,
                                   );
                                 },
                                 childCount: controller.listaCategoria.value.length

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomCardProdutoWidget extends StatelessWidget {
+  final String descricao;
+  final double preco;
+  final int ean;
+
+  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,11 +23,16 @@ class CustomCardProdutoWidget extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(
-                  "images/lays.jpg",
+                child: FadeInImage(
+                  image: NetworkImage(
+                    "https://cdn-cosmos.bluesoft.com.br/products/$ean",
+                  ),
+                  placeholder: AssetImage(
+                    "images/notimage.png"
+                  ),
                   height: 60,
                   width: 60,
-                ),
+                )
               ),
               Expanded(
                 child: Padding(
@@ -31,16 +42,16 @@ class CustomCardProdutoWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Batata Lay's 96g un",
+                        descricao,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
-                          fontSize: 24,
+                          fontSize: 18,
                         ),
                       ),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          "R\$ 5,98",
+                          "R\$ $preco",
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 24,

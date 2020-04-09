@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_module.dart';
+import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_module.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/perfil_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_module.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_widget.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_module.dart';
+import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_widget.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +39,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   });
                 },
               children: <Widget>[
+//                PromocaoScreenWidget(),
+//                TabpageprodWidget(),
+//                CarrinhoWidget(),
+//                PerfilWidget()
                 RouterOutlet(
                   module: PromocaoScreenModule(),
                 ),

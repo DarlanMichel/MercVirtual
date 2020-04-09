@@ -11,8 +11,9 @@ class CategoriaRepository extends Disposable {
   Stream<List<CategoriaModel>> getCategoria(){
     var query = ''' 
                 subscription getCategoria {
-                  categoria {
+                  categoria(order_by: {desc: asc}) {
                     desc
+                    cod_secao
                   }
                  } ''';
 

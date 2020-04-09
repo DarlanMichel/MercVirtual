@@ -22,7 +22,7 @@ class SectionScreenModule extends ModuleWidget {
   @override
   List<Router> get routers => [
     Router('/', child: (_, args) => SectionScreenWidget()),
-    Router('/produto', child: (_, args) => ProductScreenWidget())
+    Router("/produto/:categoria", child: (_, args) => ProductScreenWidget(categoria: args.params['categoria'])),
   ];
 
   Widget get view => TabpageprodWidget();

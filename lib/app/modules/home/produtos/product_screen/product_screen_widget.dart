@@ -1,35 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_produto/custom_card_produto_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
 
-class ProductScreenWidget extends StatelessWidget {
+class ProductScreenWidget extends StatefulWidget {
+  final int categoria;
+  const ProductScreenWidget({Key key,@required this.categoria}) : super(key: key);
 
+  @override
+  _ProductScreenWidgetState createState() => _ProductScreenWidgetState();
+}
+
+class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, ProductScreenController> {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: <Widget>[
-          Container(
-            child: CustomTextfieldWidget(text: "Procurar", pass: false, keyboard: TextInputType.text, icon: Icons.search,),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: Container(
-              //height: MediaQuery.of(context).size.height,
-              child: ListView.builder(
-                padding: EdgeInsets.all(8.0),
-                itemCount: 12,
-                itemBuilder: (_, index){
-                  return CustomCardProdutoWidget();
-                },
-              ),
+      children: <Widget>[
+        Container(
+          child: CustomTextfieldWidget(text: "Procurar", pass: false, keyboard: TextInputType.text, icon: Icons.search,),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: Container(
+            //height: MediaQuery.of(context).size.height,
+            child: Observer(
+              builder: (BuildContext context){
+                if(controller.listaProduto.hasError){
+                  return Center(
+                    child: Text("Ocorreu um erro ao realizar essa requisição."),
+                  );
+                }
+                if(controller.listaProduto.value == null){
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                return ListView.builder(
+                  padding: EdgeInsets.all(8.0),
+                  itemCount: controller.listaProduto.value.length,
+                  itemBuilder: (_, index){
+                    return CustomCardProdutoWidget(
+                      descricao: controller.listaProduto.value[index].descricao,
+                      preco: controller.listaProduto.value[index].preco,
+                      ean: controller.listaProduto.value[index].ean,
+                    );
+                  },
+                );
+              }
             ),
           ),
-          SizedBox(
-            height: 80,
-          )
-        ],
-      );
+        ),
+        SizedBox(
+          height: 80,
+        )
+      ],
+    );
   }
 }
+

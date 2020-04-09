@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_widget.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 
 class ProductScreenModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController())
+    Bind((i) => ProductScreenController(i.get<ProdutoRepository>())),
+    ///repositories
+    Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
+    ///Outros
+    Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];
 
   @override
   List<Router> get routers => [
-    Router('/', child: (_, args) => ProductScreenWidget(),),
+    Router('/:categoria', child: (_, args) => ProductScreenWidget(categoria: args.params['categoria']),),
   ];
 
   Widget get view => TabpageprodWidget();
