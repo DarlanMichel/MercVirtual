@@ -8,9 +8,10 @@ import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 
 class ProductScreenModule extends ModuleWidget {
+
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController(i.get<ProdutoRepository>())),
+    Bind((i) => ProductScreenController(i.get<ProdutoRepository>(), i.args.params['categ'])),
     ///repositories
     Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
     ///Outros
@@ -19,8 +20,10 @@ class ProductScreenModule extends ModuleWidget {
 
   @override
   List<Router> get routers => [
-    Router('/:categoria', child: (_, args) => ProductScreenWidget(categoria: args.params['categoria']),),
+    Router("/", child: (_, args) => ProductScreenWidget(categoria: args.data)),
   ];
 
-  Widget get view => TabpageprodWidget();
+  static Inject get to => Inject<ProductScreenModule>.of();
+
+  Widget get view => ProductScreenWidget();
 }

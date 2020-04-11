@@ -25,13 +25,13 @@ class HomeModule extends ChildModule {
         Bind((i) => PromocaoScreenController()),
         Bind((i) => TabpageprodController()),
         Bind((i) => HomeController()),
-//        Bind((i) => ProductScreenController(i.get<ProdutoRepository>())),
-//        Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
-//        ///repositories
-//        Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
-//        Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
-//        ///Outros
-//        Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
+        Bind((i) => ProductScreenController(i.get<ProdutoRepository>(), i.args.params['categ'])),
+        Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
+        ///repositories
+        Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
+        Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
+        ///Outros
+        Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
       ];
 
   @override
@@ -41,8 +41,8 @@ class HomeModule extends ChildModule {
         Router("/categoria", module: TabpageprodModule()),
         Router("/carrinho", module: CarrinhoModule()),
         Router("/perfil", module: PerfilModule()),
-//        Router("/categoria/produto/:categoria", child: (_, args) => ProductScreenWidget(categoria: args.params['categoria'])),
-//        Router("/categoria/secao", child: (_, args) => SectionScreenWidget()),
+        Router("/categoria/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.params['categ'])),
+        Router("/categoria/secao", child: (_, args) => SectionScreenWidget()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

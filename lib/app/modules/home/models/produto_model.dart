@@ -10,7 +10,7 @@ class ProdutoModel {
   final int ean;
   final int categoria;
   final int codigo;
-  final int estoque;
+  final double estoque;
   final String unidadeMedida;
 
   ProdutoModel({
@@ -29,7 +29,7 @@ class ProdutoModel {
     int ean,
     int categoria,
     int codigo,
-    int estoque,
+    double estoque,
     String unidadeMedida,
   }) =>
       ProdutoModel(
@@ -52,7 +52,7 @@ class ProdutoModel {
     ean: json["ean"],
     categoria: json["categoria"],
     codigo: json["codigo"],
-    estoque: json["estoque"],
+    estoque: json["estoque"].toDouble(),
     unidadeMedida: json["unidade_medida"],
   );
 

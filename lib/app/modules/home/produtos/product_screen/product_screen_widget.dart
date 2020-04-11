@@ -29,12 +29,12 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
             //height: MediaQuery.of(context).size.height,
             child: Observer(
               builder: (BuildContext context){
-                if(controller.listaProduto.hasError){
-                  return Center(
-                    child: Text("Ocorreu um erro ao realizar essa requisição."),
-                  );
-                }
-                if(controller.listaProduto.value == null){
+//                if(controller.listaProduto.hasError){
+//                  return Center(
+//                    child: Text("Ocorreu um erro ao realizar essa requisição."),
+//                  );
+//                }
+                if(controller.listaProduto == null){
                   return Center(
                     child: CircularProgressIndicator(),
                   );
@@ -42,12 +42,12 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
 
                 return ListView.builder(
                   padding: EdgeInsets.all(8.0),
-                  itemCount: controller.listaProduto.value.length,
+                  itemCount: controller.listaProduto.length,
                   itemBuilder: (_, index){
                     return CustomCardProdutoWidget(
-                      descricao: controller.listaProduto.value[index].descricao,
-                      preco: controller.listaProduto.value[index].preco,
-                      ean: controller.listaProduto.value[index].ean,
+                      descricao: controller.listaProduto[index].descricao,
+                      preco: controller.listaProduto[index].preco,
+                      ean: controller.listaProduto[index].ean,
                     );
                   },
                 );

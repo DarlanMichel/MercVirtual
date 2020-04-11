@@ -9,11 +9,14 @@ class ProductScreenController = _ProductScreenBase
 
 abstract class _ProductScreenBase with Store {
   final ProdutoRepository _repository;
+  final int categoria;
 
-  _ProductScreenBase(this._repository){
-    listaProduto = ObservableStream(_repository.getProduto());
+  _ProductScreenBase(this._repository, this.categoria){
+    _repository.getProduto(categoria).then((data)=> listaProduto = data);
+    //listaProduto = ObservableStream(_repository.getProduto(1));
   }
 
   @observable
-  ObservableStream<List<ProdutoModel>> listaProduto;
+  List<ProdutoModel> listaProduto = [];
+  //ObservableStream<List<ProdutoModel>> listaProduto;
 }

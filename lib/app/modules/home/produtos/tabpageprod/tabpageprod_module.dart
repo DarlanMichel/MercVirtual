@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_module.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
@@ -15,12 +16,12 @@ import '../../home_page.dart';
 class TabpageprodModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController(i.get<ProdutoRepository>())),
+    Bind((i) => ProductScreenController(i.get<IProdutoRepository>(), i.args.params['categ'])),
     Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
     Bind((i) => TabpageprodController()),
     ///repositories
     Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
-    Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
+    Bind<IProdutoRepository>((i) => ProdutoRepository(i.get<HasuraConnect>())),
     ///Outros
     Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];
@@ -28,9 +29,12 @@ class TabpageprodModule extends ModuleWidget {
   @override
   List<Router> get routers => [
     Router('/', child: (_, args) => TabpageprodWidget()),
-    Router("/produto/:categoria", child: (_, args) => ProductScreenWidget(categoria: args.params['categoria'])),
+    Router("/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
+    //Router("/produto/:categ", module: ProductScreenModule()),
     Router("/secao", child: (_, args) => SectionScreenWidget()),
   ];
 
-  Widget get view => HomePage();
+  static Inject get to => Inject<TabpageprodModule>.of();
+
+  Widget get view => TabpageprodWidget();
 }

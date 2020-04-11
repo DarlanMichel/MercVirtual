@@ -10,8 +10,8 @@ class CustomCardSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, "/produto/$codCategoria");
-        //Modular.to.pushNamed('/categoria/produto/$codCategoria');
+        //Navigator.pushNamed(context, "/produto");
+        Modular.to.pushNamed('/categoria/produto/${codCategoria}');
       },
       child: Card(
         shape: RoundedRectangleBorder(
