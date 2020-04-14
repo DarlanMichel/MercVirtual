@@ -13,7 +13,7 @@ abstract class _ProductScreenBase with Store {
 
   _ProductScreenBase(this._repository, this.categoria){
     _repository.getProduto(categoria).then((data)=> listaProduto = data);
-    //listaProduto = ObservableStream(_repository.getProduto(1));
+    //listaProduto = ObservableStream(_repository.getProduto(categoria));
   }
 
   @observable

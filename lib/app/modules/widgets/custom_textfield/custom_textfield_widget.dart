@@ -11,7 +11,7 @@ class CustomTextfieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 30, left: 30, top: 10),
+      padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
       child: TextField(
         obscureText: pass,
         keyboardType: keyboard,

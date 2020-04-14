@@ -16,5 +16,5 @@ class CarrinhoModule extends ModuleWidget {
     Router('/', child: (_, args) => CarrinhoWidget())
   ];
 
-  Widget get view => HomePage();
+  Widget get view => CarrinhoWidget();
 }

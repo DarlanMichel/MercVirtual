@@ -16,5 +16,5 @@ class PerfilModule extends ModuleWidget {
     Router('/', child: (_, args) => PerfilWidget())
   ];
 
-  Widget get view => HomePage();
+  Widget get view => PerfilWidget();
 }

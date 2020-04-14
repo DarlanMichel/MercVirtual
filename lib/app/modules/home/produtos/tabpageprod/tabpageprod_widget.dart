@@ -8,32 +8,28 @@ import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_module.dart';
 
 class TabpageprodWidget extends StatefulWidget {
+  final String title;
+  const TabpageprodWidget({Key key, this.title = "categoria"}) : super(key: key);
   @override
   _TabpageprodWidgetState createState() => _TabpageprodWidgetState();
 }
 
-class _TabpageprodWidgetState extends State<TabpageprodWidget> {
-  final PageController _pageController = PageController( initialPage: 0);
-
+class _TabpageprodWidgetState extends ModularState<TabpageprodWidget, TabpageprodController> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          children: <Widget>[
-//            SectionScreenWidget(),
-//            ProductScreenWidget()
-            RouterOutlet(
-              module: SectionScreenModule(),
-            ),
-            RouterOutlet(
-              module: ProductScreenModule(),
-            ),
-          ],
-        ),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: controller.pageController,
+        children: [
+          RouterOutlet(
+            module: SectionScreenModule(),
+          ),
+          RouterOutlet(
+            module: ProductScreenModule(),
+          )
+        ],
       ),
     );
   }

@@ -20,7 +20,7 @@ class PromocaoScreenWidget extends StatelessWidget {
                   width: 100,
                 ),
                 Text(
-                  "Bem Vindo(a) Fulana!",
+                  "Bem Vindo(a)!",
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontSize: 16,

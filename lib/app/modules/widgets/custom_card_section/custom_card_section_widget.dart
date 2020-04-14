@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 
 class CustomCardSectionWidget extends StatelessWidget {
   final String nomeCategoria;
@@ -10,8 +12,8 @@ class CustomCardSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        //Navigator.pushNamed(context, "/produto");
-        Modular.to.pushNamed('/categoria/produto/${codCategoria}');
+        //Modular.to.pushNamed('/Home/categoria/produto/${codCategoria}');
+        Navigator.of(context).pushNamed('/produto/${codCategoria}');
       },
       child: Card(
         shape: RoundedRectangleBorder(

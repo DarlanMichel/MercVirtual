@@ -16,8 +16,8 @@ class CustomCardPromoWidget extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Positioned(
-                top: 265,
-                right: -60,
+                top: 260,
+                right: -30,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).primaryColor.withOpacity(0.4),
                   radius: 100,
@@ -27,7 +27,6 @@ class CustomCardPromoWidget extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Text("$i"),
                       Text(
                         "Batata Lay's 96g un",
                         style: TextStyle(
@@ -51,13 +50,25 @@ class CustomCardPromoWidget extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text(
-                                "R\$ 5,98",
-                                style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold
-                                )
+                            Column(
+                              children: <Widget>[
+                                Text(
+                                    "De: R\$ 9,00",
+                                    style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 14,
+                                        decoration: TextDecoration.lineThrough
+                                    )
+                                ),
+                                Text(
+                                    "Por: R\$ 5,98",
+                                    style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold
+                                    )
+                                ),
+                              ],
                             ),
                           ],
                         ),

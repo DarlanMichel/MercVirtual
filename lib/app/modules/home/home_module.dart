@@ -1,8 +1,12 @@
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/perfil_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_widget.dart';
+import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_module.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
@@ -25,24 +29,28 @@ class HomeModule extends ChildModule {
         Bind((i) => PromocaoScreenController()),
         Bind((i) => TabpageprodController()),
         Bind((i) => HomeController()),
-        Bind((i) => ProductScreenController(i.get<ProdutoRepository>(), i.args.params['categ'])),
-        Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
-        ///repositories
-        Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
-        Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
-        ///Outros
-        Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
+//        Bind((i) => ProductScreenController(i.get<ProdutoRepository>(), i.args.params['categ'])),
+//        Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
+//        ///repositories
+//        Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
+//        Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
+//        ///Outros
+//        Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
       ];
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => HomePage()),
-        Router("/promocao", module: PromocaoScreenModule()),
-        Router("/categoria", module: TabpageprodModule()),
-        Router("/carrinho", module: CarrinhoModule()),
-        Router("/perfil", module: PerfilModule()),
-        Router("/categoria/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.params['categ'])),
-        Router("/categoria/secao", child: (_, args) => SectionScreenWidget()),
+        Router("/", child: (_, args) => HomePage()),
+        Router("/promocao", child: (_, args) => PromocaoScreenWidget()),
+        Router("/categoria", child: (_, args) => TabpageprodWidget()),
+        Router("/carrinho", child: (_, args) => CarrinhoWidget()),
+        Router("/perfil", child: (_, args) => PerfilWidget()),
+//        Router("/promocao", module: PromocaoScreenModule()),
+//        Router("/categoria", module: TabpageprodModule()),
+//        Router("/carrinho", module: CarrinhoModule()),
+//        Router("/perfil", module: PerfilModule()),
+//        Router("/categoria/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.params['categ'])),
+//        Router("/categoria/secao", child: (_, args) => SectionScreenWidget()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

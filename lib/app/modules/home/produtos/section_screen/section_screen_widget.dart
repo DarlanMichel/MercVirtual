@@ -68,9 +68,6 @@ class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,Section
               )
           ),
         ),
-        SizedBox(
-          height: 80,
-        )
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 part 'tabpageprod_controller.g.dart';
@@ -5,11 +6,14 @@ part 'tabpageprod_controller.g.dart';
 class TabpageprodController = _TabpageprodBase with _$TabpageprodController;
 
 abstract class _TabpageprodBase with Store {
+  var pageController = PageController();
+
   @observable
-  int value = 0;
+  int selectedIndex = 0;
 
   @action
-  void increment() {
-    value++;
+  void changePage(int index) {
+    pageController.jumpToPage(index);
+    selectedIndex = index;
   }
 }

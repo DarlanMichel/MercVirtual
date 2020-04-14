@@ -6,6 +6,7 @@ class CustomCardProdutoController = _CustomCardProdutoBase
     with _$CustomCardProdutoController;
 
 abstract class _CustomCardProdutoBase with Store {
+
   @observable
   int value = 0;
 

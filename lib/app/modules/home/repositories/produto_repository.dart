@@ -11,7 +11,7 @@ class ProdutoRepository implements IProdutoRepository {
 
   ProdutoRepository(this._hasuraConnect);
 
-
+//  @override
 //  Stream<List<ProdutoModel>> getProduto(int categ){
   @override
   Future<List<ProdutoModel>> getProduto(int categ) async{

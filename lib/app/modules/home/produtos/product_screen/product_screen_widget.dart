@@ -18,18 +18,15 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Container(
+        Padding(
+          padding: const EdgeInsets.all(10.0),
           child: CustomTextfieldWidget(text: "Procurar", pass: false, keyboard: TextInputType.text, icon: Icons.search,),
-        ),
-        SizedBox(
-          height: 20,
         ),
         Expanded(
           child: Container(
-            //height: MediaQuery.of(context).size.height,
             child: Observer(
               builder: (BuildContext context){
-//                if(controller.listaProduto.hasError){
+//                if(controller.listaProduto.value.hasError){
 //                  return Center(
 //                    child: Text("Ocorreu um erro ao realizar essa requisição."),
 //                  );
@@ -55,9 +52,6 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
             ),
           ),
         ),
-        SizedBox(
-          height: 80,
-        )
       ],
     );
   }

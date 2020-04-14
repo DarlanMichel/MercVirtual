@@ -20,7 +20,7 @@ class ProductScreenModule extends ModuleWidget {
 
   @override
   List<Router> get routers => [
-    Router("/", child: (_, args) => ProductScreenWidget(categoria: args.data)),
+    Router("/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
   ];
 
   static Inject get to => Inject<ProductScreenModule>.of();

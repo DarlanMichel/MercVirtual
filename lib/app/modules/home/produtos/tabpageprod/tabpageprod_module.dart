@@ -30,7 +30,6 @@ class TabpageprodModule extends ModuleWidget {
   List<Router> get routers => [
     Router('/', child: (_, args) => TabpageprodWidget()),
     Router("/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
-    //Router("/produto/:categ", module: ProductScreenModule()),
     Router("/secao", child: (_, args) => SectionScreenWidget()),
   ];
 

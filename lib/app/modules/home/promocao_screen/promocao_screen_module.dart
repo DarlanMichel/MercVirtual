@@ -15,5 +15,5 @@ class PromocaoScreenModule extends ModuleWidget {
     Router('/', child: (_, args) => PromocaoScreenWidget())
   ];
 
-  Widget get view => HomePage();
+  Widget get view => PromocaoScreenWidget();
 }
