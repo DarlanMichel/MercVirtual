@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
 
 class CustomCardProdutoWidget extends StatelessWidget {
   final String descricao;
@@ -10,7 +11,14 @@ class CustomCardProdutoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return CustomDialogAddProdutoWidget(descricao: descricao,);
+            }
+        );
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),

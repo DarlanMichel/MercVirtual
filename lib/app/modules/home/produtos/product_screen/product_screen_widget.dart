@@ -33,7 +33,7 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
 //                }
                 if(controller.listaProduto == null){
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(backgroundColor: Colors.black,),
                   );
                 }
 
