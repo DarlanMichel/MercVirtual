@@ -18,10 +18,5 @@ void main() {
       expect(sectionscreen, isInstanceOf<SectionScreenController>());
     });
 
-    test("Set Value", () {
-      expect(sectionscreen.value, equals(0));
-      sectionscreen.increment();
-      expect(sectionscreen.value, equals(1));
-    });
   });
 }

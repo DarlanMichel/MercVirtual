@@ -18,10 +18,5 @@ void main() {
       expect(tabpageprod, isInstanceOf<TabpageprodController>());
     });
 
-    test("Set Value", () {
-      expect(tabpageprod.value, equals(0));
-      tabpageprod.increment();
-      expect(tabpageprod.value, equals(1));
-    });
   });
 }

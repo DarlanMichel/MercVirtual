@@ -18,10 +18,5 @@ void main() {
       expect(productscreen, isInstanceOf<ProductScreenController>());
     });
 
-    test("Set Value", () {
-      expect(productscreen.value, equals(0));
-      productscreen.increment();
-      expect(productscreen.value, equals(1));
-    });
   });
 }

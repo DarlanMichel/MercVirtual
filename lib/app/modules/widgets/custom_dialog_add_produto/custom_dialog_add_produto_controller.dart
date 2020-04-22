@@ -7,7 +7,7 @@ class CustomDialogAddProdutoController = _CustomDialogAddProdutoBase
 
 abstract class _CustomDialogAddProdutoBase with Store {
   @observable
-  int value = 0;
+  int value = 1;
 
   @action
   void increment() {

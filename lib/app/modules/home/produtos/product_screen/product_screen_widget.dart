@@ -26,25 +26,25 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
           child: Container(
             child: Observer(
               builder: (BuildContext context){
-//                if(controller.listaProduto.value.hasError){
-//                  return Center(
-//                    child: Text("Ocorreu um erro ao realizar essa requisição."),
-//                  );
-//                }
-                if(controller.listaProduto == null){
+                if(controller.listaProduto.hasError){
                   return Center(
-                    child: CircularProgressIndicator(backgroundColor: Colors.black,),
+                    child: Text("Ocorreu um erro ao realizar essa requisição."),
+                  );
+                }
+                if(controller.listaProduto.value == null){
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
                 }
 
                 return ListView.builder(
                   padding: EdgeInsets.all(8.0),
-                  itemCount: controller.listaProduto.length,
+                  itemCount: controller.listaProduto.value.length,
                   itemBuilder: (_, index){
                     return CustomCardProdutoWidget(
-                      descricao: controller.listaProduto[index].descricao,
-                      preco: controller.listaProduto[index].preco,
-                      ean: controller.listaProduto[index].ean,
+                      descricao: controller.listaProduto.value[index].descricao,
+                      preco: controller.listaProduto.value[index].preco,
+                      ean: controller.listaProduto.value[index].ean,
                     );
                   },
                 );

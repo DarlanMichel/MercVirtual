@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_promo/custom_card_promo_widget.dart';
 
-class PromocaoScreenWidget extends StatelessWidget {
+class PromocaoScreenWidget extends StatefulWidget {
+  @override
+  _PromocaoScreenWidgetState createState() => _PromocaoScreenWidgetState();
+}
 
+class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, PromocaoScreenController> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +47,30 @@ class PromocaoScreenWidget extends StatelessWidget {
                 ),
                 Container(
                   height: 350,
-                  child: CustomCardPromoWidget(),
+                  child: Observer(
+                    builder: (BuildContext context){
+                      if(controller.listaPromocao == null){
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return Swiper(
+                        itemBuilder: (_, index) {
+                          return CustomCardPromoWidget(
+                            descricao: controller.listaPromocao[index].produto.descricao,
+                            ean: controller.listaPromocao[index].produto.ean,
+                            preco: controller.listaPromocao[index].produto.preco,
+                            datafim: controller.listaPromocao[index].datafim,
+                            novopreco: controller.listaPromocao[index].novopreco,
+                          );
+                        },
+                        itemCount: controller.listaPromocao.length,
+                        control: SwiperControl(),
+                        autoplayDelay: 5000,
+                        autoplay: true,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -51,3 +80,4 @@ class PromocaoScreenWidget extends StatelessWidget {
     );
   }
 }
+

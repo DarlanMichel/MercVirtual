@@ -1,3 +1,5 @@
+import 'package:hasura_connect/hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_controller.dart';
 import 'package:mercadovirtual/app/modules/home/home_module.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_module.dart';
@@ -12,13 +14,18 @@ import 'modules/home/home_controller.dart';
 import 'modules/home/perfil/perfil_module.dart';
 import 'modules/home/produtos/tabpageprod/tabpageprod_module.dart';
 import 'modules/home/promocao_screen/promocao_screen_module.dart';
+import 'modules/home/repositories/promocao_repository.dart';
 import 'modules/login/homelogin/homelogin_module.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => CustomDialogAddProdutoController()),
         Bind((i) => AppController()),
+        Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
+        ///repositories
+        Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
+        ///Outros
+        Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
       ];
 
   @override

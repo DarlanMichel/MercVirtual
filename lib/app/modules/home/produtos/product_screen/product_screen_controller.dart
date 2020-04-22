@@ -12,11 +12,11 @@ abstract class _ProductScreenBase with Store {
   final int categoria;
 
   _ProductScreenBase(this._repository, this.categoria){
-    _repository.getProduto(categoria).then((data)=> listaProduto = data);
-    //listaProduto = ObservableStream(_repository.getProduto(categoria));
+    //_repository.getProduto(categoria).then((data)=> listaProduto = data);
+    listaProduto = ObservableStream(_repository.getProduto(categoria));
   }
 
   @observable
-  List<ProdutoModel> listaProduto = [];
-  //ObservableStream<List<ProdutoModel>> listaProduto;
+  //List<ProdutoModel> listaProduto = [];
+  ObservableStream<List<ProdutoModel>> listaProduto;
 }

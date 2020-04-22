@@ -18,10 +18,5 @@ void main() {
       expect(promocaoscreen, isInstanceOf<PromocaoScreenController>());
     });
 
-    test("Set Value", () {
-      expect(promocaoscreen.value, equals(0));
-      promocaoscreen.increment();
-      expect(promocaoscreen.value, equals(1));
-    });
   });
 }

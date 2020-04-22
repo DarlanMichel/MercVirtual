@@ -9,39 +9,26 @@ part of 'promocao_screen_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PromocaoScreenController on _PromocaoScreenBase, Store {
-  final _$valueAtom = Atom(name: '_PromocaoScreenBase.value');
+  final _$listaPromocaoAtom = Atom(name: '_PromocaoScreenBase.listaPromocao');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  List<PromocaoModel> get listaPromocao {
+    _$listaPromocaoAtom.context.enforceReadPolicy(_$listaPromocaoAtom);
+    _$listaPromocaoAtom.reportObserved();
+    return super.listaPromocao;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
-  }
-
-  final _$_PromocaoScreenBaseActionController =
-      ActionController(name: '_PromocaoScreenBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_PromocaoScreenBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_PromocaoScreenBaseActionController.endAction(_$actionInfo);
-    }
+  set listaPromocao(List<PromocaoModel> value) {
+    _$listaPromocaoAtom.context.conditionallyRunInAction(() {
+      super.listaPromocao = value;
+      _$listaPromocaoAtom.reportChanged();
+    }, _$listaPromocaoAtom, name: '${_$listaPromocaoAtom.name}_set');
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'listaPromocao: ${listaPromocao.toString()}';
     return '{$string}';
   }
 }
