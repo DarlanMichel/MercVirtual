@@ -25,6 +25,9 @@ dependencies:
   flutter_mobx: ^1.1.0
   mobx: ^1.1.1
   flutter_modular: ^1.0.0
+  build_context: ^1.1.0
+  flutter_mobx_helpers:
+  intl: ^0.16.1
   flutter:
     sdk: flutter
 

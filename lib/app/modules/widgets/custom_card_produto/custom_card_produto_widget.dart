@@ -59,7 +59,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          "R\$ $preco",
+                          "R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}",
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 24,

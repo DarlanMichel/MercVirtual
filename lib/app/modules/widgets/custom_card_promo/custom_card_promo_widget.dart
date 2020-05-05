@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomCardPromoWidget extends StatelessWidget {
   final String descricao;
@@ -61,7 +62,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
-                              "Oferta válida até \n $datafim"
+                              "Oferta válida até \n ${DateFormat('dd/MM/yyyy').format(datafim)}"
                           ),
                         ),
                         Expanded(
@@ -71,7 +72,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                                "De: R\$ $preco",
+                                "De: R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}",
                                 style: TextStyle(
                                     color: Theme.of(context).accentColor,
                                     fontSize: 14,
@@ -79,7 +80,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                                 )
                             ),
                             Text(
-                                "Por: R\$ $novopreco",
+                                "Por: R\$ ${novopreco.toStringAsFixed(2).replaceAll('.', ',')}",
                                 style: TextStyle(
                                     color: Theme.of(context).accentColor,
                                     fontSize: 24,

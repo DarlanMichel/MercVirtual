@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';

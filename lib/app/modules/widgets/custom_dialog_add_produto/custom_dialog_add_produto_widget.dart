@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_mobx_helpers/flutter_mobx_helpers.dart';
+import 'package:mercadovirtual/app/modules/home/home_controller.dart';
+import 'package:mercadovirtual/app/modules/home/home_page.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_controller.dart';
+
 
 class CustomDialogAddProdutoWidget extends StatefulWidget {
   final String descricao;
-
-  const CustomDialogAddProdutoWidget({Key key, this.descricao}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const CustomDialogAddProdutoWidget({Key key, this.descricao, this.scaffoldKey}) : super(key: key);
 
   @override
   _CustomDialogAddProdutoWidgetState createState() => _CustomDialogAddProdutoWidgetState();
@@ -84,35 +88,31 @@ class _CustomDialogAddProdutoWidgetState extends State<CustomDialogAddProdutoWid
                   padding: EdgeInsets.only(right: 30, left: 30),
                   width: MediaQuery.of(context).size.width,
                   height: 55,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        side: BorderSide(
-                            color: Theme.of(context).accentColor,
-                            width: 3
-                        )
-                    ),
-                    onPressed: () {
-//                          GlobalKey<ScaffoldState>().currentState.showSnackBar(
-//                              SnackBar(
-//                                content: Text(
-//                                    "Produto adicionado ao carrinho!"
-//                                ),
-//                                backgroundColor: Theme.of(context).accentColor,
-//                                duration: Duration(seconds: 3),
-//                              )
-//                          );
-                      Navigator.pop(context);
+                  child: ObserverListener(
+                    listener: (_){
+                      HomeController().showInSnackBar("Produto adicionado ao carrinho!");
                     },
-                    child: Text(
-                      "Adicionar",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(
+                              color: Theme.of(context).accentColor,
+                              width: 3
+                          )
                       ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Adicionar",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20
+                        ),
+                      ),
+                      color: Theme.of(context).accentColor,
                     ),
-                    color: Theme.of(context).accentColor,
-                  ),
+                  )
                 )
               ],
             ),
