@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  firebase_auth: ^0.16.0
   hasura_connect: ^1.1.2
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.5.0
@@ -28,6 +29,7 @@ dependencies:
   build_context: ^1.1.0
   flutter_mobx_helpers:
   intl: ^0.16.1
+  oktoast: ^2.3.2
   flutter:
     sdk: flutter
 
@@ -41,7 +43,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
+scripts:
+  watch: flutter pub run build_runner watch
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

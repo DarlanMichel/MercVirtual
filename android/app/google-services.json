@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "733835444983",
+    "firebase_url": "https://mercadovirtual-41ce0.firebaseio.com",
+    "project_id": "mercadovirtual-41ce0",
+    "storage_bucket": "mercadovirtual-41ce0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733835444983:android:5aea00bfa656958e1d89f2",
+        "android_client_info": {
+          "package_name": "br.com.silva.darlan.mercadovirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733835444983-5rbs22189nor7qtptj7ftuo549ro6uh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlLADmrkjpXSO2W_dYtS3geWX7UIQhBk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733835444983-5rbs22189nor7qtptj7ftuo549ro6uh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercadovirtual/app/modules/home/home_page.dart';
-import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
+import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
+import 'package:oktoast/oktoast.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -12,7 +13,22 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
+
+  Future _login() async {
+    var result = await controller.login();
+
+    if (result) {
+      Modular.to.pushReplacementNamed("/Home");
+    } else {
+      showToast(
+        "Erro ao tentar efetuar o login! Tente novamente!",
+        position: ToastPosition.center,
+        duration: Duration(seconds: 5),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +41,47 @@ class _LoginPageState extends State<LoginPage> {
                 height: 200,
                 width: 200,
               ),
-              CustomTextfieldWidget(text: "E-mail", pass: false, keyboard: TextInputType.emailAddress, icon: Icons.person,),
-              CustomTextfieldWidget(text: "Senha", pass: true, keyboard: TextInputType.text, icon: Icons.lock,),
+              CustomTextfieldWidget(
+                text: "E-mail",
+                pass: false,
+                keyboard: TextInputType.emailAddress,
+                icon: Icons.person,
+                change: controller.setEmail,
+              ),
+              CustomTextfieldWidget(
+                text: "Senha",
+                pass: true,
+                keyboard: TextInputType.text,
+                icon: Icons.lock,
+                change: controller.setSenha,
+              ),
               SizedBox(
                 height: 20,
               ),
-              CustomRaisebuttonWidget(
-                cor: Theme.of(context).accentColor,
-                text: "Entrar",
-                textcolor: Colors.white,
-                nav: "Home",
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                padding: EdgeInsets.only(right: 30, left: 30),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: BorderSide(
+                          color: Theme.of(context).accentColor,
+                          width: 3
+                      )
+                  ),
+                  onPressed: () async {
+                    await _login();
+                  },
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    "Entrar",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
                 height: 20,

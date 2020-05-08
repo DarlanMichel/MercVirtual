@@ -24,7 +24,6 @@ class CustomRaisebuttonWidget extends StatelessWidget {
         ),
         onPressed: (){
           Navigator.pushNamed(context, nav);
-          //Navigator.push(context, MaterialPageRoute(builder: (context)=> nav));
         },
         color: cor,
         child: Text(

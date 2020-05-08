@@ -5,8 +5,8 @@ class CustomTextfieldWidget extends StatelessWidget {
   final bool pass;
   final TextInputType keyboard;
   final IconData icon;
-
-  const CustomTextfieldWidget({Key key,@required this.text,@required this.pass,@required this.keyboard,@required this.icon}) : super(key: key);
+  final Function change;
+  const CustomTextfieldWidget({Key key,@required this.text,@required this.pass,@required this.keyboard,@required this.icon, this.change}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CustomTextfieldWidget extends StatelessWidget {
       child: TextField(
         obscureText: pass,
         keyboardType: keyboard,
-
+        onChanged: change,
         style: TextStyle(
           color: Theme.of(context).accentColor,
         ),

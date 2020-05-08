@@ -6,10 +6,19 @@ class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
   @observable
-  int value = 0;
+  String email = '';
+
+  @observable
+  String senha = '';
 
   @action
-  void increment() {
-    value++;
+  void setEmail(String _email) => email = _email;
+
+  @action
+  void setSenha(String _senha) => senha = _senha;
+
+  @action
+  Future<bool> login() async {
+    return true;
   }
 }
