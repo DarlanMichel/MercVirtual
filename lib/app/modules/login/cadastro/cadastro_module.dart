@@ -1,25 +1,25 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/home_controller.dart';
+import 'package:mercadovirtual/app/modules/home/home_page.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_controller.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_page.dart';
-import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_controller.dart';
-import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_page.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_page.dart';
 
-class HomeloginModule extends ChildModule {
+class CadastroModule extends ChildModule {
   @override
   List<Bind> get binds => [
-    Bind((i) => HomeloginController()),
     Bind((i) => CadastroController()),
+    Bind((i) => HomeController()),
     Bind((i) => LoginController()),
   ];
 
   @override
   List<Router> get routers => [
-    Router(Modular.initialRoute, child: (_, args) => HomeloginPage()),
-    Router("/cadastro", child: (_, args) => CadastroPage()),
+    Router("/", child: (_, args) => CadastroPage()),
+    Router("/Home", child: (_, args) => HomePage()),
     Router("/login", child: (_, args) => LoginPage()),
   ];
 
-  static Inject get to => Inject<HomeloginModule>.of();
+  static Inject get to => Inject<CadastroModule>.of();
 }

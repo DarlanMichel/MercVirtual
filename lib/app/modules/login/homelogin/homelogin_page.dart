@@ -32,7 +32,7 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   cor: Colors.white,
                   text: "Cadastre-se grátis",
                   textcolor: Theme.of(context).accentColor,
-                  nav: "Cadastro",
+                  nav: "cadastro",
                 ),
                 SizedBox(
                   height: 30,
@@ -41,7 +41,7 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   cor: Theme.of(context).accentColor,
                   text: "Entrar",
                   textcolor: Colors.white,
-                  nav: "Login",
+                  nav: "login",
                 )
               ],
             ),
