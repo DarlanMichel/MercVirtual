@@ -1,3 +1,4 @@
+import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_module.dart';
 import 'package:mercadovirtual/app/modules/shared/custom_hasura_connect.dart';
@@ -30,6 +31,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => CardProdutoCarrinhoController()),
         Bind((i) => CardTotalCarrinhoController()),
         Bind((i) => CardFreteController()),
         Bind((i) => DiscountCardController()),

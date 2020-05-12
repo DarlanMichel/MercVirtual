@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_frete/card_frete_widget.dart';
+import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_total_carrinho/card_total_carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/discount_card/discount_card_widget.dart';
 
@@ -10,10 +11,7 @@ class CarrinhoWidget extends StatelessWidget {
       child: Center(
         child: Column(
           children: <Widget>[
-            Container(
-              color: Colors.red,
-              height: 100,
-            ),
+            CardProdutoCarrinhoWidget(),
             DiscountCardWidget(),
             CardFreteWidget(),
             CardTotalCarrinhoWidget()
