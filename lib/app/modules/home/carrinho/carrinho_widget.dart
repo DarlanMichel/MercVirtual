@@ -13,7 +13,7 @@ class CarrinhoWidget extends StatelessWidget {
           children: <Widget>[
             CardProdutoCarrinhoWidget(),
             DiscountCardWidget(),
-            CardFreteWidget(),
+            //CardFreteWidget(),
             CardTotalCarrinhoWidget()
           ],
         )

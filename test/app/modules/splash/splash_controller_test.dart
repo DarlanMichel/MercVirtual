@@ -18,10 +18,4 @@ void main() {
       expect(splash, isInstanceOf<SplashController>());
     });
 
-    test("Set Value", () {
-      expect(splash.value, equals(0));
-      splash.increment();
-      expect(splash.value, equals(1));
-    });
-  });
 }

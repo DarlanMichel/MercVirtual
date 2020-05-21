@@ -24,7 +24,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
       showToast(
         "Erro ao tentar efetuar o login! Tente novamente!",
         position: ToastPosition.center,
-        duration: Duration(seconds: 5),
+        duration: Duration(seconds: 3),
       );
     }
   }

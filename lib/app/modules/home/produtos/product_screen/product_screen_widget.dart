@@ -45,6 +45,7 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Produc
                       descricao: controller.listaProduto.value[index].descricao,
                       preco: controller.listaProduto.value[index].preco,
                       ean: controller.listaProduto.value[index].ean,
+                      idProduto: controller.listaProduto.value[index].codigo,
                     );
                   },
                 );

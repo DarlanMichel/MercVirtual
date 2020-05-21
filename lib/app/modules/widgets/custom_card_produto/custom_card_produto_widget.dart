@@ -5,8 +5,8 @@ class CustomCardProdutoWidget extends StatelessWidget {
   final String descricao;
   final double preco;
   final int ean;
-
-  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean}) : super(key: key);
+  final int idProduto;
+  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean,@required this.idProduto}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context){
-              return CustomDialogAddProdutoWidget(descricao: descricao,);
+              return CustomDialogAddProdutoWidget(descricao: descricao, idProduto: idProduto,);
             }
         );
       },

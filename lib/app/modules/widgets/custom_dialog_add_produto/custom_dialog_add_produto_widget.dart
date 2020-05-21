@@ -2,22 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_mobx_helpers/flutter_mobx_helpers.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
 import 'package:mercadovirtual/app/modules/home/home_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_controller.dart';
+import 'package:oktoast/oktoast.dart';
 
 
 class CustomDialogAddProdutoWidget extends StatefulWidget {
   final String descricao;
+  final int idProduto;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  const CustomDialogAddProdutoWidget({Key key, this.descricao, this.scaffoldKey}) : super(key: key);
+  const CustomDialogAddProdutoWidget({Key key,@required this.descricao, this.scaffoldKey,@required this.idProduto}) : super(key: key);
 
   @override
   _CustomDialogAddProdutoWidgetState createState() => _CustomDialogAddProdutoWidgetState();
 }
 
-class _CustomDialogAddProdutoWidgetState extends State<CustomDialogAddProdutoWidget> {
+class _CustomDialogAddProdutoWidgetState extends ModularState<CustomDialogAddProdutoWidget, CarrinhoController> {
    CustomDialogAddProdutoController _count = CustomDialogAddProdutoController();
-
     @override
     Widget build(BuildContext context) {
       return Dialog(
@@ -100,6 +103,22 @@ class _CustomDialogAddProdutoWidgetState extends State<CustomDialogAddProdutoWid
                           )
                       ),
                       onPressed: () {
+                        controller.addProdutoCarrinhoRepository.addProdutoCarrinho(widget.idProduto, _count.value);
+                        if(controller.addProdutoCarrinhoRepository.isValid){
+                          showToast(
+                            "Produto adicionado ao carrinho!",
+                            position: ToastPosition.center,
+                            duration: Duration(seconds: 5),
+                          );
+                        }
+                        else{
+                          showToast(
+                            "Erro! Produto não adicionado",
+                            position: ToastPosition.center,
+                            backgroundColor: Colors.red,
+                            duration: Duration(seconds: 5),
+                          );
+                        }
                         Navigator.pop(context);
                       },
                       child: Text(

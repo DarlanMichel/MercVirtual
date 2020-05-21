@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/add_produto_carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
@@ -27,7 +28,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => PerfilController()),
-        Bind((i) => CarrinhoController()),
+        Bind((i) => CarrinhoController(i.get<AddProdutoCarrinhoRepository>())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => TabpageprodController()),
         Bind((i) => HomeController()),
@@ -35,7 +36,7 @@ class HomeModule extends ChildModule {
 //        Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
-//        Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
+        Bind((i) => AddProdutoCarrinhoRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
       ];
