@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_mobx_helpers/flutter_mobx_helpers.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
-import 'package:mercadovirtual/app/modules/home/home_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_controller.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -90,47 +88,32 @@ class _CustomDialogAddProdutoWidgetState extends ModularState<CustomDialogAddPro
                   padding: EdgeInsets.only(right: 30, left: 30),
                   width: MediaQuery.of(context).size.width,
                   height: 55,
-                  child: ObserverListener(
-                    listener: (_){
-                      HomeController().showInSnackBar("Produto adicionado ao carrinho!");
-                    },
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(
-                              color: Theme.of(context).accentColor,
-                              width: 3
-                          )
-                      ),
-                      onPressed: () {
-                        controller.addProdutoCarrinhoRepository.addProdutoCarrinho(widget.idProduto, _count.value);
-                        if(controller.addProdutoCarrinhoRepository.isValid){
-                          showToast(
-                            "Produto adicionado ao carrinho!",
-                            position: ToastPosition.center,
-                            duration: Duration(seconds: 5),
-                          );
-                        }
-                        else{
-                          showToast(
-                            "Erro! Produto não adicionado",
-                            position: ToastPosition.center,
-                            backgroundColor: Colors.red,
-                            duration: Duration(seconds: 5),
-                          );
-                        }
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Adicionar",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20
-                        ),
-                      ),
-                      color: Theme.of(context).accentColor,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: BorderSide(
+                            color: Theme.of(context).accentColor,
+                            width: 3
+                        )
                     ),
-                  )
+                    onPressed: () {
+                      controller.addProdutoCarrinhoRepository.addProdutoCarrinho(widget.idProduto, _count.value);
+                      showToast(
+                        "Produto adicionado ao carrinho!",
+                        position: ToastPosition.center,
+                        duration: Duration(seconds: 5),
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Adicionar",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20
+                      ),
+                    ),
+                    color: Theme.of(context).accentColor,
+                  ),
                 )
               ],
             ),

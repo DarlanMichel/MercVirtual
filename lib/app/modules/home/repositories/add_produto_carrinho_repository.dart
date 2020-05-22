@@ -6,7 +6,7 @@ class AddProdutoCarrinhoRepository extends Disposable{
 
   AddProdutoCarrinhoRepository(this._hasuraConnect);
 
-  bool isValid = true;
+
 
   Future<bool> addProdutoCarrinho(int produto, int qtd) async {
     var mutation = ''' 

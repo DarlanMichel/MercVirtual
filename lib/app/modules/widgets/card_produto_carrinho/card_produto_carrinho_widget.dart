@@ -4,10 +4,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
 
 class CardProdutoCarrinhoWidget extends StatelessWidget {
-  CardProdutoCarrinhoController _count = CardProdutoCarrinhoController();
+  final String descricao;
+  final double preco;
+  final int ean;
+  final int idProduto;
+  final int qtd;
+
+  const CardProdutoCarrinhoWidget({Key key, this.descricao, this.preco, this.ean, this.idProduto, this.qtd}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    CardProdutoCarrinhoController _count = CardProdutoCarrinhoController();
+    _count.value = qtd;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
@@ -21,7 +30,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: FadeInImage(
                   image: NetworkImage(
-                    "https://cdn-cosmos.bluesoft.com.br/products/7891910000197",
+                    "https://cdn-cosmos.bluesoft.com.br/products/$ean",
                   ),
                   placeholder: AssetImage(
                       "images/notimage.png"
@@ -40,7 +49,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "ACUCAR REFINADO UNIAO 1KG",
+                        "$descricao",
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 16,
@@ -50,7 +59,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "R\$ 2,50",
+                        "$preco",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 14,
