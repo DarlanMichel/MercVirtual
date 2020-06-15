@@ -15,19 +15,19 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
 
-  Future _login() async {
-    var result = await controller.login();
-
-    if (result) {
-      Modular.to.pushReplacementNamed("/Home");
-    } else {
-      showToast(
-        "Erro ao tentar efetuar o login! Tente novamente!",
-        position: ToastPosition.center,
-        duration: Duration(seconds: 3),
-      );
-    }
-  }
+//  Future _login() async {
+//    var result = await controller.login();
+//
+//    if (result) {
+//      Modular.to.pushReplacementNamed("/Home");
+//    } else {
+//      showToast(
+//        "Erro ao tentar efetuar o login! Tente novamente!",
+//        position: ToastPosition.center,
+//        duration: Duration(seconds: 3),
+//      );
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       )
                   ),
                   onPressed: () async {
-                    await _login();
+//                    await _login();
+                    controller.login();
                   },
                   color: Theme.of(context).accentColor,
                   child: Text(

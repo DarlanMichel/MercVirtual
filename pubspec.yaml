@@ -19,7 +19,7 @@ environment:
 dependencies:
   shared_preferences: ^0.5.7+1
   firebase_auth: ^0.16.0
-  hasura_connect: ^1.1.2
+  hasura_connect: ^1.2.2+1
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.5.0
   flutter_swiper: ^1.1.6

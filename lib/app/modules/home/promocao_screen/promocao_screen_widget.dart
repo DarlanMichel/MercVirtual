@@ -19,6 +19,8 @@ class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, Prom
         children: <Widget>[
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
                   "images/logo2.png",
@@ -62,6 +64,7 @@ class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, Prom
                             preco: controller.listaPromocao[index].produto.preco,
                             datafim: controller.listaPromocao[index].datafim,
                             novopreco: controller.listaPromocao[index].novopreco,
+                            idProduto: controller.listaPromocao[index].codprod,
                           );
                         },
                         itemCount: controller.listaPromocao.length,

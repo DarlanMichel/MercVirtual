@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_controller.g.dart';
@@ -6,6 +9,11 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
+  final LoginStoreController store;
+  _LoginControllerBase(this.store);
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @observable
   String email = '';
 
@@ -17,6 +25,8 @@ abstract class _LoginControllerBase with Store {
 
   @observable
   String senhaError;
+
+
 
   @action
   void setEmail(String _email) => email = _email;
@@ -49,15 +59,23 @@ abstract class _LoginControllerBase with Store {
       return false;
     }
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: senha,
-    )).user;
-
-    var tokenId = await user.getIdToken();
-    valid = tokenId != null;
-
+    try {
+      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: senha,
+      )).user;
+      print((await user.getIdToken()).token);
+      store.setToken((await user.getIdToken()).token);
+      var tokenId = await user.getIdToken();
+      valid = tokenId != null;
+      Modular.to.pushReplacementNamed("/Home");
+    }catch (e){
+      Modular.to.showDialog(builder: (context){
+        return AlertDialog (
+          content: Text("E-mail ou senha inválida!"),
+        );
+      });
+    }
     return valid;
   }
 }

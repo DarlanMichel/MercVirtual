@@ -7,7 +7,7 @@ class CategoriaRepository extends Disposable {
 
   CategoriaRepository(this._hasuraConnect);
 
-
+  @override
   Stream<List<CategoriaModel>> getCategoria(){
     var query = ''' 
                 subscription getCategoria {

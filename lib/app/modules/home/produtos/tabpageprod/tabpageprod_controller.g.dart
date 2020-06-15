@@ -9,31 +9,75 @@ part of 'tabpageprod_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TabpageprodController on _TabpageprodBase, Store {
-  final _$selectedIndexAtom = Atom(name: '_TabpageprodBase.selectedIndex');
+  final _$listaProdutoAtom = Atom(name: '_TabpageprodBase.listaProduto');
 
   @override
-  int get selectedIndex {
-    _$selectedIndexAtom.context.enforceReadPolicy(_$selectedIndexAtom);
-    _$selectedIndexAtom.reportObserved();
-    return super.selectedIndex;
+  List<ProdutoModel> get listaProduto {
+    _$listaProdutoAtom.context.enforceReadPolicy(_$listaProdutoAtom);
+    _$listaProdutoAtom.reportObserved();
+    return super.listaProduto;
   }
 
   @override
-  set selectedIndex(int value) {
-    _$selectedIndexAtom.context.conditionallyRunInAction(() {
-      super.selectedIndex = value;
-      _$selectedIndexAtom.reportChanged();
-    }, _$selectedIndexAtom, name: '${_$selectedIndexAtom.name}_set');
+  set listaProduto(List<ProdutoModel> value) {
+    _$listaProdutoAtom.context.conditionallyRunInAction(() {
+      super.listaProduto = value;
+      _$listaProdutoAtom.reportChanged();
+    }, _$listaProdutoAtom, name: '${_$listaProdutoAtom.name}_set');
+  }
+
+  final _$listaCategoriaAtom = Atom(name: '_TabpageprodBase.listaCategoria');
+
+  @override
+  ObservableStream<List<CategoriaModel>> get listaCategoria {
+    _$listaCategoriaAtom.context.enforceReadPolicy(_$listaCategoriaAtom);
+    _$listaCategoriaAtom.reportObserved();
+    return super.listaCategoria;
+  }
+
+  @override
+  set listaCategoria(ObservableStream<List<CategoriaModel>> value) {
+    _$listaCategoriaAtom.context.conditionallyRunInAction(() {
+      super.listaCategoria = value;
+      _$listaCategoriaAtom.reportChanged();
+    }, _$listaCategoriaAtom, name: '${_$listaCategoriaAtom.name}_set');
+  }
+
+  final _$pesquisaAtom = Atom(name: '_TabpageprodBase.pesquisa');
+
+  @override
+  String get pesquisa {
+    _$pesquisaAtom.context.enforceReadPolicy(_$pesquisaAtom);
+    _$pesquisaAtom.reportObserved();
+    return super.pesquisa;
+  }
+
+  @override
+  set pesquisa(String value) {
+    _$pesquisaAtom.context.conditionallyRunInAction(() {
+      super.pesquisa = value;
+      _$pesquisaAtom.reportChanged();
+    }, _$pesquisaAtom, name: '${_$pesquisaAtom.name}_set');
   }
 
   final _$_TabpageprodBaseActionController =
       ActionController(name: '_TabpageprodBase');
 
   @override
-  void changePage(int index) {
+  void setPesquisa(String _pesquisa) {
     final _$actionInfo = _$_TabpageprodBaseActionController.startAction();
     try {
-      return super.changePage(index);
+      return super.setPesquisa(_pesquisa);
+    } finally {
+      _$_TabpageprodBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changePage(int index, int categ) {
+    final _$actionInfo = _$_TabpageprodBaseActionController.startAction();
+    try {
+      return super.changePage(index, categ);
     } finally {
       _$_TabpageprodBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +85,8 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
 
   @override
   String toString() {
-    final string = 'selectedIndex: ${selectedIndex.toString()}';
+    final string =
+        'listaProduto: ${listaProduto.toString()},listaCategoria: ${listaCategoria.toString()},pesquisa: ${pesquisa.toString()}';
     return '{$string}';
   }
 }

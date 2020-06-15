@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_module.dart';
 import 'package:mercadovirtual/app/modules/home/home_controller.dart';
@@ -28,7 +27,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: PageView(
-              scrollDirection: Axis.horizontal,
+              physics: NeverScrollableScrollPhysics(),
               controller: controller.pageController,
               onPageChanged: (index) => controller.changePage(index),
               children: [

@@ -2,73 +2,69 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_controller.dart';
-import 'package:mercadovirtual/app/modules/widgets/custom_card_section/custom_card_section_widget.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
+import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_module.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
+import 'package:mobx/mobx.dart';
+
 
 class SectionScreenWidget extends StatefulWidget {
   @override
   _SectionScreenWidgetState createState() => _SectionScreenWidgetState();
 }
 
-class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,SectionScreenController> {
+class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,TabpageprodController> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            "Selecione a Categoria Desejada",
-            style: TextStyle(
-                fontSize: 22,
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.bold
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            //height: MediaQuery.of(context).size.height,
-            //Gridview.count
-              child: Observer(
-                  builder: (BuildContext context){
-                    if(controller.listaCategoria.hasError){
-                      return Center(
-                        child: Text("Ocorreu um erro ao realizar essa requisição."),
-                      );
-                    }
-                    if(controller.listaCategoria.value == null){
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return CustomScrollView(
-                      slivers: List.generate(
-                          1,
-                              (item) => SliverGrid(
-                            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 250,
-                                mainAxisSpacing: 3,
-                                crossAxisSpacing: 3,
-                                childAspectRatio: 1.3
-                            ),
-                            delegate: SliverChildBuilderDelegate(
-                                    (BuildContext context, int index){
-                                  return CustomCardSectionWidget(
-                                    nomeCategoria: controller.listaCategoria.value[index].desc,
-                                    codCategoria: controller.listaCategoria.value[index].codSecao,
-                                  );
-                                },
-                                childCount: controller.listaCategoria.value.length
-                            ),
-                          )
+    return Container(
+      height: 50,
+      child: Observer(
+          builder: (BuildContext context){
+            if(controller.listaCategoria.hasError){
+              return Center(
+                child: Text("Ocorreu um erro ao realizar essa requisição."),
+              );
+            }
+            if(controller.listaCategoria.value == null){
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+                padding: EdgeInsets.all(8.0),
+                scrollDirection: Axis.horizontal,
+                itemCount: controller.listaCategoria.value.length,
+                itemBuilder: (_, index){
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        controller.changePage(index, controller.listaCategoria.value[index].codSecao);
+                      });
+                    },
+                    child: Container(
+                      constraints: BoxConstraints(minWidth: 101),
+                      margin: const EdgeInsets.only(right: 10.0),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: controller.selectedCat == index ? Border.all() : Border(),
+                        color: controller.selectedCat == index ? Colors.white : Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(9.0),
                       ),
-                    );
-                  }
-              )
-          ),
-        ),
-      ],
+                      child: Text(
+                        "${controller.listaCategoria.value[index].desc}",
+                        style: TextStyle(
+                            color: controller.selectedCat == index ? Theme.of(context).accentColor : Colors.white
+                        ),
+                      ),
+                    ),
+                  );
+                }
+            );
+          }
+      ),
     );
   }
 }

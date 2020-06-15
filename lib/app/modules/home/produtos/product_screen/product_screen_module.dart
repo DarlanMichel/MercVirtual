@@ -9,7 +9,7 @@ class ProductScreenModule extends ModuleWidget {
 
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController(i.get<ProdutoRepository>(), i.args.params['categ'])),
+    Bind((i) => ProductScreenController()),
     ///repositories
     Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
     ///Outros
@@ -18,7 +18,7 @@ class ProductScreenModule extends ModuleWidget {
 
   @override
   List<Router> get routers => [
-    Router("/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
+    Router("/:categ", child: (_, args) => ProductScreenWidget()),
   ];
 
   static Inject get to => Inject<ProductScreenModule>.of();

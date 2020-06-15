@@ -1,3 +1,4 @@
+import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_module.dart';
@@ -31,6 +32,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => LoginStoreController()),
         Bind((i) => CardProdutoCarrinhoController()),
         Bind((i) => CardTotalCarrinhoController()),
         Bind((i) => CardFreteController()),
@@ -56,11 +58,11 @@ class AppModule extends MainModule {
         Router("/login", module: LoginModule()),
         Router("/Home", module: HomeModule()),
         Router("/Home/promocao", module: PromocaoScreenModule()),
-        Router("/Home/categoria", module: TabpageprodModule()),
+        Router("/Home/produtos/:categ", module: TabpageprodModule()),
         Router("/Home/carrinho", module: CarrinhoModule()),
         Router("/Home/perfil", module: PerfilModule()),
-        Router("/Home/categoria/produto/:categ", module: ProductScreenModule()),
-        Router("/Home/categoria/secao", module: SectionScreenModule()),
+//        Router("/Home/produtos/:categ", module: ProductScreenModule()),
+//        Router("/Home/categoria/secao", module: SectionScreenModule()),
       ];
 
   @override

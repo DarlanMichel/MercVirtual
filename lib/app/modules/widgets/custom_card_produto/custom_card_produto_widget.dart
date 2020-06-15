@@ -53,7 +53,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                         descricao,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       Align(
@@ -62,7 +62,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                           "R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}",
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
-                              fontSize: 24,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold
                           ),
                         ),

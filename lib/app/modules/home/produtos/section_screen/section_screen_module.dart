@@ -9,7 +9,7 @@ import 'package:mercadovirtual/app/modules/home/repositories/categoria_repositor
 class SectionScreenModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
+    Bind((i) => SectionScreenController()),
     ///repositories
     Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
     ///Outros

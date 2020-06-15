@@ -1,5 +1,7 @@
 import 'package:mercadovirtual/app/modules/home/repositories/add_produto_carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
@@ -20,7 +22,7 @@ class HomeModule extends ChildModule {
         Bind((i) => PerfilController()),
         Bind((i) => CarrinhoController(i.get<AddProdutoCarrinhoRepository>(), i.get<CarrinhoRepository>())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
-        Bind((i) => TabpageprodController()),
+        Bind((i) => TabpageprodController(i.get<ProdutoRepository>(), 0, i.get<CategoriaRepository>())),
         Bind((i) => HomeController()),
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
@@ -34,7 +36,7 @@ class HomeModule extends ChildModule {
   List<Router> get routers => [
         Router("/", child: (_, args) => HomePage()),
         Router("/promocao", child: (_, args) => PromocaoScreenWidget()),
-        Router("/categoria", child: (_, args) => TabpageprodWidget()),
+        Router("/produtos/:categ", child: (_, args) => TabpageprodWidget(categoria: args.data)),
         Router("/carrinho", child: (_, args) => CarrinhoWidget()),
         Router("/perfil", child: (_, args) => PerfilWidget()),
       ];

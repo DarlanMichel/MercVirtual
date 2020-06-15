@@ -8,15 +8,22 @@ class ProductScreenController = _ProductScreenBase
     with _$ProductScreenController;
 
 abstract class _ProductScreenBase with Store {
-  final ProdutoRepository _repository;
-  final int categoria;
+//  final ProdutoRepository _repository;
+//  final int categoria;
+//
+//  _ProductScreenBase(this._repository, this.categoria){
+//      listaProduto = ObservableStream(_repository.getProdutos(categoria));
+//  }
+//
+//  @observable
+//  ObservableStream<List<ProdutoModel>> listaProduto;
 
-  _ProductScreenBase(this._repository, this.categoria){
-    //_repository.getProduto(categoria).then((data)=> listaProduto = data);
-    listaProduto = ObservableStream(_repository.getProduto(categoria));
-  }
-
-  @observable
-  //List<ProdutoModel> listaProduto = [];
-  ObservableStream<List<ProdutoModel>> listaProduto;
+//  @observable
+//  List<ProdutoModel> listaProdutoCat = [];
+//
+//  @action
+//  Future<List<ProdutoModel>> produtoCategoria(int categoria) async{
+//    var result = await _repository.getProdutoCat(categoria).then((data) => listaProdutoCat = data);
+//    return result;
+//  }
 }

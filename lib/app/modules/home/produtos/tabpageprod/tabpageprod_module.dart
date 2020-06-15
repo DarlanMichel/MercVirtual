@@ -16,21 +16,21 @@ import '../../home_page.dart';
 class TabpageprodModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => ProductScreenController(i.get<IProdutoRepository>(), i.args.params['categ'])),
-    Bind((i) => SectionScreenController(i.get<CategoriaRepository>())),
-    Bind((i) => TabpageprodController()),
+    Bind((i) => ProductScreenController()),
+    Bind((i) => SectionScreenController()),
+    Bind((i) => TabpageprodController(i.get<ProdutoRepository>(), 0, i.get<CategoriaRepository>())),
     ///repositories
     Bind((i) => CategoriaRepository(i.get<HasuraConnect>())),
-    Bind<IProdutoRepository>((i) => ProdutoRepository(i.get<HasuraConnect>())),
+    Bind((i) => ProdutoRepository(i.get<HasuraConnect>())),
     ///Outros
     Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];
 
   @override
   List<Router> get routers => [
-    Router('/', child: (_, args) => TabpageprodWidget()),
-    Router("/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
-    Router("/secao", child: (_, args) => SectionScreenWidget()),
+    Router('/:categ', child: (_, args) => TabpageprodWidget(categoria: args.data)),
+//    Router("/produto/", child: (_, args) => ProductScreenWidget()),
+//    Router("/secao", child: (_, args) => SectionScreenWidget()),
   ];
 
   static Inject get to => Inject<TabpageprodModule>.of();

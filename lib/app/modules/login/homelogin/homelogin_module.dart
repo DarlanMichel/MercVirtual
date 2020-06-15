@@ -5,13 +5,14 @@ import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_controller.
 import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_page.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_page.dart';
+import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
 
 class HomeloginModule extends ChildModule {
   @override
   List<Bind> get binds => [
     Bind((i) => HomeloginController()),
     Bind((i) => CadastroController()),
-    Bind((i) => LoginController()),
+    Bind((i) => LoginController(i.get<LoginStoreController>())),
   ];
 
   @override
