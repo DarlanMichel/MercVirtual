@@ -6,11 +6,9 @@ class AddProdutoCarrinhoRepository extends Disposable{
 
   AddProdutoCarrinhoRepository(this._hasuraConnect);
 
-
-
   Future<bool> addProdutoCarrinho(int produto, int qtd) async {
     var mutation = ''' 
-                  mutation addProdutoCarrinho(\$produto:Int, \$qtd:float8) {
+                  mutation addProdutoCarrinho(\$produto:Int, \$qtd:Int) {
                     insert_carrinho(objects: {id_produto: \$produto, qtd: \$qtd, status: "A"}) {
                       affected_rows
                     }
@@ -23,6 +21,7 @@ class AddProdutoCarrinhoRepository extends Disposable{
     });
 
     return snapshot["data"]["insert_carrinho"]["affected_rows"] > 0;
+
   }
 
   @override

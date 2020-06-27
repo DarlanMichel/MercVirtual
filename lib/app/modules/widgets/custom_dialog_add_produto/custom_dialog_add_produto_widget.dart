@@ -96,14 +96,23 @@ class _CustomDialogAddProdutoWidgetState extends ModularState<CustomDialogAddPro
                             width: 3
                         )
                     ),
-                    onPressed: () {
-                      controller.addProdutoCarrinhoRepository.addProdutoCarrinho(widget.idProduto, _count.value);
-                      showToast(
-                        "Produto adicionado ao carrinho!",
-                        position: ToastPosition.center,
-                        duration: Duration(seconds: 5),
-                      );
-                      Navigator.pop(context);
+                    onPressed: () async{
+                      var result = await controller.salvar(widget.idProduto, _count.value);
+                      if(result){
+                        showToast(
+                          "Produto adicionado ao carrinho!",
+                          position: ToastPosition.center,
+                          duration: Duration(seconds: 3),
+                        );
+                        Navigator.pop(context);
+                      }else{
+                        showToast(
+                            "Erro ao adicionar Produto no carrinho!",
+                            position: ToastPosition.center,
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.red
+                        );
+                      }
                     },
                     child: Text(
                       "Adicionar",

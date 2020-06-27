@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
+import 'package:oktoast/oktoast.dart';
 
-class CardProdutoCarrinhoWidget extends StatelessWidget {
+
+class CardProdutoCarrinhoWidget extends StatefulWidget {
   final String descricao;
   final double preco;
   final int ean;
@@ -11,11 +15,15 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
   final int qtd;
 
   const CardProdutoCarrinhoWidget({Key key, this.descricao, this.preco, this.ean, this.idProduto, this.qtd}) : super(key: key);
+  @override
+  _CardProdutoCarrinhoWidgetState createState() => _CardProdutoCarrinhoWidgetState();
+}
 
+class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWidget, CarrinhoController> {
   @override
   Widget build(BuildContext context) {
     CardProdutoCarrinhoController _count = CardProdutoCarrinhoController();
-    _count.value = qtd;
+    _count.value = widget.qtd;
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -30,7 +38,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: FadeInImage(
                   image: NetworkImage(
-                    "https://cdn-cosmos.bluesoft.com.br/products/$ean",
+                    "https://cdn-cosmos.bluesoft.com.br/products/${widget.ean}",
                   ),
                   placeholder: AssetImage(
                       "images/notimage.png"
@@ -49,7 +57,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "$descricao",
+                        "${widget.descricao}",
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 16,
@@ -59,7 +67,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "$preco",
+                        "${widget.preco}",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 14,
@@ -109,7 +117,17 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                   IconButton(
                     icon: Icon(FontAwesomeIcons.trashAlt),
                     iconSize: 18,
-                    onPressed: (){},
+                    onPressed: () async{
+                      var result = await controller.delete(widget.idProduto);
+                      if(result){
+                        showToast(
+                            "Produto deletado do carrinho!",
+                            position: ToastPosition.center,
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.red
+                        );
+                      }
+                    },
                   ),
                   Container(
                     height: 60,
@@ -123,3 +141,4 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
     );
   }
 }
+

@@ -64,10 +64,10 @@ abstract class _LoginControllerBase with Store {
         email: email,
         password: senha,
       )).user;
-      print((await user.getIdToken()).token);
       store.setToken((await user.getIdToken()).token);
       var tokenId = await user.getIdToken();
       valid = tokenId != null;
+      print(IdTokenResult);
       Modular.to.pushReplacementNamed("/Home");
     }catch (e){
       Modular.to.showDialog(builder: (context){

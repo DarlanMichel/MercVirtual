@@ -6,14 +6,23 @@ import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dar
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/add_produto_carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/delete_produto_carrinho_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/update_carrinho_repository.dart';
 
 class CarrinhoModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => CarrinhoController(i.get<AddProdutoCarrinhoRepository>(), i.get<CarrinhoRepository>())),
+    Bind((i) => CarrinhoController(
+        i.get<AddProdutoCarrinhoRepository>(),
+        i.get<CarrinhoRepository>(),
+        i.get<UpdateCarrinhoRepository>(),
+        i.get<DeleteProdutoCarrinhoRepository>(),
+    )),
 
     Bind((i) => CarrinhoRepository(AppModule.to.get<HasuraConnect>())),
-    Bind((i) => AddProdutoCarrinhoRepository(AppModule.to.get<HasuraConnect>()))
+    Bind((i) => AddProdutoCarrinhoRepository(AppModule.to.get<HasuraConnect>())),
+    Bind((i) => UpdateCarrinhoRepository(AppModule.to.get<HasuraConnect>())),
+    Bind((i) => DeleteProdutoCarrinhoRepository(AppModule.to.get<HasuraConnect>()))
   ];
 
   @override
