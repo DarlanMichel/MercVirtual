@@ -3,27 +3,19 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
+import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:mercadovirtual/app/modules/widgets/custom_dialog_excluir/custom_dialog_excluir_widget.dart';
 
+class CardProdutoCarrinhoWidget extends StatelessWidget {
+  final CarrinhoModel model;
 
-class CardProdutoCarrinhoWidget extends StatefulWidget {
-  final String descricao;
-  final double preco;
-  final int ean;
-  final int idProduto;
-  final int qtd;
+  const CardProdutoCarrinhoWidget({Key key, this.model}) : super(key: key);
 
-  const CardProdutoCarrinhoWidget({Key key, this.descricao, this.preco, this.ean, this.idProduto, this.qtd}) : super(key: key);
-  @override
-  _CardProdutoCarrinhoWidgetState createState() => _CardProdutoCarrinhoWidgetState();
-}
-
-class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWidget, CarrinhoController> {
   @override
   Widget build(BuildContext context) {
     CardProdutoCarrinhoController _count = CardProdutoCarrinhoController();
-    _count.value = widget.qtd;
+    _count.value = model.qtd;
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -38,7 +30,7 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                 padding: const EdgeInsets.all(10.0),
                 child: FadeInImage(
                   image: NetworkImage(
-                    "https://cdn-cosmos.bluesoft.com.br/products/${widget.ean}",
+                    "https://cdn-cosmos.bluesoft.com.br/products/${model.produto.ean}",
                   ),
                   placeholder: AssetImage(
                       "images/notimage.png"
@@ -57,7 +49,7 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "${widget.descricao}",
+                        "${model.produto.descricao}",
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 16,
@@ -67,7 +59,7 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "${widget.preco}",
+                        "R\$ ${model.produto.preco.toStringAsFixed(2).replaceAll('.', ',')}",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 14,
@@ -82,10 +74,12 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                           icon: Icon(Icons.remove),
                           onPressed: (){
                             if (_count.value == 1){
-                              return _count.value = 1;
+                              _count.value = 1;
                             }else{
-                              return _count.value --;
+                              _count.value --;
                             }
+                            model.qtd = _count.value;
+                            Modular.get<CarrinhoController>().update(model);
                           },
                         ),
                         Padding(
@@ -101,8 +95,10 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                         ),
                         IconButton(
                             icon: Icon(Icons.add),
-                            onPressed: (){
+                            onPressed: () {
                               _count.value ++;
+                              model.qtd = _count.value;
+                              Modular.get<CarrinhoController>().update(model);
                             }
                         )
                       ],
@@ -117,16 +113,13 @@ class _CardProdutoCarrinhoWidgetState extends ModularState<CardProdutoCarrinhoWi
                   IconButton(
                     icon: Icon(FontAwesomeIcons.trashAlt),
                     iconSize: 18,
-                    onPressed: () async{
-                      var result = await controller.delete(widget.idProduto);
-                      if(result){
-                        showToast(
-                            "Produto deletado do carrinho!",
-                            position: ToastPosition.center,
-                            duration: Duration(seconds: 3),
-                            backgroundColor: Colors.red
-                        );
-                      }
+                    onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context){
+                            return CustomDialogExcluirWidget(model: model,);
+                          }
+                      );
                     },
                   ),
                   Container(

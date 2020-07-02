@@ -11,8 +11,6 @@ import 'package:mercadovirtual/app/modules/widgets/custom_alertdialog/custom_ale
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/home_module.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_module.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_module.dart';
 import 'package:mercadovirtual/app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +23,7 @@ import 'modules/home/promocao_screen/promocao_screen_module.dart';
 import 'modules/home/repositories/promocao_repository.dart';
 import 'modules/login/homelogin/homelogin_module.dart';
 import 'modules/login/login/login_module.dart';
+import 'modules/widgets/custom_dialog_excluir/custom_dialog_excluir_controller.dart';
 
 class AppModule extends MainModule {
   final SharedPreferences shared;
@@ -32,6 +31,7 @@ class AppModule extends MainModule {
 
   @override
   List<Bind> get binds => [
+        Bind((i) => CustomDialogExcluirController()),
         Bind((i) => LoginStoreController()),
         Bind((i) => CardProdutoCarrinhoController()),
         Bind((i) => CardTotalCarrinhoController()),
@@ -61,8 +61,6 @@ class AppModule extends MainModule {
         Router("/Home/produtos/:categ", module: TabpageprodModule()),
         Router("/Home/carrinho", module: CarrinhoModule()),
         Router("/Home/perfil", module: PerfilModule()),
-//        Router("/Home/produtos/:categ", module: ProductScreenModule()),
-//        Router("/Home/categoria/secao", module: SectionScreenModule()),
       ];
 
   @override

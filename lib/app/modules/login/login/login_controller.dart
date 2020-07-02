@@ -67,7 +67,7 @@ abstract class _LoginControllerBase with Store {
       store.setToken((await user.getIdToken()).token);
       var tokenId = await user.getIdToken();
       valid = tokenId != null;
-      print(IdTokenResult);
+      print(tokenId.token);
       Modular.to.pushReplacementNamed("/Home");
     }catch (e){
       Modular.to.showDialog(builder: (context){

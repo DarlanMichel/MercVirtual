@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final categoriaModel = categoriaModelFromJson(jsonString);
-
 import 'dart:convert';
 
 class CategoriaModel {

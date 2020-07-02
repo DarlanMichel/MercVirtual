@@ -7,10 +7,10 @@ class CardTotalCarrinhoController = _CardTotalCarrinhoBase
 
 abstract class _CardTotalCarrinhoBase with Store {
   @observable
-  int value = 0;
+  double subtotal = 0;
 
   @action
-  void increment() {
-    value++;
+  void sum() {
+    subtotal = 0;
   }
 }

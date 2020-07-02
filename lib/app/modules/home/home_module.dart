@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
-import 'repositories/delete_produto_carrinho_repository.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/update_carrinho_repository.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/add_produto_carrinho_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
@@ -23,12 +20,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => PerfilController()),
-        Bind((i) => CarrinhoController(
-              i.get<AddProdutoCarrinhoRepository>(),
-              i.get<CarrinhoRepository>(),
-              i.get<UpdateCarrinhoRepository>(),
-              i.get<DeleteProdutoCarrinhoRepository>(),
-            )),
+        Bind((i) => CarrinhoController(i.get())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => TabpageprodController(
             i.get<ProdutoRepository>(), 0, i.get<CategoriaRepository>())),
@@ -36,10 +28,7 @@ class HomeModule extends ChildModule {
 
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
-        Bind((i) => AddProdutoCarrinhoRepository(i.get<HasuraConnect>())),
-        Bind((i) => CarrinhoRepository(i.get<HasuraConnect>())),
-        Bind((i) => UpdateCarrinhoRepository(i.get<HasuraConnect>())),
-        Bind((i) => DeleteProdutoCarrinhoRepository(i.get<HasuraConnect>())),
+        Bind<ICarrinhoRepository>((i) => CarrinhoRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) =>
             HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))

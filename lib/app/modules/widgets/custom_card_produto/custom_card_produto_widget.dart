@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
 
 class CustomCardProdutoWidget extends StatelessWidget {
@@ -6,7 +8,9 @@ class CustomCardProdutoWidget extends StatelessWidget {
   final double preco;
   final int ean;
   final int idProduto;
-  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean,@required this.idProduto}) : super(key: key);
+  final ProdutoModel produtoModel;
+  final CarrinhoModel carrinhoModel;
+  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean,@required this.idProduto, this.carrinhoModel, this.produtoModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context){
-              return CustomDialogAddProdutoWidget(descricao: descricao, idProduto: idProduto,);
+              return CustomDialogAddProdutoWidget(model: carrinhoModel,);
             }
         );
       },

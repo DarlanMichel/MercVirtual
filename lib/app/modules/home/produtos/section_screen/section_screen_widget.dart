@@ -2,14 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_controller.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_module.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
-import 'package:mobx/mobx.dart';
-
 
 class SectionScreenWidget extends StatefulWidget {
   @override

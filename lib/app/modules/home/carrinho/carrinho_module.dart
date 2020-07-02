@@ -4,25 +4,15 @@ import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/app_module.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/add_produto_carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/delete_produto_carrinho_repository.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/update_carrinho_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
 
 class CarrinhoModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => CarrinhoController(
-        i.get<AddProdutoCarrinhoRepository>(),
-        i.get<CarrinhoRepository>(),
-        i.get<UpdateCarrinhoRepository>(),
-        i.get<DeleteProdutoCarrinhoRepository>(),
-    )),
+    Bind((i) => CarrinhoController(i.get())),
 
-    Bind((i) => CarrinhoRepository(AppModule.to.get<HasuraConnect>())),
-    Bind((i) => AddProdutoCarrinhoRepository(AppModule.to.get<HasuraConnect>())),
-    Bind((i) => UpdateCarrinhoRepository(AppModule.to.get<HasuraConnect>())),
-    Bind((i) => DeleteProdutoCarrinhoRepository(AppModule.to.get<HasuraConnect>()))
+    Bind<ICarrinhoRepository>((i) => CarrinhoRepository(AppModule.to.get<HasuraConnect>())),
   ];
 
   @override
