@@ -12,18 +12,31 @@ mixin _$PromocaoScreenController on _PromocaoScreenBase, Store {
   final _$listaPromocaoAtom = Atom(name: '_PromocaoScreenBase.listaPromocao');
 
   @override
-  List<PromocaoModel> get listaPromocao {
+  ObservableStream<List<PromocaoModel>> get listaPromocao {
     _$listaPromocaoAtom.context.enforceReadPolicy(_$listaPromocaoAtom);
     _$listaPromocaoAtom.reportObserved();
     return super.listaPromocao;
   }
 
   @override
-  set listaPromocao(List<PromocaoModel> value) {
+  set listaPromocao(ObservableStream<List<PromocaoModel>> value) {
     _$listaPromocaoAtom.context.conditionallyRunInAction(() {
       super.listaPromocao = value;
       _$listaPromocaoAtom.reportChanged();
     }, _$listaPromocaoAtom, name: '${_$listaPromocaoAtom.name}_set');
+  }
+
+  final _$_PromocaoScreenBaseActionController =
+      ActionController(name: '_PromocaoScreenBase');
+
+  @override
+  dynamic getPromocao() {
+    final _$actionInfo = _$_PromocaoScreenBaseActionController.startAction();
+    try {
+      return super.getPromocao();
+    } finally {
+      _$_PromocaoScreenBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

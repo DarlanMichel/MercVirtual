@@ -12,14 +12,14 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
   final _$listaProdutoAtom = Atom(name: '_TabpageprodBase.listaProduto');
 
   @override
-  List<ProdutoModel> get listaProduto {
+  ObservableStream<List<ProdutoModel>> get listaProduto {
     _$listaProdutoAtom.context.enforceReadPolicy(_$listaProdutoAtom);
     _$listaProdutoAtom.reportObserved();
     return super.listaProduto;
   }
 
   @override
-  set listaProduto(List<ProdutoModel> value) {
+  set listaProduto(ObservableStream<List<ProdutoModel>> value) {
     _$listaProdutoAtom.context.conditionallyRunInAction(() {
       super.listaProduto = value;
       _$listaProdutoAtom.reportChanged();
@@ -62,6 +62,26 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
 
   final _$_TabpageprodBaseActionController =
       ActionController(name: '_TabpageprodBase');
+
+  @override
+  dynamic getProdutos(String desc, int categ) {
+    final _$actionInfo = _$_TabpageprodBaseActionController.startAction();
+    try {
+      return super.getProdutos(desc, categ);
+    } finally {
+      _$_TabpageprodBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getCategorias() {
+    final _$actionInfo = _$_TabpageprodBaseActionController.startAction();
+    try {
+      return super.getCategorias();
+    } finally {
+      _$_TabpageprodBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setPesquisa(String _pesquisa) {

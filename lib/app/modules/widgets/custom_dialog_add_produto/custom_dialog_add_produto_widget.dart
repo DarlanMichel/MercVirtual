@@ -4,16 +4,18 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
 import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_controller.dart';
 import 'package:oktoast/oktoast.dart';
 
 class CustomDialogAddProdutoWidget extends StatelessWidget {
-  final CarrinhoModel model;
+  final ProdutoModel model;
   const CustomDialogAddProdutoWidget({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     CustomDialogAddProdutoController _count = CustomDialogAddProdutoController();
+    CarrinhoModel carrinhoModel;
     return Dialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20)
@@ -26,7 +28,7 @@ class CustomDialogAddProdutoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "${model.produto.descricao}",
+                "${model.descricao}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
@@ -90,7 +92,9 @@ class CustomDialogAddProdutoWidget extends StatelessWidget {
                       )
                   ),
                   onPressed: () {
-                    Modular.get<CarrinhoController>().save(model);
+                    carrinhoModel.idProduto = model.codigo;
+                    carrinhoModel.qtd = _count.value;
+                    Modular.get<CarrinhoController>().save(carrinhoModel);
                     showToast(
                       "Produto adicionado ao carrinho!",
                       position: ToastPosition.center,

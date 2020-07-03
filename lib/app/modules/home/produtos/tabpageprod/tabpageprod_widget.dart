@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_module.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
-import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_module.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';

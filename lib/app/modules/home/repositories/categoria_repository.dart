@@ -1,25 +1,20 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/home/documents/categoria_document.dart';
 import 'package:mercadovirtual/app/modules/home/models/categoria_model.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository_interface.dart';
 
-class CategoriaRepository extends Disposable {
+class CategoriaRepository implements ICategoriaRepository {
   final HasuraConnect _hasuraConnect;
 
   CategoriaRepository(this._hasuraConnect);
 
   @override
   Stream<List<CategoriaModel>> getCategoria(){
-    var query = ''' 
-                subscription getCategoria {
-                  categoria(order_by: {desc: asc}) {
-                    desc
-                    cod_secao
-                  }
-                 } ''';
-
-    var snapshot = _hasuraConnect.subscription(query);
-
-    return snapshot.map((data)=> CategoriaModel.fromJsonList(data["data"]["categoria"]));
+    return _hasuraConnect.subscription(categoriaQuery).map((event) {
+      return (event["data"]["categoria"] as List).map((json) {
+        return CategoriaModel.fromJson(json);
+      }).toList();
+    });
   }
 
   //dispose will be called automatically

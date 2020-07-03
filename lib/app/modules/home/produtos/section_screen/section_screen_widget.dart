@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/models/categoria_model.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 
 class SectionScreenWidget extends StatefulWidget {
@@ -18,23 +19,30 @@ class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,Tabpage
           builder: (BuildContext context){
             if(controller.listaCategoria.hasError){
               return Center(
-                child: Text("Ocorreu um erro ao realizar essa requisição."),
+                  child: RaisedButton(
+                    onPressed: controller.getCategorias,
+                    child: Text('Recarregar'),
+                  )
               );
             }
-            if(controller.listaCategoria.value == null){
+            if(controller.listaCategoria.data == null){
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
+
+            List<CategoriaModel> listCat = controller.listaCategoria.data;
+
             return ListView.builder(
                 padding: EdgeInsets.all(8.0),
                 scrollDirection: Axis.horizontal,
-                itemCount: controller.listaCategoria.value.length,
+                itemCount: listCat.length,
                 itemBuilder: (_, index){
+                  CategoriaModel model = listCat[index];
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        controller.changePage(index, controller.listaCategoria.value[index].codSecao);
+                        controller.changePage(index, model.codSecao);
                       });
                     },
                     child: Container(
@@ -47,7 +55,7 @@ class _SectionScreenWidgetState extends ModularState<SectionScreenWidget,Tabpage
                         borderRadius: BorderRadius.circular(9.0),
                       ),
                       child: Text(
-                        "${controller.listaCategoria.value[index].desc}",
+                        "${model.desc}",
                         style: TextStyle(
                             color: controller.selectedCat == index ? Theme.of(context).accentColor : Colors.white
                         ),

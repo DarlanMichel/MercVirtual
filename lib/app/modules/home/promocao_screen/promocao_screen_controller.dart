@@ -9,13 +9,16 @@ class PromocaoScreenController = _PromocaoScreenBase with _$PromocaoScreenContro
 abstract class _PromocaoScreenBase with Store {
   final PromocaoRepository _repository;
 
+  @observable
+  ObservableStream<List<PromocaoModel>> listaPromocao;
+
   _PromocaoScreenBase(this._repository){
-    _repository.getPromocao().then((data)=> listaPromocao = data);
-    //listaPromocao = ObservableStream(_repository.getPromocao());
+    getPromocao();
   }
 
-  @observable
-  List<PromocaoModel> listaPromocao = [];
-  //ObservableStream<List<PromocaoModel>> listaPromocao;
+  @action
+  getPromocao(){
+    listaPromocao = _repository.getPromocao().asObservable();
+  }
 
 }

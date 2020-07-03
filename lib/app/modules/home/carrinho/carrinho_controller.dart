@@ -27,42 +27,8 @@ abstract class _CarrinhoBase with Store {
 
   Future update(CarrinhoModel model) => _repository.update(model);
 
-//  @observable
-//  int quantidade;
-//
-//  @observable
-//  int tamanho;
-//
-//  @observable
-//  List<ProdutoCarrinhoModel> updatedCarrinho = [];
-//
-//
-//
-//  @action
-//  Future<bool> salvar(int idProduto, int qtd) async{
-//
-//    await updateCarrinhoRepository.getProdutoCarrinho(idProduto).then((data) {
-//      updatedCarrinho = data;
-//      quantidade = updatedCarrinho.length;
-//    });
-//
-//    if(quantidade == 0){
-//      return await addProdutoCarrinhoRepository.addProdutoCarrinho(idProduto, qtd);
-//    }
-//    else{
-//      return await updateCarrinhoRepository.updateCarrinho(idProduto, qtd);
-//    }
-//  }
-//
-//  @action
-//  Future<bool> update(int idProduto, int qtd) async{
-//    return await updateCarrinhoRepository.decrementCarrinho(idProduto, qtd);
-//  }
-//
-//  @action
-//  Future<bool> delete(int idProduto) async{
-//    return await deleteProdutoCarrinhoRepository.deleteCarrinho(idProduto);
-//  }
+
+
 //
 //  @observable
 //  double subtotal;

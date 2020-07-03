@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
+import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
 
 class CustomCardPromoWidget extends StatelessWidget {
-  final String descricao;
-  final int ean;
-  final DateTime datafim;
-  final double preco;
-  final double novopreco;
-  final int idProduto;
-  const CustomCardPromoWidget({Key key,@required this.descricao,@required this.ean,@required this.datafim,@required this.preco,@required this.novopreco,@required this.idProduto}) : super(key: key);
+  final PromocaoModel model;
+
+  const CustomCardPromoWidget({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +41,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        descricao,
+                        model.produto.descricao,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 24,
@@ -58,7 +54,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                     ),
                     FadeInImage(
                       image: NetworkImage(
-                        "https://cdn-cosmos.bluesoft.com.br/products/$ean",
+                        "https://cdn-cosmos.bluesoft.com.br/products/${model.produto.ean}",
                       ),
                       placeholder: AssetImage(
                           "images/notimage.png"
@@ -76,7 +72,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 30),
                             child: Text(
-                                "Oferta válida até \n ${DateFormat('dd/MM/yyyy').format(datafim)}"
+                                "Oferta válida até \n ${DateFormat('dd/MM/yyyy').format(model.datafim)}"
                             ),
                           ),
                           Expanded(
@@ -86,7 +82,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                  "De: R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}",
+                                  "De: R\$ ${model.produto.preco.toStringAsFixed(2).replaceAll('.', ',')}",
                                   style: TextStyle(
                                       color: Theme.of(context).accentColor,
                                       fontSize: 14,
@@ -94,7 +90,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                                   )
                               ),
                               Text(
-                                  "Por: R\$ ${novopreco.toStringAsFixed(2).replaceAll('.', ',')}",
+                                  "Por: R\$ ${model.novopreco.toStringAsFixed(2).replaceAll('.', ',')}",
                                   style: TextStyle(
                                       color: Theme.of(context).accentColor,
                                       fontSize: 24,

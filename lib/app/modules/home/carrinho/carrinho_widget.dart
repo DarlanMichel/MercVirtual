@@ -25,7 +25,7 @@ class _CarrinhoWidgetState extends ModularState<CarrinhoWidget, CarrinhoControll
                 return Center(
                   child: RaisedButton(
                     onPressed: controller.getList,
-                    child: Text('Error'),
+                    child: Text('Recarregar'),
                   )
                 );
               }

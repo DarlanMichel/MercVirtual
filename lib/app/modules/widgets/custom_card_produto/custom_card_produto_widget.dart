@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
 import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
-import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
 
 class CustomCardProdutoWidget extends StatelessWidget {
-  final String descricao;
-  final double preco;
-  final int ean;
-  final int idProduto;
   final ProdutoModel produtoModel;
-  final CarrinhoModel carrinhoModel;
-  const CustomCardProdutoWidget({Key key,@required this.descricao,@required this.preco,@required this.ean,@required this.idProduto, this.carrinhoModel, this.produtoModel}) : super(key: key);
+  final Function onTap;
+  const CustomCardProdutoWidget({Key key, this.produtoModel, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        showDialog(
-            context: context,
-            builder: (BuildContext context){
-              return CustomDialogAddProdutoWidget(model: carrinhoModel,);
-            }
-        );
-      },
+      onTap: onTap,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
@@ -37,7 +24,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: FadeInImage(
                   image: NetworkImage(
-                    "https://cdn-cosmos.bluesoft.com.br/products/$ean",
+                    "https://cdn-cosmos.bluesoft.com.br/products/${produtoModel.ean}",
                   ),
                   placeholder: AssetImage(
                     "images/notimage.png"
@@ -54,7 +41,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        descricao,
+                        produtoModel.descricao,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 16,
@@ -63,7 +50,7 @@ class CustomCardProdutoWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          "R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}",
+                          "R\$ ${produtoModel.preco.toStringAsFixed(2).replaceAll('.', ',')}",
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
                               fontSize: 18,

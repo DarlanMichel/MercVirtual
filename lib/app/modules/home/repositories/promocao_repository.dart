@@ -1,34 +1,21 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/home/documents/promocao_document.dart';
 import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository_interface.dart';
 
-class PromocaoRepository extends Disposable {
+class PromocaoRepository implements IPromocaoRepository {
   final HasuraConnect _hasuraConnect;
 
   PromocaoRepository(this._hasuraConnect);
 
   @override
-//  Stream<List<PromocaoModel>> getPromocao(){
-  Future<List<PromocaoModel>> getPromocao() async{
-    var query = ''' 
-                query getPromocao {
-                    promocao {
-                      datafim
-                      novopreco
-                      codprod
-                      produto {
-                        descricao
-                        ean
-                        preco
-                      }
-                    }
-                  } ''';
+  Stream<List<PromocaoModel>> getPromocao(){
+    return _hasuraConnect.subscription(promocaoQuery).map((event) {
+      return (event["data"]["promocao"] as List).map((json) {
+        return PromocaoModel.fromJson(json);
+      }).toList();
+    });
 
-    //var snapshot = _hasuraConnect.subscription(query);
-    var data = await _hasuraConnect.query(query);
-
-    //return snapshot.map((data)=> PromocaoModel.fromJsonList(data["data"]["promocao"]));
-    return PromocaoModel.fromJsonList(data["data"]["promocao"] as List);
   }
 
   //dispose will be called automatically

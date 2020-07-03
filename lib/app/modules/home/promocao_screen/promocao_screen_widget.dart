@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_promo/custom_card_promo_widget.dart';
 
@@ -51,23 +52,22 @@ class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, Prom
                   height: 350,
                   child: Observer(
                     builder: (BuildContext context){
-                      if(controller.listaPromocao == null){
+                      if(controller.listaPromocao.data == null){
                         return Center(
                           child: CircularProgressIndicator(),
                         );
                       }
+
+                      List<PromocaoModel> listPromo = controller.listaPromocao.data;
+
                       return Swiper(
                         itemBuilder: (_, index) {
+                          PromocaoModel model = listPromo[index];
                           return CustomCardPromoWidget(
-                            descricao: controller.listaPromocao[index].produto.descricao,
-                            ean: controller.listaPromocao[index].produto.ean,
-                            preco: controller.listaPromocao[index].produto.preco,
-                            datafim: controller.listaPromocao[index].datafim,
-                            novopreco: controller.listaPromocao[index].novopreco,
-                            idProduto: controller.listaPromocao[index].codprod,
+                            model: model,
                           );
                         },
-                        itemCount: controller.listaPromocao.length,
+                        itemCount: listPromo.length,
                         control: SwiperControl(),
                         autoplayDelay: 5000,
                         autoplay: true,
