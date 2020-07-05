@@ -11,23 +11,22 @@ class TabpageprodController = _TabpageprodBase with _$TabpageprodController;
 abstract class _TabpageprodBase with Store {
   final IProdutoRepository _prodRepository;
   final ICategoriaRepository _catRepository;
-  final int cat;
-  int selectedCat;
+  final int categoria;
 
   @observable
-  ObservableStream<List<ProdutoModel>> listaProduto;
+  List<ProdutoModel> listaProduto = [];
 
   @observable
   ObservableStream<List<CategoriaModel>> listaCategoria;
 
-  _TabpageprodBase(this._prodRepository, this._catRepository, this.cat){
-    getProdutos(pesquisa, cat);
+  _TabpageprodBase(this._prodRepository, this._catRepository, this.categoria){
+    getProdutos(pesquisa, categoria);
     getCategorias();
   }
 
   @action
-  getProdutos(String desc, int categ){
-    listaProduto = _prodRepository.getProduto(desc, categ).asObservable();
+  getProdutos(String desc, int cat){
+    _prodRepository.getProduto(desc, cat).then((data)=> listaProduto = data);
   }
 
   @action
@@ -36,18 +35,21 @@ abstract class _TabpageprodBase with Store {
   }
 
   @observable
+  int selectedCat;
+
+  @observable
   String pesquisa = '';
 
   @action
   void setPesquisa(String _pesquisa){
     pesquisa = _pesquisa;
-    getProdutos(_pesquisa, cat);
+    _prodRepository.getProduto(_pesquisa, categoria).then((data)=> listaProduto = data);
   }
 
   @action
   void changePage(int index, int categ) {
     selectedCat = index;
-    getProdutos(pesquisa, categ);
+    _prodRepository.getProduto(pesquisa, categ).then((data)=> listaProduto = data);
   }
 
 }

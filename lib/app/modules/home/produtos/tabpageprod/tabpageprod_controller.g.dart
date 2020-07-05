@@ -12,14 +12,14 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
   final _$listaProdutoAtom = Atom(name: '_TabpageprodBase.listaProduto');
 
   @override
-  ObservableStream<List<ProdutoModel>> get listaProduto {
+  List<ProdutoModel> get listaProduto {
     _$listaProdutoAtom.context.enforceReadPolicy(_$listaProdutoAtom);
     _$listaProdutoAtom.reportObserved();
     return super.listaProduto;
   }
 
   @override
-  set listaProduto(ObservableStream<List<ProdutoModel>> value) {
+  set listaProduto(List<ProdutoModel> value) {
     _$listaProdutoAtom.context.conditionallyRunInAction(() {
       super.listaProduto = value;
       _$listaProdutoAtom.reportChanged();
@@ -43,6 +43,23 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
     }, _$listaCategoriaAtom, name: '${_$listaCategoriaAtom.name}_set');
   }
 
+  final _$selectedCatAtom = Atom(name: '_TabpageprodBase.selectedCat');
+
+  @override
+  int get selectedCat {
+    _$selectedCatAtom.context.enforceReadPolicy(_$selectedCatAtom);
+    _$selectedCatAtom.reportObserved();
+    return super.selectedCat;
+  }
+
+  @override
+  set selectedCat(int value) {
+    _$selectedCatAtom.context.conditionallyRunInAction(() {
+      super.selectedCat = value;
+      _$selectedCatAtom.reportChanged();
+    }, _$selectedCatAtom, name: '${_$selectedCatAtom.name}_set');
+  }
+
   final _$pesquisaAtom = Atom(name: '_TabpageprodBase.pesquisa');
 
   @override
@@ -64,10 +81,10 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
       ActionController(name: '_TabpageprodBase');
 
   @override
-  dynamic getProdutos(String desc, int categ) {
+  dynamic getProdutos(String desc, int cat) {
     final _$actionInfo = _$_TabpageprodBaseActionController.startAction();
     try {
-      return super.getProdutos(desc, categ);
+      return super.getProdutos(desc, cat);
     } finally {
       _$_TabpageprodBaseActionController.endAction(_$actionInfo);
     }
@@ -106,7 +123,7 @@ mixin _$TabpageprodController on _TabpageprodBase, Store {
   @override
   String toString() {
     final string =
-        'listaProduto: ${listaProduto.toString()},listaCategoria: ${listaCategoria.toString()},pesquisa: ${pesquisa.toString()}';
+        'listaProduto: ${listaProduto.toString()},listaCategoria: ${listaCategoria.toString()},selectedCat: ${selectedCat.toString()},pesquisa: ${pesquisa.toString()}';
     return '{$string}';
   }
 }

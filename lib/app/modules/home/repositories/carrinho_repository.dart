@@ -1,4 +1,3 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/documents/carrinho_document.dart';
 import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
@@ -19,17 +18,23 @@ class CarrinhoRepository implements ICarrinhoRepository{
   }
 
   @override
-  Future save(CarrinhoModel model) async {
-    if(model.idProduto == null){
+  Future save(int produto, int qtd) async {
+    var quantidade;
+    await getProdutoCarrinho(produto).then((data) {
+      quantidade = data.length;
+      print(quantidade);
+    });
+
+    if(quantidade == 0){
       var data = await _hasuraConnect.mutation(carrinhoInsertQuery, variables: {
-        "produto": model.idProduto,
-        "qtd": model.qtd
+        "produto": produto,
+        "qtd": qtd
       });
       return data["data"]["insert_carrinho"]["affected_rows"] > 0;
     }else{
       var data = await _hasuraConnect.mutation(carrinhoIncQuery, variables: {
-        "produto": model.idProduto,
-        "qtd": model.qtd
+        "produto": produto,
+        "qtd": qtd
       });
       return data["data"]["update_carrinho"]["affected_rows"] > 0;
     }
@@ -52,4 +57,13 @@ class CarrinhoRepository implements ICarrinhoRepository{
 
   @override
   void dispose() {}
+
+  @override
+  Future<List<Carrinho>> getProdutoCarrinho(int idProduto) {
+    return _hasuraConnect.query(getProdutoCarrinhoQuery, variables: {"produto": idProduto}).then((event) {
+      return (event["data"]["carrinho"] as List).map((json) {
+        return Carrinho.fromJson(json);
+      }).toList();
+    });
+  }
 }

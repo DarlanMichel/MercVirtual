@@ -52,6 +52,15 @@ class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, Prom
                   height: 350,
                   child: Observer(
                     builder: (BuildContext context){
+                      if(controller.listaPromocao.hasError){
+                        print(controller.listaPromocao.error);
+                        return Center(
+                            child: RaisedButton(
+                              onPressed: controller.getPromocao,
+                              child: Text('Recarregar'),
+                            )
+                        );
+                      }
                       if(controller.listaPromocao.data == null){
                         return Center(
                           child: CircularProgressIndicator(),

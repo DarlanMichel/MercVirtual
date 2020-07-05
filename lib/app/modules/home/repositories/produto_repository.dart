@@ -9,20 +9,20 @@ class ProdutoRepository implements IProdutoRepository {
   ProdutoRepository(this._hasuraConnect);
 
   @override
-  Stream<List<ProdutoModel>> getProduto(String desc, int categ) {
+  Future<List<ProdutoModel>> getProduto(String desc, int categ) {
     if (categ == 0 || categ == null){
-      return _hasuraConnect.subscription(produtoGetQuery, variables: {
-        "desc": {"desc": "%${desc}%"},
-      }).map((event) {
+      return _hasuraConnect.query(produtoGetQuery, variables: {
+        "desc":  "%${desc}%",
+      }).then((event) {
         return (event["data"]["produtos"] as List).map((json) {
           return ProdutoModel.fromJson(json);
         }).toList();
       });
     }else{
-      return _hasuraConnect.subscription(produtoCategoriaQuery, variables: {
-        "desc": {"desc": "%${desc}%"},
+      return _hasuraConnect.query(produtoCategoriaQuery, variables: {
+        "desc": "%${desc}%",
         "categoria": categ
-      }).map((event) {
+      }).then((event) {
         return (event["data"]["produtos"] as List).map((json) {
           return ProdutoModel.fromJson(json);
         }).toList();

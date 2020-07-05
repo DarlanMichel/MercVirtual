@@ -1,10 +1,8 @@
-import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
-
 class PromocaoModel {
   DateTime datafim;
   double novopreco;
   int codprod;
-  ProdutoModel produto;
+  ProdutoPromo produto;
 
   PromocaoModel({
     this.datafim,
@@ -16,9 +14,27 @@ class PromocaoModel {
   factory PromocaoModel.fromJson(Map json) {
     return PromocaoModel(
       datafim: DateTime.parse(json["datafim"]),
-      novopreco: json["novopreco"],
+      novopreco: json["novopreco"].toDouble(),
       codprod: json["codprod"],
-      produto: ProdutoModel.fromJson(json["produto"]),
+      produto: ProdutoPromo.fromJson(json["produto"]),
+    );
+  }
+}
+
+class ProdutoPromo{
+  String descricao;
+  int ean;
+  double preco;
+
+  ProdutoPromo({
+    this.descricao, this.ean, this.preco,
+  });
+
+  factory ProdutoPromo.fromJson(Map json){
+    return ProdutoPromo(
+      descricao: json["descricao"],
+      ean: json["ean"],
+      preco: json["preco"].toDouble(),
     );
   }
 }

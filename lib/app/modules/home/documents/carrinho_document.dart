@@ -42,3 +42,11 @@ const String carrinhoDeleteQuery = '''
                     }
                    }
               ''';
+
+const String getProdutoCarrinhoQuery = '''
+           query getProdutoCarrinho(\$produto: Int) {
+            carrinho(where: {id_produto: {_eq: \$produto}, status: {_eq: "A"}}) {
+              qtd
+            }
+          }
+      ''';

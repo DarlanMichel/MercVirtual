@@ -5,6 +5,7 @@ import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_produto/custom_card_produto_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
+import 'package:mobx/mobx.dart';
 
 class ProductScreenWidget extends StatefulWidget {
   final int categoria;
@@ -21,22 +22,13 @@ class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, Tabpag
       height: MediaQuery.of(context).size.height - 75,
       child: Observer(
         builder: (BuildContext context){
-          if(controller.listaProduto.hasError){
-            return Center(
-                child: RaisedButton(
-                  onPressed: controller.getProdutos('', 0),
-                  child: Text('Recarregar'),
-                )
-            );
-          }
-
-          if(controller.listaProduto.data == null){
+          if(controller.listaProduto == null){
             return Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          List<ProdutoModel> listProd = controller.listaProduto.data;
+          List<ProdutoModel> listProd = controller.listaProduto;
 
           return ListView.builder(
             padding: EdgeInsets.all(8.0),

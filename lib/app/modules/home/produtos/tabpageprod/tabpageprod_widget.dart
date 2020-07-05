@@ -7,20 +7,13 @@ import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
 
 class TabpageprodWidget extends StatefulWidget {
-  final String title;
   final int categoria;
-  const TabpageprodWidget({Key key, this.title = "categoria",@required this.categoria}) : super(key: key);
+  const TabpageprodWidget({Key key, @required this.categoria}) : super(key: key);
   @override
   _TabpageprodWidgetState createState() => _TabpageprodWidgetState();
 }
 
 class _TabpageprodWidgetState extends ModularState<TabpageprodWidget, TabpageprodController> {
-  @override
-  void initState() {
-    controller.setPesquisa;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

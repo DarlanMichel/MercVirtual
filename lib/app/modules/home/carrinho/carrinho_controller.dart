@@ -21,24 +21,18 @@ abstract class _CarrinhoBase with Store {
     listaCarrinho = _repository.getCarrinho().asObservable();
   }
 
-  Future save(CarrinhoModel model) =>  _repository.save(model);
+  Future save(int idProduto, int qtd) =>  _repository.save(idProduto, qtd);
 
   Future delete(CarrinhoModel model) => _repository.delete(model);
 
   Future update(CarrinhoModel model) => _repository.update(model);
 
-
-
-//
 //  @observable
 //  double subtotal;
 //
 //  @action
 //  Future<double> atualizaValores(double valor) async{
 //    subtotal = 0;
-//    if(listaCarrinho.value == null){
-//      listaCarrinho = _repository.getCarrinho().asObservable();
-//    }
 //
 //    for(var i = 0; i < listaCarrinho.value.length; i ++ ){
 //      print(subtotal);
