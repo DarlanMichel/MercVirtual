@@ -27,19 +27,7 @@ abstract class _CarrinhoBase with Store {
 
   Future update(CarrinhoModel model) => _repository.update(model);
 
-//  @observable
-//  double subtotal;
-//
-//  @action
-//  Future<double> atualizaValores(double valor) async{
-//    subtotal = 0;
-//
-//    for(var i = 0; i < listaCarrinho.value.length; i ++ ){
-//      print(subtotal);
-//      subtotal += (listaCarrinho.value[i].qtd * listaCarrinho.value[i].produto.preco);
-//    }
-//    subtotal += valor;
-//    return subtotal;
-//  }
+  @computed
+  double get subtotal => listaCarrinho.value.map((item) => item.produto.preco * item.qtd).reduce((value, element) => value + element);
 
 }

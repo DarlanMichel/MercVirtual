@@ -4,12 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 
-class CardTotalCarrinhoWidget extends StatefulWidget {
-  @override
-  _CardTotalCarrinhoWidgetState createState() => _CardTotalCarrinhoWidgetState();
-}
-
-class _CardTotalCarrinhoWidgetState extends ModularState<CardTotalCarrinhoWidget, CarrinhoController> {
+class CardTotalCarrinhoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +14,8 @@ class _CardTotalCarrinhoWidgetState extends ModularState<CardTotalCarrinhoWidget
       ),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
+          padding: EdgeInsets.all(20),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
@@ -38,11 +33,13 @@ class _CardTotalCarrinhoWidgetState extends ModularState<CardTotalCarrinhoWidget
                   Text(
                       "Subtotal"
                   ),
-                  //Observer(builder: (BuildContext context){
-//                    return Text("R\$ ${controller.subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
-                    Text("R\$ 20,00",)
-                   // }
-                 // )
+                  Observer(builder: (BuildContext context){
+                    if(Modular.get<CarrinhoController>().subtotal != null)
+                      return Text("R\$ ${Modular.get<CarrinhoController>().subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
+                    else
+                     return Text("R\$ 0,00",);
+                    }
+                  )
                 ],
               ),
               Divider(),
@@ -81,19 +78,19 @@ class _CardTotalCarrinhoWidgetState extends ModularState<CardTotalCarrinhoWidget
                         color: Theme.of(context).accentColor
                     ),
                   ),
-//                  Observer(
-//                    builder: (BuildContext context){
-                      //double total = controller.subtotal + 10; //frete - desconto
-                      Text(
-                        "R\$ 30,00",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).accentColor,
-                            fontSize: 18
-                        ),
-                      )
-                    //},
-                 // )
+                  Observer(
+                    builder: (BuildContext context){
+                  double total = Modular.get<CarrinhoController>().subtotal + 10; //frete - desconto
+                  return Text(
+                    "R\$ ${total.toStringAsFixed(2).replaceAll('.', ',')}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).accentColor,
+                        fontSize: 18
+                    ),
+                  );
+                  },
+                  )
                 ],
               ),
               SizedBox(height: 12,),
@@ -108,4 +105,3 @@ class _CardTotalCarrinhoWidgetState extends ModularState<CardTotalCarrinhoWidget
     );
   }
 }
-

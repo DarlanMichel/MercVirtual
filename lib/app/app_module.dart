@@ -55,7 +55,7 @@ class AppModule extends MainModule {
         Router(Modular.initialRoute, module: SplashModule()),
         Router("/homelogin", module: HomeloginModule()),
         Router("/cadastro", module: CadastroModule()),
-        Router("/login", module: LoginModule()),
+        Router("/Login", module: LoginModule()),
         Router("/Home", module: HomeModule()),
         Router("/Home/promocao", module: PromocaoScreenModule()),
         Router("/Home/produtos/:categ", module: TabpageprodModule()),

@@ -6,6 +6,7 @@ import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_total_carrinho/card_total_carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/discount_card/discount_card_widget.dart';
+import 'package:mobx/mobx.dart';
 
 class CarrinhoWidget extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class CarrinhoWidget extends StatefulWidget {
 }
 
 class _CarrinhoWidgetState extends ModularState<CarrinhoWidget, CarrinhoController> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(

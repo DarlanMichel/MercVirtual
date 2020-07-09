@@ -9,6 +9,12 @@ part of 'carrinho_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CarrinhoController on _CarrinhoBase, Store {
+  Computed<double> _$subtotalComputed;
+
+  @override
+  double get subtotal =>
+      (_$subtotalComputed ??= Computed<double>(() => super.subtotal)).value;
+
   final _$listaCarrinhoAtom = Atom(name: '_CarrinhoBase.listaCarrinho');
 
   @override
@@ -41,7 +47,8 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
 
   @override
   String toString() {
-    final string = 'listaCarrinho: ${listaCarrinho.toString()}';
+    final string =
+        'listaCarrinho: ${listaCarrinho.toString()},subtotal: ${subtotal.toString()}';
     return '{$string}';
   }
 }
