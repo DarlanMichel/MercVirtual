@@ -41,6 +41,7 @@ class AppModule extends MainModule {
         Bind((i) => AppController()),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
 
+
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
 

@@ -1,7 +1,10 @@
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_page.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository.dart';
@@ -21,7 +24,7 @@ import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => PerfilController()),
+        Bind((i) => PerfilController(i.get<PerfilRepository>())),
         Bind((i) => CarrinhoController(i.get<CarrinhoRepository>())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => TabpageprodController(
@@ -33,6 +36,7 @@ class HomeModule extends ChildModule {
         Bind<ICarrinhoRepository>((i) => CarrinhoRepository(i.get<HasuraConnect>())),
         Bind<IProdutoRepository>((i) => ProdutoRepository(i.get<HasuraConnect>())),
         Bind<ICategoriaRepository>((i) => CategoriaRepository(i.get<HasuraConnect>())),
+        Bind<IPerfilRepository>((i) => PerfilRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) =>
             HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
@@ -46,6 +50,7 @@ class HomeModule extends ChildModule {
             child: (_, args) => TabpageprodWidget(categoria: args.data)),
         Router("/carrinho", child: (_, args) => CarrinhoWidget()),
         Router("/perfil", child: (_, args) => PerfilWidget()),
+        Router('/endcadastro', child: (_, args) => CadastroEnderecoPage())
       ];
 
   static Inject get to => Inject<HomeModule>.of();

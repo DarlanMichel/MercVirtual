@@ -9,30 +9,30 @@ part of 'perfil_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PerfilController on _PerfilBase, Store {
-  final _$valueAtom = Atom(name: '_PerfilBase.value');
+  final _$listaNomeAtom = Atom(name: '_PerfilBase.listaNome');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  ObservableStream<List<PerfilModel>> get listaNome {
+    _$listaNomeAtom.context.enforceReadPolicy(_$listaNomeAtom);
+    _$listaNomeAtom.reportObserved();
+    return super.listaNome;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set listaNome(ObservableStream<List<PerfilModel>> value) {
+    _$listaNomeAtom.context.conditionallyRunInAction(() {
+      super.listaNome = value;
+      _$listaNomeAtom.reportChanged();
+    }, _$listaNomeAtom, name: '${_$listaNomeAtom.name}_set');
   }
 
   final _$_PerfilBaseActionController = ActionController(name: '_PerfilBase');
 
   @override
-  void increment() {
+  dynamic getNome() {
     final _$actionInfo = _$_PerfilBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.getNome();
     } finally {
       _$_PerfilBaseActionController.endAction(_$actionInfo);
     }
@@ -40,7 +40,7 @@ mixin _$PerfilController on _PerfilBase, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'listaNome: ${listaNome.toString()}';
     return '{$string}';
   }
 }

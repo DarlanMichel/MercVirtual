@@ -1,7 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/models/perfil_model.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
 
-class PerfilWidget extends StatelessWidget {
+class PerfilWidget extends StatefulWidget {
+  @override
+  _PerfilWidgetState createState() => _PerfilWidgetState();
+}
+
+class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,51 +26,100 @@ class PerfilWidget extends StatelessWidget {
                   children: [
                     Container(
                       height: 165,
-                      color: Theme.of(context).accentColor,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Darlan Michel da Silva",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "darlan.michel@hotmail.com",
-                                  style: TextStyle(
-                                    color: Colors.white,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.vertical(bottom: Radius.circular(15.0)),
+                        color: Theme.of(context).accentColor,
+                      ),
+                      child: Observer(
+                        builder: (_){
+                          if(controller.listaNome.hasError){
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Bem Vindo!",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
+                                ],
+                              ),
+                            );
+                          }
+                          if(controller.listaNome.data == null){
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Bem Vindo!",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+
+                          List<PerfilModel> listperfil = controller.listaNome.data;
+
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${listperfil[0].nome}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${listperfil[0].email}",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 120),
-                      width: 90,
-                      height: 90,
+                      width: 100,
+                      height: 100,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
+                          color: Colors.white,
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  "https://forum.imasters.com.br/uploads/monthly_2018_04/D_member_120673.png"))),
+                              image: AssetImage(
+                                  "images/logo2.png",
+                              )
+                          )
+                      ),
                     ),
                   ],
                 ),
@@ -99,6 +157,9 @@ class PerfilWidget extends StatelessWidget {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: (){
+                        Navigator.pushNamed(context, "/Home/perfil/endereco");
+                      },
                     )
                   ],
                 ),
@@ -168,3 +229,4 @@ class PerfilWidget extends StatelessWidget {
     );
   }
 }
+
