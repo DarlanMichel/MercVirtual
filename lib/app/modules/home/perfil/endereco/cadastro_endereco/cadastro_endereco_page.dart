@@ -43,20 +43,17 @@ class _CadastroEnderecoPageState
             ),
             Row(
               children: [
-                Expanded(
-                  child: Observer(
-                    builder: (_){
-                      return TextfieldSemIconWidget(
-                        keyboard: TextInputType.text,
-                        pass: false,
-                        text: "Rua",
-                        change: controller.setRua,
-                        controller: controller.rua,
-                      );
-                    },
-                  )
-                ),
-
+                Expanded(child: Observer(
+                  builder: (_) {
+                    return TextfieldSemIconWidget(
+                      keyboard: TextInputType.text,
+                      pass: false,
+                      text: "Rua",
+                      change: controller.setRua,
+                      controller: controller.rua,
+                    );
+                  },
+                )),
                 SizedBox(
                   width: 100,
                   child: TextfieldSemIconWidget(
@@ -68,7 +65,6 @@ class _CadastroEnderecoPageState
                 ),
               ],
             ),
-
             TextfieldSemIconWidget(
               keyboard: TextInputType.text,
               pass: false,
@@ -76,7 +72,7 @@ class _CadastroEnderecoPageState
               change: controller.setComplemento,
             ),
             Observer(
-              builder: (_){
+              builder: (_) {
                 return TextfieldSemIconWidget(
                   keyboard: TextInputType.text,
                   pass: false,
@@ -92,27 +88,36 @@ class _CadastroEnderecoPageState
               text: "Referência",
               change: controller.setReferencia,
             ),
-            Observer(
-              builder: (_){
-                return TextfieldSemIconWidget(
-                    keyboard: TextInputType.text,
-                    pass: false,
-                    text: "Cidade",
-                    change: controller.setCidade,
-                    controller: controller.cidade,
-                );
-              },
-            ),
-            Observer(
-              builder: (_){
-                return TextfieldSemIconWidget(
-                  keyboard: TextInputType.text,
-                  pass: false,
-                  text: "UF",
-                  change: controller.setUF,
-                  controller: controller.uf,
-                );
-              },
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Observer(
+                    builder: (_) {
+                      return TextfieldSemIconWidget(
+                        keyboard: TextInputType.text,
+                        pass: false,
+                        text: "Cidade",
+                        change: controller.setCidade,
+                        controller: controller.cidade,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Observer(
+                    builder: (_) {
+                      return TextfieldSemIconWidget(
+                        keyboard: TextInputType.text,
+                        pass: false,
+                        text: "UF",
+                        change: controller.setUF,
+                        controller: controller.uf,
+                      );
+                    },
+                  ),
+                )
+              ],
             ),
             SizedBox(
               height: 20,
@@ -121,8 +126,17 @@ class _CadastroEnderecoPageState
               text: "Salvar",
               cor: Theme.of(context).accentColor,
               textcolor: Colors.white,
-              function: (){
-                controller.save(controller.bairro, controller.cep, controller.cidade, controller.complemento, controller.descricao, controller.uf, controller.num, controller.referencia, controller.rua);
+              function: () {
+                controller.save(
+                    controller.bairro,
+                    controller.cep,
+                    controller.cidade,
+                    controller.complemento,
+                    controller.descricao,
+                    controller.uf,
+                    controller.num,
+                    controller.referencia,
+                    controller.rua);
                 showToast(
                   "Endereço cadastrado!",
                   position: ToastPosition.center,

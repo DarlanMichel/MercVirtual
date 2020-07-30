@@ -1,7 +1,6 @@
 import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_controller.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_module.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/endereco/endereco_controller.dart';
-import 'package:mercadovirtual/app/modules/home/perfil/endereco/endereco_module.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
@@ -22,10 +21,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:mercadovirtual/app/app_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'modules/home/carrinho/carrinho_module.dart';
-import 'modules/home/perfil/perfil_module.dart';
-import 'modules/home/produtos/tabpageprod/tabpageprod_module.dart';
-import 'modules/home/promocao_screen/promocao_screen_module.dart';
 import 'modules/home/repositories/promocao_repository.dart';
 import 'modules/login/homelogin/homelogin_module.dart';
 import 'modules/login/login/login_module.dart';
@@ -48,9 +43,12 @@ class AppModule extends MainModule {
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => EnderecoController(i.get<EnderecoRepository>())),
         Bind((i) => CadastroEnderecoController(i.get<EnderecoRepository>())),
+
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
-        Bind<IEnderecoRepository>((i)=> EnderecoRepository(i.get<HasuraConnect>())),
+        Bind<IEnderecoRepository>(
+            (i) => EnderecoRepository(i.get<HasuraConnect>())),
+
         ///Outros
         Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => shared),
@@ -69,7 +67,8 @@ class AppModule extends MainModule {
         //Router("/Home/carrinho", module: CarrinhoModule()),
         //Router("/Home/perfil", module: PerfilModule()),
         //Router("/Home/perfil/endereco", module: EnderecoModule()),
-        Router("/Home/perfil/endereco/endcadastro", module: CadastroEnderecoModule()),
+        Router("/Home/perfil/endereco/endcadastro",
+            module: CadastroEnderecoModule()),
       ];
 
   @override

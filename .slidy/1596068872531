@@ -1,0 +1,4 @@
+lib/app/modules/widgets/card_endereco/card_endereco_widget.dart
+test/app/modules/widgets/card_endereco/card_endereco_widget_test.dart
+lib/app/modules/widgets/card_endereco/card_endereco_controller.dart
+test/app/modules/widgets/card_endereco/card_endereco_controller_test.dart

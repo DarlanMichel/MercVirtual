@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/widgets/card_endereco/card_endereco_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/textfield_sem_icon/textfield_sem_icon_widget.dart';
 import 'endereco_controller.dart';
@@ -24,13 +25,18 @@ class _EnderecoPageState
         title: Text(widget.title),
       ),
       body: Center(
-        child: CustomRaisebuttonWidget(
-          text: "Novo Endereço",
-          cor: Theme.of(context).accentColor,
-          textcolor: Colors.white,
-          function: (){
-            Modular.to.pushNamed("/Home/perfil/endereco/endcadastro");
-          },
+        child: Column(
+          children: <Widget>[
+            CardEnderecoWidget(),
+            CustomRaisebuttonWidget(
+              text: "Novo Endereço",
+              cor: Theme.of(context).accentColor,
+              textcolor: Colors.white,
+              function: (){
+                Modular.to.pushNamed("/Home/perfil/endereco/endcadastro");
+              },
+            ),
+          ],
         ),
       )
     );
