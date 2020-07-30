@@ -1,4 +1,3 @@
-import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 import 'package:via_cep/via_cep.dart';
@@ -13,15 +12,16 @@ abstract class _CadastroEnderecoControllerBase with Store {
 
   _CadastroEnderecoControllerBase(this._repository);
 
-  Future save(EnderecoModel model) =>  _repository.save(model);
+  Future save(String bairro, String cep, String cidade, String complemento, String descricao, String estado, String numero, String referencia, String rua) =>
+      _repository.save(bairro, cep, cidade, complemento, descricao, estado, numero, referencia, rua);
 
   @observable
   String cep = '';
 
   @action
-  void setCEP(String _cep) async{
+  Future setCEP(String _cep) async{
     cep = _cep;
-    if(cep.length == 8){
+    if(cep.length == 8) {
       var CEP = new via_cep();
 
       await CEP.searchCEP(cep, 'json', '');
@@ -29,15 +29,13 @@ abstract class _CadastroEnderecoControllerBase with Store {
       // Sucesso
       if (CEP.getResponse() == 200) {
         setRua(CEP.getLogradouro());
-        print('Logradouro: '+CEP.getLogradouro());
-        setComplemento(CEP.getComplemento());
-        print('Complemento: '+CEP.getComplemento());
+        print('Logradouro: ' +rua);
         setBairro(CEP.getBairro());
-        print('Bairro: '+CEP.getBairro());
+        print('Bairro: '+bairro);
         setCidade(CEP.getLocalidade());
-        print('Localidade: '+CEP.getLocalidade());
+        print('Localidade: '+cidade);
         setUF(CEP.getUF());
-        print('UF: '+CEP.getUF());
+        print('UF: '+uf);
         // Falha
       } else {
         print('Código de Retorno: '+CEP.getResponse().toString());
@@ -93,18 +91,5 @@ abstract class _CadastroEnderecoControllerBase with Store {
 
   @action
   void setDescricao(String _descricao) => descricao = _descricao;
-
-  @computed
-  EnderecoModel get model{
-    model.cep = cep;
-    model.rua = rua;
-    model.numero = num;
-    model.complemento = complemento;
-    model.bairro = bairro;
-    model.referencia = referencia;
-    model.cidade = cidade;
-    model.estado = uf;
-    model.descricao = descricao;
-  }
 
 }

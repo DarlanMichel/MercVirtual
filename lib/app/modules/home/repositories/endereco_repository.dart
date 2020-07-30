@@ -24,24 +24,24 @@ class EnderecoRepository implements IEnderecoRepository {
   }
 
   @override
-  Future save(EnderecoModel model) {
-    return _hasuraConnect.mutation(enderecoInsertQuery, variables: {
-      "bairro": model.bairro,
-      "cep": model.cep,
-      "cidade": model.cidade,
-      "complemento": model.complemento,
-      "descricao": model.descricao,
-      "estado": model.estado,
-      "numero": model.numero,
-      "referencia": model.referencia,
-      "rua": model.rua
-    });
-  }
-
-  @override
   Future update(EnderecoModel model) {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  @override
+  Future save(String bairro, String cep, String cidade, String complemento, String descricao, String estado, String numero, String referencia, String rua) {
+    return _hasuraConnect.mutation(enderecoInsertQuery, variables: {
+      "bairro": bairro,
+      "cep": cep,
+      "cidade": cidade,
+      "complemento": complemento,
+      "descricao": descricao,
+      "estado": estado,
+      "numero": numero,
+      "referencia": referencia,
+      "rua": rua
+    });
   }
 
 }

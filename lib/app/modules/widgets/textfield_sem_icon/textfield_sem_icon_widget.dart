@@ -5,14 +5,16 @@ class TextfieldSemIconWidget extends StatelessWidget {
   final bool pass;
   final TextInputType keyboard;
   final Function change;
+  final String controller;
 
-  const TextfieldSemIconWidget({Key key, this.text, this.pass, this.keyboard, this.change}) : super(key: key);
+  const TextfieldSemIconWidget({Key key, this.text, this.pass, this.keyboard, this.change, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, top: 5),
       child: TextField(
+        controller: TextEditingController(text: controller),
         obscureText: pass,
         keyboardType: keyboard,
         onChanged: change,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/textfield_sem_icon/textfield_sem_icon_widget.dart';
@@ -43,12 +44,17 @@ class _CadastroEnderecoPageState
             Row(
               children: [
                 Expanded(
-                  child: TextfieldSemIconWidget(
-                    keyboard: TextInputType.text,
-                    pass: false,
-                    text: "Rua",
-                    change: controller.setRua,
-                  ),
+                  child: Observer(
+                    builder: (_){
+                      return TextfieldSemIconWidget(
+                        keyboard: TextInputType.text,
+                        pass: false,
+                        text: "Rua",
+                        change: controller.setRua,
+                        controller: controller.rua,
+                      );
+                    },
+                  )
                 ),
 
                 SizedBox(
@@ -69,11 +75,16 @@ class _CadastroEnderecoPageState
               text: "Complemento",
               change: controller.setComplemento,
             ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              pass: false,
-              text: "Bairro",
-              change: controller.setBairro,
+            Observer(
+              builder: (_){
+                return TextfieldSemIconWidget(
+                  keyboard: TextInputType.text,
+                  pass: false,
+                  text: "Bairro",
+                  change: controller.setBairro,
+                  controller: controller.bairro,
+                );
+              },
             ),
             TextfieldSemIconWidget(
               keyboard: TextInputType.text,
@@ -81,17 +92,27 @@ class _CadastroEnderecoPageState
               text: "Referência",
               change: controller.setReferencia,
             ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              pass: false,
-              text: "Cidade",
-              change: controller.setCidade
+            Observer(
+              builder: (_){
+                return TextfieldSemIconWidget(
+                    keyboard: TextInputType.text,
+                    pass: false,
+                    text: "Cidade",
+                    change: controller.setCidade,
+                    controller: controller.cidade,
+                );
+              },
             ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              pass: false,
-              text: "UF",
-              change: controller.setUF,
+            Observer(
+              builder: (_){
+                return TextfieldSemIconWidget(
+                  keyboard: TextInputType.text,
+                  pass: false,
+                  text: "UF",
+                  change: controller.setUF,
+                  controller: controller.uf,
+                );
+              },
             ),
             SizedBox(
               height: 20,
@@ -101,12 +122,13 @@ class _CadastroEnderecoPageState
               cor: Theme.of(context).accentColor,
               textcolor: Colors.white,
               function: (){
-                controller.save(controller.model);
+                controller.save(controller.bairro, controller.cep, controller.cidade, controller.complemento, controller.descricao, controller.uf, controller.num, controller.referencia, controller.rua);
                 showToast(
                   "Endereço cadastrado!",
                   position: ToastPosition.center,
                   duration: Duration(seconds: 3),
                 );
+                Navigator.pop(context);
               },
             )
           ],

@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
-import 'package:oktoast/oktoast.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;

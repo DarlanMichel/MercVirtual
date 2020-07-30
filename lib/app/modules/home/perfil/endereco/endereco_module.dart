@@ -10,15 +10,17 @@ import 'endereco_page.dart';
 class EnderecoModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind<IEnderecoRepository>((i) => EnderecoRepository(i.get<HasuraConnect>())),
         Bind((i) => EnderecoController(i.get<EnderecoRepository>())),
         Bind((i) => CadastroEnderecoController(i.get<EnderecoRepository>())),
+
+        Bind<IEnderecoRepository>((i) => EnderecoRepository(i.get<HasuraConnect>())),
+
         Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
       ];
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => EnderecoPage()),
+        Router('/', child: (_, args) => EnderecoPage()),
         Router('/endcadastro', child: (_, args) => CadastroEnderecoPage())
       ];
 

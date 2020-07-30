@@ -31,7 +31,7 @@ class PerfilModule extends ModuleWidget {
   List<Router> get routers => [
     Router('/', child: (_, args) => PerfilWidget()),
     Router('/endereco', child: (_, args) => EnderecoPage()),
-    Router('/enderco/endcadastro', child: (_, args) => CadastroEnderecoPage())
+    Router('/endereco/endcadastro', child: (_, args) => CadastroEnderecoPage())
   ];
 
   Widget get view => PerfilWidget();

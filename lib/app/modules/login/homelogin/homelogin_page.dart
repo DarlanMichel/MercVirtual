@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_page.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_page.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
@@ -32,7 +33,10 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   cor: Colors.white,
                   text: "Cadastre-se grátis",
                   textcolor: Theme.of(context).accentColor,
-                  nav: "cadastro",
+                  function: (){
+                    Modular.to.pushNamed("cadastro");
+                  },
+                  //nav: "cadastro",
                 ),
                 SizedBox(
                   height: 30,
@@ -41,7 +45,10 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   cor: Theme.of(context).accentColor,
                   text: "Entrar",
                   textcolor: Colors.white,
-                  nav: "login",
+                  function: (){
+                    Modular.to.pushNamed("login");
+                  },
+                  //nav: "login",
                 )
               ],
             ),

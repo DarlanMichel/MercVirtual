@@ -28,7 +28,9 @@ class _EnderecoPageState
           text: "Novo Endereço",
           cor: Theme.of(context).accentColor,
           textcolor: Colors.white,
-          nav: "endcadastro"
+          function: (){
+            Modular.to.pushNamed("/Home/perfil/endereco/endcadastro");
+          },
         ),
       )
     );

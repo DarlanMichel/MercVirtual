@@ -9,12 +9,6 @@ part of 'cadastro_endereco_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroEnderecoController on _CadastroEnderecoControllerBase, Store {
-  Computed<EnderecoModel> _$modelComputed;
-
-  @override
-  EnderecoModel get model =>
-      (_$modelComputed ??= Computed<EnderecoModel>(() => super.model)).value;
-
   final _$cepAtom = Atom(name: '_CadastroEnderecoControllerBase.cep');
 
   @override
@@ -171,19 +165,15 @@ mixin _$CadastroEnderecoController on _CadastroEnderecoControllerBase, Store {
     }, _$descricaoAtom, name: '${_$descricaoAtom.name}_set');
   }
 
-  final _$_CadastroEnderecoControllerBaseActionController =
-      ActionController(name: '_CadastroEnderecoControllerBase');
+  final _$setCEPAsyncAction = AsyncAction('setCEP');
 
   @override
-  void setCEP(String _cep) {
-    final _$actionInfo =
-        _$_CadastroEnderecoControllerBaseActionController.startAction();
-    try {
-      return super.setCEP(_cep);
-    } finally {
-      _$_CadastroEnderecoControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future<dynamic> setCEP(String _cep) {
+    return _$setCEPAsyncAction.run(() => super.setCEP(_cep));
   }
+
+  final _$_CadastroEnderecoControllerBaseActionController =
+      ActionController(name: '_CadastroEnderecoControllerBase');
 
   @override
   void setRua(String _rua) {
@@ -276,7 +266,7 @@ mixin _$CadastroEnderecoController on _CadastroEnderecoControllerBase, Store {
   @override
   String toString() {
     final string =
-        'cep: ${cep.toString()},rua: ${rua.toString()},num: ${num.toString()},complemento: ${complemento.toString()},bairro: ${bairro.toString()},referencia: ${referencia.toString()},cidade: ${cidade.toString()},uf: ${uf.toString()},descricao: ${descricao.toString()},model: ${model.toString()}';
+        'cep: ${cep.toString()},rua: ${rua.toString()},num: ${num.toString()},complemento: ${complemento.toString()},bairro: ${bairro.toString()},referencia: ${referencia.toString()},cidade: ${cidade.toString()},uf: ${uf.toString()},descricao: ${descricao.toString()}';
     return '{$string}';
   }
 }

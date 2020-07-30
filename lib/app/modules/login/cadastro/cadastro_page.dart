@@ -59,7 +59,7 @@ class _CadastroPageState extends ModularState<CadastroPage, CadastroController> 
                     ),
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushNamed(context, '/Login');
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: Text(
                         "Já tem uma Conta?",

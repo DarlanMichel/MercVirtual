@@ -1,3 +1,9 @@
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_controller.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_module.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/endereco_controller.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/endereco_module.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_produto_carrinho/card_produto_carrinho_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,11 +46,11 @@ class AppModule extends MainModule {
         Bind((i) => CustomAlertdialogController()),
         Bind((i) => AppController()),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
-
-
+        Bind((i) => EnderecoController(i.get<EnderecoRepository>())),
+        Bind((i) => CadastroEnderecoController(i.get<EnderecoRepository>())),
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
-
+        Bind<IEnderecoRepository>((i)=> EnderecoRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => shared),
@@ -58,10 +64,12 @@ class AppModule extends MainModule {
         Router("/cadastro", module: CadastroModule()),
         Router("/login", module: LoginModule()),
         Router("/Home", module: HomeModule()),
-        Router("/Home/promocao", module: PromocaoScreenModule()),
-        Router("/Home/produtos/:categ", module: TabpageprodModule()),
-        Router("/Home/carrinho", module: CarrinhoModule()),
-        Router("/Home/perfil", module: PerfilModule()),
+        //Router("/Home/promocao", module: PromocaoScreenModule()),
+        //Router("/Home/produtos/:categ", module: TabpageprodModule()),
+        //Router("/Home/carrinho", module: CarrinhoModule()),
+        //Router("/Home/perfil", module: PerfilModule()),
+        //Router("/Home/perfil/endereco", module: EnderecoModule()),
+        Router("/Home/perfil/endereco/endcadastro", module: CadastroEnderecoModule()),
       ];
 
   @override
