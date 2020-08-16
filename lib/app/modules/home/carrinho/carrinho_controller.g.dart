@@ -32,6 +32,59 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
     }, _$listaCarrinhoAtom, name: '${_$listaCarrinhoAtom.name}_set');
   }
 
+  final _$listaFormaPagtoAtom = Atom(name: '_CarrinhoBase.listaFormaPagto');
+
+  @override
+  ObservableStream<List<FormaPagtoModel>> get listaFormaPagto {
+    _$listaFormaPagtoAtom.context.enforceReadPolicy(_$listaFormaPagtoAtom);
+    _$listaFormaPagtoAtom.reportObserved();
+    return super.listaFormaPagto;
+  }
+
+  @override
+  set listaFormaPagto(ObservableStream<List<FormaPagtoModel>> value) {
+    _$listaFormaPagtoAtom.context.conditionallyRunInAction(() {
+      super.listaFormaPagto = value;
+      _$listaFormaPagtoAtom.reportChanged();
+    }, _$listaFormaPagtoAtom, name: '${_$listaFormaPagtoAtom.name}_set');
+  }
+
+  final _$selectedEnderecoAtom = Atom(name: '_CarrinhoBase.selectedEndereco');
+
+  @override
+  EnderecoModel get selectedEndereco {
+    _$selectedEnderecoAtom.context.enforceReadPolicy(_$selectedEnderecoAtom);
+    _$selectedEnderecoAtom.reportObserved();
+    return super.selectedEndereco;
+  }
+
+  @override
+  set selectedEndereco(EnderecoModel value) {
+    _$selectedEnderecoAtom.context.conditionallyRunInAction(() {
+      super.selectedEndereco = value;
+      _$selectedEnderecoAtom.reportChanged();
+    }, _$selectedEnderecoAtom, name: '${_$selectedEnderecoAtom.name}_set');
+  }
+
+  final _$selectedFormaPagtoAtom =
+      Atom(name: '_CarrinhoBase.selectedFormaPagto');
+
+  @override
+  FormaPagtoModel get selectedFormaPagto {
+    _$selectedFormaPagtoAtom.context
+        .enforceReadPolicy(_$selectedFormaPagtoAtom);
+    _$selectedFormaPagtoAtom.reportObserved();
+    return super.selectedFormaPagto;
+  }
+
+  @override
+  set selectedFormaPagto(FormaPagtoModel value) {
+    _$selectedFormaPagtoAtom.context.conditionallyRunInAction(() {
+      super.selectedFormaPagto = value;
+      _$selectedFormaPagtoAtom.reportChanged();
+    }, _$selectedFormaPagtoAtom, name: '${_$selectedFormaPagtoAtom.name}_set');
+  }
+
   final _$_CarrinhoBaseActionController =
       ActionController(name: '_CarrinhoBase');
 
@@ -46,9 +99,39 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
   }
 
   @override
+  dynamic getFormaPagto() {
+    final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
+    try {
+      return super.getFormaPagto();
+    } finally {
+      _$_CarrinhoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEndereco(EnderecoModel _endereco) {
+    final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
+    try {
+      return super.setEndereco(_endereco);
+    } finally {
+      _$_CarrinhoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFormaPagto(FormaPagtoModel _formaPagto) {
+    final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
+    try {
+      return super.setFormaPagto(_formaPagto);
+    } finally {
+      _$_CarrinhoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'listaCarrinho: ${listaCarrinho.toString()},subtotal: ${subtotal.toString()}';
+        'listaCarrinho: ${listaCarrinho.toString()},listaFormaPagto: ${listaFormaPagto.toString()},selectedEndereco: ${selectedEndereco.toString()},selectedFormaPagto: ${selectedFormaPagto.toString()},subtotal: ${subtotal.toString()}';
     return '{$string}';
   }
 }

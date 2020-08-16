@@ -32,6 +32,8 @@ dependencies:
   intl: ^0.16.1
   oktoast: ^2.3.2
   via_cep: ^1.0.6
+  find_dropdown:
+    git: https://github.com/Bwolfs2/find_dropdown.git
   flutter:
     sdk: flutter
 

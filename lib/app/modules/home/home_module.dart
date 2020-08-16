@@ -14,6 +14,8 @@ import 'package:mercadovirtual/app/modules/home/repositories/categoria_repositor
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/pedido_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/pedido_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
@@ -38,7 +40,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => PerfilController(i.get<PerfilRepository>())),
-        Bind((i) => CarrinhoController(i.get<CarrinhoRepository>())),
+        Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<FormaPagtoRepository>())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => TabpageprodController(
             i.get<ProdutoRepository>(),  i.get<CategoriaRepository>(), 0)),
@@ -56,6 +58,7 @@ class HomeModule extends ChildModule {
         Bind<IPerfilRepository>((i) => PerfilRepository(i.get<HasuraConnect>())),
         Bind<IEnderecoRepository>((i) => EnderecoRepository(i.get<HasuraConnect>())),
         Bind<IPedidoRepository>((i) => PedidoRepository(i.get<HasuraConnect>())),
+        Bind<IFormaPagtoRepository>((i) => FormaPagtoRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) =>
             HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
