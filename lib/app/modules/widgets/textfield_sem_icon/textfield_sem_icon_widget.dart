@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 
 class TextfieldSemIconWidget extends StatelessWidget {
   final String text;
-  final bool pass;
   final TextInputType keyboard;
   final Function change;
   final String controller;
 
-  const TextfieldSemIconWidget({Key key, this.text, this.pass, this.keyboard, this.change, this.controller}) : super(key: key);
+  const TextfieldSemIconWidget({Key key, this.text, this.keyboard, this.change, this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20, left: 20, top: 5),
-      child: TextField(
+      child: TextFormField(
         controller: TextEditingController(text: controller),
-        obscureText: pass,
         keyboardType: keyboard,
         onChanged: change,
         style: TextStyle(
@@ -23,7 +21,6 @@ class TextfieldSemIconWidget extends StatelessWidget {
         ),
         decoration: InputDecoration(
           hintText: text,
-
           hintStyle: TextStyle(
             color: Theme.of(context).accentColor,
           ),

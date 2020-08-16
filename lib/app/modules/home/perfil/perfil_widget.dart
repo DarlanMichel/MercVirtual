@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/models/perfil_model.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/cadastro_perfil/cadastro_perfil_page.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
 
 class PerfilWidget extends StatefulWidget {
@@ -13,6 +15,11 @@ class PerfilWidget extends StatefulWidget {
 class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Theme.of(context).accentColor,
+    ));
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -28,7 +35,7 @@ class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
                       height: 165,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        borderRadius:  BorderRadius.vertical(bottom: Radius.circular(15.0)),
+                        borderRadius:  BorderRadius.vertical(bottom: Radius.circular(20.0)),
                         color: Theme.of(context).accentColor,
                       ),
                       child: Observer(
@@ -189,6 +196,9 @@ class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: (){
+                        Navigator.pushNamed(context, "/Home/perfil/pagamento");
+                      },
                     )
                   ],
                 ),
@@ -218,6 +228,41 @@ class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: (){
+                        Navigator.pushNamed(context, "/Home/perfil/pedidos");
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.person_pin,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Perfil",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Edite seus dados do perfil")
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => CadastroPerfilPage(nome: controller.listaNome.value[0].nome, email: controller.listaNome.value[0].email, id: controller.listaNome.value[0].id,)));
+                      },
                     )
                   ],
                 )

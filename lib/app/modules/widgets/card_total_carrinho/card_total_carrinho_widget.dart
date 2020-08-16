@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
-import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 
 class CardTotalCarrinhoWidget extends StatelessWidget {
 
@@ -34,10 +33,7 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                       "Subtotal"
                   ),
                   Observer(builder: (BuildContext context){
-                    if(Modular.get<CarrinhoController>().subtotal != null)
-                      return Text("R\$ ${Modular.get<CarrinhoController>().subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
-                    else
-                     return Text("R\$ 0,00",);
+                    return Modular.get<CarrinhoController>()?.subtotal == null ? Text("R\$ 0,00",) : Text("R\$ ${Modular.get<CarrinhoController>().subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
                     }
                   )
                 ],
@@ -80,10 +76,10 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                   ),
                   Observer(
                     builder: (BuildContext context){
-                  double total = Modular.get<CarrinhoController>().subtotal + 10; //frete - desconto
-                  return Text(
-                    "R\$ ${total.toStringAsFixed(2).replaceAll('.', ',')}",
-                    style: TextStyle(
+                    double total = Modular.get<CarrinhoController>().subtotal + 10; //frete - desconto
+                    return Text(
+                      "R\$ ${total.toStringAsFixed(2).replaceAll('.', ',')}",
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).accentColor,
                         fontSize: 18
@@ -94,10 +90,29 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 12,),
-              CustomRaisebuttonWidget(
-                text: "Finalizar Pedido",
-                cor: Theme.of(context).accentColor,
-                textcolor: Colors.white,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 55,
+                padding: EdgeInsets.only(right: 30, left: 30),
+
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: BorderSide(
+                          color: Theme.of(context).accentColor,
+                          width: 3
+                      )
+                  ),
+                  onPressed: (){},
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    "Finalizar Pedido",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white
+                    ),
+                  ),
+                ),
               )
             ],
           )

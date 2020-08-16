@@ -19,14 +19,25 @@ class EnderecoRepository implements IEnderecoRepository {
 
   @override
   Future delete(EnderecoModel model) {
-    // TODO: implement delete
-    throw UnimplementedError();
+    return _hasuraConnect.mutation(enderecoDeleteQuery, variables: {
+      "id": model.id,
+    });
   }
 
   @override
   Future update(EnderecoModel model) {
-    // TODO: implement update
-    throw UnimplementedError();
+    return _hasuraConnect.mutation(enderecoUpdateQuery, variables: {
+      "id": model.id,
+      "bairro": model.bairro,
+      "cep": model.cep,
+      "cidade": model.cidade,
+      "complemento": model.complemento,
+      "descricao": model.descricao,
+      "estado": model.estado,
+      "numero": model.numero,
+      "referencia": model.referencia,
+      "rua": model.rua
+    });
   }
 
   @override

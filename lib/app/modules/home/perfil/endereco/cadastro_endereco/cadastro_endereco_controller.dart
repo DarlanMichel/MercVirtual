@@ -1,3 +1,4 @@
+import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 import 'package:via_cep/via_cep.dart';
@@ -12,8 +13,11 @@ abstract class _CadastroEnderecoControllerBase with Store {
 
   _CadastroEnderecoControllerBase(this._repository);
 
+
   Future save(String bairro, String cep, String cidade, String complemento, String descricao, String estado, String numero, String referencia, String rua) =>
       _repository.save(bairro, cep, cidade, complemento, descricao, estado, numero, referencia, rua);
+
+  Future update(EnderecoModel model) => _repository.update(model);
 
   @observable
   String cep = '';

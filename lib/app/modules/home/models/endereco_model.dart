@@ -1,4 +1,5 @@
 class EnderecoModel {
+  int id;
   String descricao;
   String rua;
   String numero;
@@ -10,6 +11,7 @@ class EnderecoModel {
   String cep;
 
   EnderecoModel({
+    this.id,
     this.descricao,
     this.rua,
     this.numero,
@@ -23,6 +25,7 @@ class EnderecoModel {
 
   factory EnderecoModel.fromJson(Map json){
     return EnderecoModel(
+      id: json["id_end"],
       descricao: json["descricao"],
       rua: json["rua"],
       numero: json["numero"],

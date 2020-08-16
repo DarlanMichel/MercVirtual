@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
@@ -17,6 +18,11 @@ class _CarrinhoWidgetState extends ModularState<CarrinhoWidget, CarrinhoControll
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white,
+    ));
+
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: ListView(
@@ -54,6 +60,12 @@ class _CarrinhoWidgetState extends ModularState<CarrinhoWidget, CarrinhoControll
             },
           ),
           DiscountCardWidget(),
+          Container(
+            child: Text("Selecionar Endereço"),
+          ),
+          Container(
+            child: Text("Selecionar Forma de Pagamento"),
+          ),
           CardTotalCarrinhoWidget(),
         ],
       ),

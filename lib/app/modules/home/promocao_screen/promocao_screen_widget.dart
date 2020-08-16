@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -14,6 +15,11 @@ class PromocaoScreenWidget extends StatefulWidget {
 class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, PromocaoScreenController> {
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white,
+    ));
+
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Row(

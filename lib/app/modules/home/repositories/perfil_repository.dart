@@ -18,6 +18,15 @@ class PerfilRepository implements IPerfilRepository {
     });
   }
 
+  @override
+  Future save(String nome, String email, String id) {
+    return _hasuraConnect.mutation(updateClienteQuery, variables: {
+      "email": email,
+      "nome": nome,
+      "id": id,
+    });
+  }
+
   //dispose will be called automatically
   @override
   void dispose() {}

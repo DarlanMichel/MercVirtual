@@ -14,6 +14,7 @@ class CustomRaisebuttonWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 55,
       padding: EdgeInsets.only(right: 30, left: 30),
+
       child: RaisedButton(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

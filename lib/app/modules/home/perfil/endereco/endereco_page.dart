@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
 import 'package:mercadovirtual/app/modules/widgets/card_endereco/card_endereco_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/textfield_sem_icon/textfield_sem_icon_widget.dart';
@@ -24,10 +27,42 @@ class _EnderecoPageState
         backgroundColor: Theme.of(context).accentColor,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            CardEnderecoWidget(),
+            Container(
+              height: MediaQuery.of(context).size.height -170,
+              child: Observer(
+                builder: (_){
+                  if(controller.listaEndereco.hasError){
+                    return Center(
+                        child: RaisedButton(
+                          onPressed: controller.getEndereco,
+                          child: Text('Recarregar'),
+                        )
+                    );
+                  }
+                  if(controller.listaEndereco.data == null){
+                    return Center(
+                      child: Text("Nenhum Endereço cadastrado!"),
+                    );
+                  }
+
+                  List<EnderecoModel> listEnd = controller.listaEndereco.data;
+
+                  return ListView.builder(
+                    itemCount: listEnd.length,
+                    itemBuilder: (_, index){
+                      EnderecoModel model = listEnd[index];
+                      return CardEnderecoWidget(
+                        model: model,
+                        context: _,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
             CustomRaisebuttonWidget(
               text: "Novo Endereço",
               cor: Theme.of(context).accentColor,

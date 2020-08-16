@@ -1,6 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:mercadovirtual/app/modules/home/documents/popup_endereco.dart';
+import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/endereco/cadastro_endereco/cadastro_endereco_page.dart';
+import 'package:mercadovirtual/app/modules/widgets/dialog_excluir_end/dialog_excluir_end_widget.dart';
 
 class CardEnderecoWidget extends StatelessWidget {
+  final EnderecoModel model;
+  final BuildContext context;
+
+  const CardEnderecoWidget({Key key, this.model, this.context}) : super(key: key);
+
+  void _selected (String choice){
+    if (choice == PopupEndereco.excluir){
+      showDialog(
+         context: context,
+          builder: (BuildContext context){
+            return DialogExcluirEndWidget(model: model,);
+          }
+      );
+    }
+    else if (choice == PopupEndereco.editar){
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => CadastroEnderecoPage(model: model,)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,35 +54,40 @@ class CardEnderecoWidget extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        "Descrição",
+                        "${model.descricao}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.more_vert,
-                        color: Theme.of(context).accentColor,
-                      ),
-                    )
+                    PopupMenuButton<String>(
+                      onSelected: _selected,
+                      itemBuilder: (BuildContext context){
+                        return PopupEndereco.choices.map((String choice){
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
+                      },
+                    ),
                   ],
                 ),
                 Text(
-                  "Nome da rua, numero - Bairro,",
+                  "${model.rua}, ${model.numero} - ${model.bairro},",
                   style: TextStyle(
                     fontSize: 14,
                   ),
                 ),
                 Text(
-                  "Cidade - UF",
+                  "${model.cidade} - ${model.estado}",
                   style: TextStyle(
                     fontSize: 14,
                   ),
                 ),
                 Text(
-                  "Complemento - Referencia",
+                  "${model.complemento} - ${model.referencia}",
                   style: TextStyle(
                     fontSize: 14,
                   ),
