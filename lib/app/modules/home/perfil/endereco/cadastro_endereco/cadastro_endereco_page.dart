@@ -19,6 +19,8 @@ class CadastroEnderecoPage extends StatefulWidget {
 class _CadastroEnderecoPageState
     extends ModularState<CadastroEnderecoPage, CadastroEnderecoController> {
 
+  final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
 
@@ -39,135 +41,198 @@ class _CadastroEnderecoPageState
         title: Text(widget.title),
         backgroundColor: Theme.of(context).accentColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              text: "Descrição do Endereço",
-              change: controller.setDescricao,
-              controller: controller.descricao,
-            ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              text: "CEP",
-              change: controller.setCEP,
-              controller: controller.cep,
-            ),
-            Row(
-              children: [
-                Expanded(child: Observer(
-                  builder: (_) {
-                    return TextfieldSemIconWidget(
+      body: Form(
+        key: _formkey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              TextfieldSemIconWidget(
+                keyboard: TextInputType.text,
+                text: "Descrição do Endereço",
+                change: controller.setDescricao,
+                controller: controller.descricao,
+                validator: (String text){
+                  if (text.isEmpty || text.trim() == ''){
+                    return 'Campo obrigatório';
+                  }else{
+                    return null;
+                  }
+                },
+              ),
+              TextfieldSemIconWidget(
+                keyboard: TextInputType.number,
+                text: "CEP",
+                change: controller.setCEP,
+                controller: controller.cep,
+                validator: (String text){
+                  if (text.isEmpty || text.trim() == ''){
+                    return 'Campo obrigatório';
+                  }else if(text.length != 8){
+                    return 'CEP Inválido';
+                  }else{
+                    return null;
+                  }
+                },
+              ),
+              Row(
+                children: [
+                  Expanded(child: Observer(
+                    builder: (_) {
+                      return TextfieldSemIconWidget(
+                        keyboard: TextInputType.text,
+                        text: "Rua",
+                        change: controller.setRua,
+  //                        if (controller.rua != null) {
+ //                           TextEditingController().selection = TextSelection.collapsed(offset: controller.rua.length);
+//                          } else {
+//                            TextEditingController().selection = TextSelection.collapsed(offset:0)
+//                        },
+                        controller: controller.rua,
+                        validator: (String text){
+                          if (text.isEmpty || text.trim() == ''){
+                            return 'Campo obrigatório';
+                          }else{
+                            return null;
+                          }
+                        },
+                      );
+                    },
+                  )),
+                  SizedBox(
+                    width: 100,
+                    child: TextfieldSemIconWidget(
                       keyboard: TextInputType.text,
-                      text: "Rua",
-                      change: controller.setRua,
-                      controller: controller.rua,
-                    );
-                  },
-                )),
-                SizedBox(
-                  width: 100,
-                  child: TextfieldSemIconWidget(
+                      text: "Nº",
+                      change: controller.setNum,
+                      controller: controller.num,
+                      validator: (String text){
+                        if (text.isEmpty || text.trim() == ''){
+                          return 'Campo obrigatório';
+                        }else{
+                          return null;
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              TextfieldSemIconWidget(
+                keyboard: TextInputType.text,
+                text: "Complemento",
+                change: controller.setComplemento,
+                controller: controller.complemento,
+              ),
+              Observer(
+                builder: (_) {
+                  return TextfieldSemIconWidget(
                     keyboard: TextInputType.text,
-                    text: "Nº",
-                    change: controller.setNum,
-                    controller: controller.num,
-                  ),
-                ),
-              ],
-            ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              text: "Complemento",
-              change: controller.setComplemento,
-              controller: controller.complemento,
-            ),
-            Observer(
-              builder: (_) {
-                return TextfieldSemIconWidget(
-                  keyboard: TextInputType.text,
-                  text: "Bairro",
-                  change: controller.setBairro,
-                  controller: controller.bairro,
-                );
-              },
-            ),
-            TextfieldSemIconWidget(
-              keyboard: TextInputType.text,
-              text: "Referência",
-              change: controller.setReferencia,
-              controller: controller.referencia,
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Observer(
-                    builder: (_) {
-                      return TextfieldSemIconWidget(
-                        keyboard: TextInputType.text,
-                        text: "Cidade",
-                        change: controller.setCidade,
-                        controller: controller.cidade,
-                      );
+                    text: "Bairro",
+                    change: controller.setBairro,
+                    controller: controller.bairro,
+                    validator: (String text){
+                      if (text.isEmpty || text.trim() == ''){
+                        return 'Campo obrigatório';
+                      }else{
+                        return null;
+                      }
                     },
+                  );
+                },
+              ),
+              TextfieldSemIconWidget(
+                keyboard: TextInputType.text,
+                text: "Referência",
+                change: controller.setReferencia,
+                controller: controller.referencia,
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Observer(
+                      builder: (_) {
+                        return TextfieldSemIconWidget(
+                          keyboard: TextInputType.text,
+                          text: "Cidade",
+                          change: controller.setCidade,
+                          controller: controller.cidade,
+                          validator: (String text){
+                            if (text.isEmpty || text.trim() == ''){
+                              return 'Campo obrigatório';
+                            }else{
+                              return null;
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 100,
-                  child: Observer(
-                    builder: (_) {
-                      return TextfieldSemIconWidget(
-                        keyboard: TextInputType.text,
-                        text: "UF",
-                        change: controller.setUF,
-                        controller: controller.uf,
-                      );
-                    },
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomRaisebuttonWidget(
-              text: "Salvar",
-              cor: Theme.of(context).accentColor,
-              textcolor: Colors.white,
-              function: () {
-                if (widget.model == null) {
-                  controller.save(
-                      controller.bairro,
-                      controller.cep,
-                      controller.cidade,
-                      controller.complemento,
-                      controller.descricao,
-                      controller.uf,
-                      controller.num,
-                      controller.referencia,
-                      controller.rua);
-                } else{
-                  widget.model.bairro = controller.bairro;
-                  widget.model.cep = controller.cep;
-                  widget.model.cidade = controller.cidade;
-                  widget.model.complemento = controller.complemento;
-                  widget.model.descricao = controller.descricao;
-                  widget.model.estado = controller.uf;
-                  widget.model.numero = controller.num;
-                  widget.model.referencia = controller.referencia;
-                  widget.model.rua = controller.rua;
-                  controller.update(widget.model);
-                }
-                showToast(
-                  "Endereço cadastrado!",
-                  position: ToastPosition.center,
-                  duration: Duration(seconds: 3),
-                );
-                Navigator.pop(context);
-              },
-            )
-          ],
+                  SizedBox(
+                    width: 100,
+                    child: Observer(
+                      builder: (_) {
+                        return TextfieldSemIconWidget(
+                          keyboard: TextInputType.text,
+                          text: "UF",
+                          change: controller.setUF,
+                          controller: controller.uf,
+                          validator: (String text){
+                            if (text.isEmpty || text.trim() == ''){
+                              return 'Campo obrigatório';
+                            }else if(text.length != 2){
+                              return 'UF Inválida!';
+                            }else{
+                              return null;
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomRaisebuttonWidget(
+                text: "Salvar",
+                cor: Theme.of(context).accentColor,
+                textcolor: Colors.white,
+                function: () {
+                 if ( _formkey.currentState.validate()){
+                    if (widget.model == null) {
+                      controller.save(
+                          controller.bairro,
+                          controller.cep,
+                          controller.cidade,
+                          controller.complemento,
+                          controller.descricao,
+                          controller.uf,
+                          controller.num,
+                          controller.referencia,
+                          controller.rua);
+                    } else {
+                      widget.model.bairro = controller.bairro;
+                      widget.model.cep = controller.cep;
+                      widget.model.cidade = controller.cidade;
+                      widget.model.complemento = controller.complemento;
+                      widget.model.descricao = controller.descricao;
+                      widget.model.estado = controller.uf;
+                      widget.model.numero = controller.num;
+                      widget.model.referencia = controller.referencia;
+                      widget.model.rua = controller.rua;
+                      controller.update(widget.model);
+                    }
+                    showToast(
+                      "Endereço cadastrado!",
+                      position: ToastPosition.center,
+                      duration: Duration(seconds: 3),
+                    );
+                    Navigator.pop(context);
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

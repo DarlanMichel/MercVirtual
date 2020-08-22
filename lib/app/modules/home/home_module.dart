@@ -12,6 +12,8 @@ import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository.dart';
@@ -40,7 +42,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => PerfilController(i.get<PerfilRepository>())),
-        Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<FormaPagtoRepository>())),
+        Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<DescontoRepository>())),
         Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
         Bind((i) => TabpageprodController(
             i.get<ProdutoRepository>(),  i.get<CategoriaRepository>(), 0)),
@@ -49,7 +51,7 @@ class HomeModule extends ChildModule {
         Bind((i) => CadastroEnderecoController(i.get<EnderecoRepository>())),
         Bind((i) => PedidoController(i.get<PedidoRepository>())),
         Bind((i) => CadastroPerfilController(i.get<PerfilRepository>())),
-        Bind((i) => PagamentoController()),
+        Bind((i) => PagamentoController(i.get<FormaPagtoRepository>())),
         ///repositories
         Bind((i) => PromocaoRepository(i.get<HasuraConnect>())),
         Bind<ICarrinhoRepository>((i) => CarrinhoRepository(i.get<HasuraConnect>())),
@@ -59,6 +61,7 @@ class HomeModule extends ChildModule {
         Bind<IEnderecoRepository>((i) => EnderecoRepository(i.get<HasuraConnect>())),
         Bind<IPedidoRepository>((i) => PedidoRepository(i.get<HasuraConnect>())),
         Bind<IFormaPagtoRepository>((i) => FormaPagtoRepository(i.get<HasuraConnect>())),
+        Bind<IDescontoRepository>((i) => DescontoRepository(i.get<HasuraConnect>())),
         ///Outros
         Bind((i) =>
             HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))

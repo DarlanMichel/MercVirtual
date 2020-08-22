@@ -18,7 +18,7 @@ environment:
 
 dependencies:
   shared_preferences: ^0.5.7+1
-  firebase_auth: ^0.16.0
+  firebase_auth: ^0.16.1
   hasura_connect: ^1.2.2+1
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.5.0
@@ -34,6 +34,8 @@ dependencies:
   via_cep: ^1.0.6
   find_dropdown:
     git: https://github.com/Bwolfs2/find_dropdown.git
+  scoped_model: ^1.0.1
+  google_sign_in: ^4.5.1
   flutter:
     sdk: flutter
 

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
+import 'package:mercadovirtual/app/modules/widgets/custom_raisebutton/custom_raisebutton_widget.dart';
 
 class DiscountCardWidget extends StatelessWidget {
+  final Function change;
+
+  const DiscountCardWidget({Key key, this.change}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,7 +21,8 @@ class DiscountCardWidget extends StatelessWidget {
           textAlign: TextAlign.start,
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            color: Theme.of(context).accentColor
+            color: Theme.of(context).accentColor,
+            fontSize: 14,
           ),
         ),
         leading: Icon(
@@ -49,7 +57,20 @@ class DiscountCardWidget extends StatelessWidget {
                 hintText: "Digite seu Cupom",
               ),
               initialValue: "",
+              onChanged: change,
             ),
+          ),
+          CustomRaisebuttonWidget(
+            text: "Validar",
+            textcolor: Colors.white,
+            cor: Theme.of(context).accentColor,
+            function: (){
+              Modular.get<CarrinhoController>().getDesconto();
+              FocusScope.of(context).unfocus();
+            },
+          ),
+          SizedBox(
+            height: 8,
           )
         ],
       ),

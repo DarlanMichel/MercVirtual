@@ -27,7 +27,7 @@ class _PedidoPageState extends ModularState<PedidoPage, PedidoController> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height -90,
               child: Observer(
                 builder: (_){
                   if(controller.listaPedidos.hasError){

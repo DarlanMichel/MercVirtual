@@ -13,3 +13,10 @@ const String updateClienteQuery = '''
                             affected_rows
                           }
                         } ''';
+
+const String insertClienteQuery = '''
+                  mutation insertCliente(\$email: String!, \$nome: String!, \$id: String!) {
+                      insert_cliente(objects: {email: \$email, nome: \$nome, id: \$id}) {
+                        affected_rows
+                      }
+                    }''';

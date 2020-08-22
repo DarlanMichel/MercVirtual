@@ -1,4 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_controller.dart';
 import 'package:mercadovirtual/app/modules/login/cadastro/cadastro_page.dart';
 import 'package:mercadovirtual/app/modules/login/homelogin/homelogin_controller.dart';
@@ -11,8 +14,12 @@ class HomeloginModule extends ChildModule {
   @override
   List<Bind> get binds => [
     Bind((i) => HomeloginController()),
-    Bind((i) => CadastroController()),
-    Bind((i) => LoginController(i.get<LoginStoreController>())),
+    Bind((i) => CadastroController(i.get<PerfilRepository>(), i.get<LoginStoreController>())),
+    Bind((i) => LoginController(i.get<LoginStoreController>(), i.get<PerfilRepository>(),)),
+    Bind<IPerfilRepository>((i) => PerfilRepository(i.get<HasuraConnect>())),
+
+    Bind((i) =>
+        HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];
 
   @override

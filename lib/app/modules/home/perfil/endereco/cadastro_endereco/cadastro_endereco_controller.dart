@@ -96,4 +96,11 @@ abstract class _CadastroEnderecoControllerBase with Store {
   @action
   void setDescricao(String _descricao) => descricao = _descricao;
 
+  bool isValid(){
+    bool valid = true;
+    if(descricao == '' || rua == '' || cep == '' || num == '' || bairro == '' || cidade == '' || uf == ''){
+      valid = false;
+    }
+    return valid;
+  }
 }

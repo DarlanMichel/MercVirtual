@@ -26,6 +26,23 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
     }, _$emailAtom, name: '${_$emailAtom.name}_set');
   }
 
+  final _$nomeAtom = Atom(name: '_CadastroControllerBase.nome');
+
+  @override
+  String get nome {
+    _$nomeAtom.context.enforceReadPolicy(_$nomeAtom);
+    _$nomeAtom.reportObserved();
+    return super.nome;
+  }
+
+  @override
+  set nome(String value) {
+    _$nomeAtom.context.conditionallyRunInAction(() {
+      super.nome = value;
+      _$nomeAtom.reportChanged();
+    }, _$nomeAtom, name: '${_$nomeAtom.name}_set');
+  }
+
   final _$senhaAtom = Atom(name: '_CadastroControllerBase.senha');
 
   @override
@@ -61,49 +78,60 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
     }, _$confirmaSenhaAtom, name: '${_$confirmaSenhaAtom.name}_set');
   }
 
-  final _$emailErrorAtom = Atom(name: '_CadastroControllerBase.emailError');
+  final _$validAtom = Atom(name: '_CadastroControllerBase.valid');
 
   @override
-  String get emailError {
-    _$emailErrorAtom.context.enforceReadPolicy(_$emailErrorAtom);
-    _$emailErrorAtom.reportObserved();
-    return super.emailError;
+  bool get valid {
+    _$validAtom.context.enforceReadPolicy(_$validAtom);
+    _$validAtom.reportObserved();
+    return super.valid;
   }
 
   @override
-  set emailError(String value) {
-    _$emailErrorAtom.context.conditionallyRunInAction(() {
-      super.emailError = value;
-      _$emailErrorAtom.reportChanged();
-    }, _$emailErrorAtom, name: '${_$emailErrorAtom.name}_set');
+  set valid(bool value) {
+    _$validAtom.context.conditionallyRunInAction(() {
+      super.valid = value;
+      _$validAtom.reportChanged();
+    }, _$validAtom, name: '${_$validAtom.name}_set');
   }
 
-  final _$senhaErrorAtom = Atom(name: '_CadastroControllerBase.senhaError');
+  final _$usuarioAtom = Atom(name: '_CadastroControllerBase.usuario');
 
   @override
-  String get senhaError {
-    _$senhaErrorAtom.context.enforceReadPolicy(_$senhaErrorAtom);
-    _$senhaErrorAtom.reportObserved();
-    return super.senhaError;
+  String get usuario {
+    _$usuarioAtom.context.enforceReadPolicy(_$usuarioAtom);
+    _$usuarioAtom.reportObserved();
+    return super.usuario;
   }
 
   @override
-  set senhaError(String value) {
-    _$senhaErrorAtom.context.conditionallyRunInAction(() {
-      super.senhaError = value;
-      _$senhaErrorAtom.reportChanged();
-    }, _$senhaErrorAtom, name: '${_$senhaErrorAtom.name}_set');
+  set usuario(String value) {
+    _$usuarioAtom.context.conditionallyRunInAction(() {
+      super.usuario = value;
+      _$usuarioAtom.reportChanged();
+    }, _$usuarioAtom, name: '${_$usuarioAtom.name}_set');
   }
 
   final _$criarContaAsyncAction = AsyncAction('criarConta');
 
   @override
-  Future<bool> criarConta() {
+  Future<void> criarConta() {
     return _$criarContaAsyncAction.run(() => super.criarConta());
   }
 
   final _$_CadastroControllerBaseActionController =
       ActionController(name: '_CadastroControllerBase');
+
+  @override
+  void setNome(String _nome) {
+    final _$actionInfo =
+        _$_CadastroControllerBaseActionController.startAction();
+    try {
+      return super.setNome(_nome);
+    } finally {
+      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setEmail(String _email) {
@@ -139,9 +167,20 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
   }
 
   @override
+  void setvalid(bool _value) {
+    final _$actionInfo =
+        _$_CadastroControllerBaseActionController.startAction();
+    try {
+      return super.setvalid(_value);
+    } finally {
+      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'email: ${email.toString()},senha: ${senha.toString()},confirmaSenha: ${confirmaSenha.toString()},emailError: ${emailError.toString()},senhaError: ${senhaError.toString()}';
+        'email: ${email.toString()},nome: ${nome.toString()},senha: ${senha.toString()},confirmaSenha: ${confirmaSenha.toString()},valid: ${valid.toString()},usuario: ${usuario.toString()}';
     return '{$string}';
   }
 }

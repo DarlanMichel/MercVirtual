@@ -22,7 +22,6 @@ class CarrinhoRepository implements ICarrinhoRepository{
     var quantidade;
     await getProdutoCarrinho(produto).then((data) {
       quantidade = data.length;
-      print(quantidade);
     });
 
     if(quantidade == 0){
@@ -66,4 +65,5 @@ class CarrinhoRepository implements ICarrinhoRepository{
       }).toList();
     });
   }
+
 }

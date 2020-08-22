@@ -5,8 +5,9 @@ class TextfieldSemIconWidget extends StatelessWidget {
   final TextInputType keyboard;
   final Function change;
   final String controller;
+  final Function validator;
 
-  const TextfieldSemIconWidget({Key key, this.text, this.keyboard, this.change, this.controller}) : super(key: key);
+  const TextfieldSemIconWidget({Key key, this.text, this.keyboard, this.change, this.controller, this.validator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,12 @@ class TextfieldSemIconWidget extends StatelessWidget {
         controller: TextEditingController(text: controller),
         keyboardType: keyboard,
         onChanged: change,
+        validator: validator,
         style: TextStyle(
           color: Theme.of(context).accentColor,
         ),
         decoration: InputDecoration(
+          labelText: text,
           hintText: text,
           hintStyle: TextStyle(
             color: Theme.of(context).accentColor,

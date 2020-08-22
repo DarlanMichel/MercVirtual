@@ -39,12 +39,26 @@ class _CadastroPerfilPageState
               text: "Nome",
               change: controller.setNome,
               controller: controller.nome,
+              validator: (String text){
+                if (text.isEmpty || text.trim() == ''){
+                  return 'Campo obrigatório';
+                }else{
+                  return null;
+                }
+              },
             ),
             TextfieldSemIconWidget(
               keyboard: TextInputType.text,
               text: "E-mail",
               change: controller.setEmail,
               controller: controller.email,
+              validator: (String text){
+                if (text.isEmpty || text.trim() == ''){
+                  return 'Campo obrigatório';
+                }else{
+                  return null;
+                }
+              },
             ),
             SizedBox(
               height: 20,

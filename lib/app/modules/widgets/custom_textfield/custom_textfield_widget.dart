@@ -6,16 +6,18 @@ class CustomTextfieldWidget extends StatelessWidget {
   final TextInputType keyboard;
   final IconData icon;
   final Function change;
-  const CustomTextfieldWidget({Key key,@required this.text,@required this.pass,@required this.keyboard,@required this.icon, this.change}) : super(key: key);
+  final Function validator;
+  const CustomTextfieldWidget({Key key,@required this.text,@required this.pass,@required this.keyboard,@required this.icon, this.change, this.validator}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 30, left: 30, top: 5),
-      child: TextField(
+      child: TextFormField(
         obscureText: pass,
         keyboardType: keyboard,
         onChanged: change,
+        validator: validator,
         style: TextStyle(
           color: Theme.of(context).accentColor,
         ),

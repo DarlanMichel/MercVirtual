@@ -14,6 +14,8 @@ import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/endereco_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/pedido_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/pedido_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
@@ -29,11 +31,12 @@ class PerfilModule extends ModuleWidget {
     Bind((i) => CadastroEnderecoController(i.get<EnderecoRepository>())),
     Bind((i) => PedidoController(i.get<PedidoRepository>())),
     Bind((i) => CadastroPerfilController(i.get<PerfilRepository>())),
-    Bind((i) => PagamentoController()),
+    Bind((i) => PagamentoController(i.get<FormaPagtoRepository>())),
     ///repositories
     Bind<IPerfilRepository>((i) => PerfilRepository(i.get<HasuraConnect>())),
     Bind<IEnderecoRepository>((i) => EnderecoRepository(i.get<HasuraConnect>())),
     Bind<IPedidoRepository>((i) => PedidoRepository(i.get<HasuraConnect>())),
+    Bind<IFormaPagtoRepository>((i) => FormaPagtoRepository(i.get<HasuraConnect>())),
     ///Outros
     Bind((i) => HasuraConnect("https://mercadovirtual.herokuapp.com/v1/graphql"))
   ];

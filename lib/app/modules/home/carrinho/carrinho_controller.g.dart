@@ -32,23 +32,6 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
     }, _$listaCarrinhoAtom, name: '${_$listaCarrinhoAtom.name}_set');
   }
 
-  final _$listaFormaPagtoAtom = Atom(name: '_CarrinhoBase.listaFormaPagto');
-
-  @override
-  ObservableStream<List<FormaPagtoModel>> get listaFormaPagto {
-    _$listaFormaPagtoAtom.context.enforceReadPolicy(_$listaFormaPagtoAtom);
-    _$listaFormaPagtoAtom.reportObserved();
-    return super.listaFormaPagto;
-  }
-
-  @override
-  set listaFormaPagto(ObservableStream<List<FormaPagtoModel>> value) {
-    _$listaFormaPagtoAtom.context.conditionallyRunInAction(() {
-      super.listaFormaPagto = value;
-      _$listaFormaPagtoAtom.reportChanged();
-    }, _$listaFormaPagtoAtom, name: '${_$listaFormaPagtoAtom.name}_set');
-  }
-
   final _$selectedEnderecoAtom = Atom(name: '_CarrinhoBase.selectedEndereco');
 
   @override
@@ -85,6 +68,47 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
     }, _$selectedFormaPagtoAtom, name: '${_$selectedFormaPagtoAtom.name}_set');
   }
 
+  final _$codDescontoAtom = Atom(name: '_CarrinhoBase.codDesconto');
+
+  @override
+  String get codDesconto {
+    _$codDescontoAtom.context.enforceReadPolicy(_$codDescontoAtom);
+    _$codDescontoAtom.reportObserved();
+    return super.codDesconto;
+  }
+
+  @override
+  set codDesconto(String value) {
+    _$codDescontoAtom.context.conditionallyRunInAction(() {
+      super.codDesconto = value;
+      _$codDescontoAtom.reportChanged();
+    }, _$codDescontoAtom, name: '${_$codDescontoAtom.name}_set');
+  }
+
+  final _$descontoAtom = Atom(name: '_CarrinhoBase.desconto');
+
+  @override
+  int get desconto {
+    _$descontoAtom.context.enforceReadPolicy(_$descontoAtom);
+    _$descontoAtom.reportObserved();
+    return super.desconto;
+  }
+
+  @override
+  set desconto(int value) {
+    _$descontoAtom.context.conditionallyRunInAction(() {
+      super.desconto = value;
+      _$descontoAtom.reportChanged();
+    }, _$descontoAtom, name: '${_$descontoAtom.name}_set');
+  }
+
+  final _$getDescontoAsyncAction = AsyncAction('getDesconto');
+
+  @override
+  Future<int> getDesconto() {
+    return _$getDescontoAsyncAction.run(() => super.getDesconto());
+  }
+
   final _$_CarrinhoBaseActionController =
       ActionController(name: '_CarrinhoBase');
 
@@ -93,16 +117,6 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
     final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
     try {
       return super.getList();
-    } finally {
-      _$_CarrinhoBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic getFormaPagto() {
-    final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
-    try {
-      return super.getFormaPagto();
     } finally {
       _$_CarrinhoBaseActionController.endAction(_$actionInfo);
     }
@@ -129,9 +143,19 @@ mixin _$CarrinhoController on _CarrinhoBase, Store {
   }
 
   @override
+  void setDesconto(String _codDesconto) {
+    final _$actionInfo = _$_CarrinhoBaseActionController.startAction();
+    try {
+      return super.setDesconto(_codDesconto);
+    } finally {
+      _$_CarrinhoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'listaCarrinho: ${listaCarrinho.toString()},listaFormaPagto: ${listaFormaPagto.toString()},selectedEndereco: ${selectedEndereco.toString()},selectedFormaPagto: ${selectedFormaPagto.toString()},subtotal: ${subtotal.toString()}';
+        'listaCarrinho: ${listaCarrinho.toString()},selectedEndereco: ${selectedEndereco.toString()},selectedFormaPagto: ${selectedFormaPagto.toString()},codDesconto: ${codDesconto.toString()},desconto: ${desconto.toString()},subtotal: ${subtotal.toString()}';
     return '{$string}';
   }
 }

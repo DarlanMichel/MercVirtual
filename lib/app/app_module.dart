@@ -62,11 +62,6 @@ class AppModule extends MainModule {
         Router("/cadastro", module: CadastroModule()),
         Router("/login", module: LoginModule()),
         Router("/Home", module: HomeModule()),
-        //Router("/Home/promocao", module: PromocaoScreenModule()),
-        //Router("/Home/produtos/:categ", module: TabpageprodModule()),
-        //Router("/Home/carrinho", module: CarrinhoModule()),
-        //Router("/Home/perfil", module: PerfilModule()),
-        //Router("/Home/perfil/endereco", module: EnderecoModule()),
         Router("/Home/perfil/endereco/endcadastro",
             module: CadastroEnderecoModule()),
       ];

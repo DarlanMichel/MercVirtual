@@ -1,8 +1,9 @@
+import 'package:intl/intl.dart';
 import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
 import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
 import 'package:mercadovirtual/app/modules/home/models/formaPagto_model.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'carrinho_controller.g.dart';
@@ -11,27 +12,18 @@ class CarrinhoController = _CarrinhoBase with _$CarrinhoController;
 
 abstract class _CarrinhoBase with Store {
   final ICarrinhoRepository _repository;
-  final IFormaPagtoRepository _formaPagtoRepository;
+  final IDescontoRepository _descontoRepository;
 
   @observable
   ObservableStream<List<CarrinhoModel>> listaCarrinho;
 
-  @observable
-  ObservableStream<List<FormaPagtoModel>> listaFormaPagto;
-
-  _CarrinhoBase(ICarrinhoRepository this._repository, IFormaPagtoRepository this._formaPagtoRepository){
+  _CarrinhoBase(ICarrinhoRepository this._repository, this._descontoRepository){
     getList();
-    getFormaPagto();
   }
 
   @action
   getList(){
     listaCarrinho = _repository.getCarrinho().asObservable();
-  }
-
-  @action
-  getFormaPagto(){
-    listaFormaPagto = _formaPagtoRepository.getFormaPagto().asObservable();
   }
 
   Future save(int idProduto, int qtd) =>  _repository.save(idProduto, qtd);
@@ -54,5 +46,19 @@ abstract class _CarrinhoBase with Store {
 
   @action
   void setFormaPagto(FormaPagtoModel _formaPagto) => selectedFormaPagto = _formaPagto;
+
+  @observable
+  String codDesconto = '';
+
+  @action
+  void setDesconto(String _codDesconto) => codDesconto = _codDesconto;
+
+  @observable
+  int desconto = 0;
+
+  @action
+  Future<int> getDesconto() async{
+    desconto = await _descontoRepository.getDesconto(codDesconto, DateFormat('yyyy-MM-dd').format(DateTime.now()));
+  }
 
 }

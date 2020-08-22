@@ -30,4 +30,13 @@ class PerfilRepository implements IPerfilRepository {
   //dispose will be called automatically
   @override
   void dispose() {}
+
+  @override
+  Future insert(String nome, String email, String id) {
+    return _hasuraConnect.mutation(insertClienteQuery, variables: {
+      "nome": nome,
+      "email": email,
+      "id": id,
+    });
+  }
 }

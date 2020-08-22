@@ -20,4 +20,6 @@ abstract class _PedidoControllerBase with Store {
   getPedidos(){
     listaPedidos = _repository.getPedido().asObservable();
   }
+
+  Future save(int formaPagto, int idEnd, double valorTotal) =>  _repository.save(formaPagto, idEnd, valorTotal);
 }

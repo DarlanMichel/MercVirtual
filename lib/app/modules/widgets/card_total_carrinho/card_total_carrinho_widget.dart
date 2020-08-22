@@ -1,12 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/pedido/pedido_controller.dart';
+import 'package:oktoast/oktoast.dart';
 
 class CardTotalCarrinhoWidget extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    double _total = 0.00;
+    double _desconto = 0.00;
+    CarrinhoController _carrinhoController = Modular.get<CarrinhoController>();
+    PedidoController _pedidoController = Modular.get<PedidoController>();
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
@@ -32,8 +39,8 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                   Text(
                       "Subtotal"
                   ),
-                  Observer(builder: (BuildContext context){
-                    return Modular.get<CarrinhoController>()?.subtotal == null ? Text("R\$ 0,00",) : Text("R\$ ${Modular.get<CarrinhoController>().subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
+                  Observer(builder: (_){
+                      return Text("R\$ ${_carrinhoController.subtotal.toStringAsFixed(2).replaceAll('.', ',')}",);
                     }
                   )
                 ],
@@ -45,9 +52,12 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                   Text(
                       "Desconto"
                   ),
-                  Text(
-                      "R\$ 0,00"
-                  )
+                  Observer(
+                    builder: (_){
+                      _desconto = _carrinhoController.subtotal *(_carrinhoController.desconto/100);
+                      return Text("R\$ ${_desconto.toStringAsFixed(2).replaceAll('.', ',')}",);
+                    },
+                  ),
                 ],
               ),
               Divider(),
@@ -75,10 +85,10 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                     ),
                   ),
                   Observer(
-                    builder: (BuildContext context){
-                    double total = Modular.get<CarrinhoController>().subtotal + 10; //frete - desconto
+                    builder: (_){
+                    _total = _carrinhoController.subtotal + 10 - (_carrinhoController.subtotal *(_carrinhoController.desconto/100)); //frete - desconto
                     return Text(
-                      "R\$ ${total.toStringAsFixed(2).replaceAll('.', ',')}",
+                      "R\$ ${_total.toStringAsFixed(2).replaceAll('.', ',')}",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).accentColor,
@@ -103,7 +113,50 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                           width: 3
                       )
                   ),
-                  onPressed: (){},
+                  onPressed: (){
+                    if( _carrinhoController.selectedEndereco == null){
+                      showDialog(
+                          context: context,
+                          builder: (_){
+                            return AlertDialog(
+                              title: Text("Selecione um Endereço!"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                      );
+                    }else if( _carrinhoController.selectedFormaPagto == null){
+                      showDialog(
+                        context: context,
+                        builder: (_){
+                            return AlertDialog(
+                              title: Text("Selecione a Forma de Pagamento!"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('OK'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                        }
+                      );
+                    }else {
+                      _pedidoController.save(
+                          _carrinhoController.selectedFormaPagto.id,
+                          _carrinhoController.selectedEndereco.id,
+                          _total
+                      );
+                      showToast("Pedido realizado com Sucesso!");
+                    }
+                  },
                   color: Theme.of(context).accentColor,
                   child: Text(
                     "Finalizar Pedido",

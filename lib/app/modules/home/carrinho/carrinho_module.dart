@@ -6,16 +6,16 @@ import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_controller.dar
 import 'package:mercadovirtual/app/modules/home/carrinho/carrinho_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository.dart';
-import 'package:mercadovirtual/app/modules/home/repositories/formaPagto_repository_interface.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository.dart';
+import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository_interface.dart';
 
 class CarrinhoModule extends ModuleWidget {
   @override
   List<Bind> get binds => [
-    Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<FormaPagtoRepository>())),
+    Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<DescontoRepository>())),
 
     Bind<ICarrinhoRepository>((i) => CarrinhoRepository(AppModule.to.get<HasuraConnect>())),
-    Bind<IFormaPagtoRepository>((i) => FormaPagtoRepository(AppModule.to.get<HasuraConnect>())),
+    Bind<IDescontoRepository>((i) => DescontoRepository(AppModule.to.get<HasuraConnect>())),
   ];
 
   @override

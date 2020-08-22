@@ -30,7 +30,7 @@ class CustomComboboxWidget extends StatelessWidget {
                   "Selecione ${text}",
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500
                   ),
                 ),
@@ -56,9 +56,6 @@ class CustomComboboxWidget extends StatelessWidget {
             );
           },
         ),
-        SizedBox(
-          height: 10,
-        )
       ],
     );
   }
