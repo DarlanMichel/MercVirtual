@@ -16,7 +16,7 @@ const String updateClienteQuery = '''
 
 const String insertClienteQuery = '''
                   mutation insertCliente(\$email: String!, \$nome: String!, \$id: String!) {
-                      insert_cliente(objects: {email: \$email, nome: \$nome, id: \$id}) {
-                        affected_rows
-                      }
-                    }''';
+                    insert_cliente(objects: {email: \$email, nome: \$nome, id: \$id}, on_conflict: {constraint: cliente_pkey, update_columns: email}) {
+                      affected_rows
+                    }
+                  }''';

@@ -25,23 +25,30 @@ abstract class _LoginControllerBase with Store {
   @observable
   String senha = '';
 
-  bool emailValid(String email){
-    final RegExp regex = RegExp(
-        r"^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
-    return regex.hasMatch(email);
-  }
-
   @action
   void setEmail(String _email) => email = _email;
 
   @action
   void setSenha(String _senha) => senha = _senha;
 
-  Future insert(String nome, String email, String id) => _repository.insert(nome, email, id);
+  Future insert(String nome, String email, String id) =>
+      _repository.insert(nome, email, id);
+
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool _loading) => loading = _loading;
+
+  @observable
+  String usuario;
+
+  @observable
+  String nome;
 
   @action
   Future<bool> login() async {
-    var valid = true;
+    setLoading(true);
 
     try {
       final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
@@ -50,66 +57,94 @@ abstract class _LoginControllerBase with Store {
       )).user;
 
       store.setToken((await user.getIdToken()).token);
-      var tokenId = await user.getIdToken();
-      valid = tokenId != null;
+      //var tokenId = await user.getIdToken();
+      //valid = tokenId != null;
 
-      Modular.to.pushReplacementNamed("/Home");
-    }catch (e){
-      Modular.to.showDialog(builder: (context){
-        return AlertDialog (
+    } catch (e) {
+      Modular.to.showDialog(builder: (context) {
+        return AlertDialog(
           content: Text("E-mail ou senha inválida!"),
         );
       });
     }
-    return valid;
+    setLoading(false);
   }
 
-  //Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-  //final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-  //final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-    // Create a new credential
-  //final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-  //accessToken: googleAuth.accessToken,
-  //idToken: googleAuth.idToken,
-  //);
-
-    // Once signed in, return the UserCredential
-//return await FirebaseAuth.instance.signInWithCredential(credential);
-  //}
-
-
-
   Future<bool> signInWithGoogle() async {
-    var valid = true;
-      print("entrou na função");
-      await Future.delayed(Duration(seconds: 1));
+    setLoading(true);
+    try {
       final GoogleSignInAccount googleUser = await googleSignIn.signIn();
-
-    print("passou pelo signin");
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      print("passou pelo autenticador");
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final AuthResult authResult = await _auth.signInWithCredential(credential);
+      final AuthResult authResult =
+          await _auth.signInWithCredential(credential);
       final FirebaseUser user = authResult.user;
 
-      print(user);
-
       store.setToken((await user.getIdToken()).token);
-      var tokenId = await user.getIdToken();
-      valid = tokenId != null;
-      print(tokenId.token);
 
-      await insert(user.displayName, user.email, user.uid);
+      email = user.email;
+      usuario = user.uid;
+      nome = user.displayName;
 
+    } catch (e) {
+      Modular.to.showDialog(builder: (context) {
+        return AlertDialog(
+          content: Text("Não foi possivel conectar! Tente Novamente!"),
+        );
+      });
+    }
 
-    return valid;
+    setLoading(false);
   }
+
+//  Future<bool> signInWithFacebook() async {
+//    setLoading(true);
+//
+//    try{
+//      final LoginResult result = await FacebookAuth.instance.login();
+//      final AuthCredential credential = FacebookAuthProvider.getCredential(
+//        accessToken: result.accessToken.token,
+//      );
+//      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+//
+//      var result = await FacebookLogin().logIn(['email', 'public_profile']);
+//      switch (result.status) {
+//        case FacebookLoginStatus.loggedIn:
+//          final credential = FacebookAuthProvider.getCredential(
+//              accessToken: result.accessToken.token
+//          );
+//
+//          final authResult = await _auth.signInWithCredential(credential);
+//
+//          final FirebaseUser user = authResult.user;
+//          store.setToken((await user.getIdToken()).token);
+//
+//          email = user.email;
+//          usuario = user.uid;
+//          nome = user.displayName;
+//
+//          break;
+//        case FacebookLoginStatus.cancelledByUser:
+//          print("Facebook login cancelled");
+//          break;
+//        case FacebookLoginStatus.error:
+//          print(result.errorMessage);
+//          break;
+//      }
+//
+//    }catch (e) {
+//      Modular.to.showDialog(builder: (context) {
+//        return AlertDialog(
+//          content: Text("Não foi possivel conectar! Tente Novamente!"),
+//        );
+//      });
+//    }
+//
+//    setLoading(false);
+//  }
 }

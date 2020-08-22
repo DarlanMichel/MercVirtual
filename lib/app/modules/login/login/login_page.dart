@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   validator: (String text){
                     if (text.isEmpty || text.trim() == ''){
                       return 'Campo obrigatório';
-                    }else if (!controller.emailValid(text)){
+                    }else if (!text.contains('@')){
                       return 'E-mail Inválido!';
                     }else{
                       return null;
@@ -79,16 +80,24 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     ),
                     onPressed: () async {
                       if ( _formkey.currentState.validate()) {
-                        controller.login();
+                        await controller.login();
+                        Modular.to.pushReplacementNamed("/Home");
                       }
                     },
                     color: Theme.of(context).accentColor,
-                    child: Text(
-                      "Entrar",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white
-                      ),
+                    child: Observer(
+                      builder: (_){
+                        return controller.loading ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ) :
+                        const Text(
+                          "Entrar",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -137,7 +146,11 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)
                           ),
-                          onPressed: (){},
+                          onPressed: () async{
+//                            await controller.signInWithFacebook();
+//                            await controller.insert(controller.nome, controller.email, controller.usuario);
+//                            Modular.to.pushReplacementNamed("/Home");
+                          },
                           color: Colors.blue,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -170,8 +183,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)
                           ),
-                          onPressed: () {
-                            controller.signInWithGoogle();
+                          onPressed: () async{
+                            await controller.signInWithGoogle();
+                            await controller.insert(controller.nome, controller.email, controller.usuario);
+                            Modular.to.pushReplacementNamed("/Home");
                           },
                           color: Colors.red,
                           child: Row(

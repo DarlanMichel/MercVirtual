@@ -36,6 +36,8 @@ dependencies:
     git: https://github.com/Bwolfs2/find_dropdown.git
   scoped_model: ^1.0.1
   google_sign_in: ^4.5.1
+ # flutter_facebook_auth: ^0.2.3
+ # flutter_facebook_login: ^3.0.0
   flutter:
     sdk: flutter
 
