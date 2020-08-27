@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -5,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercadovirtual/app/modules/login/login/login_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_textfield/custom_textfield_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:oktoast/oktoast.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -81,7 +83,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     onPressed: () async {
                       if ( _formkey.currentState.validate()) {
                         await controller.login();
-                        Modular.to.pushReplacementNamed("/Home");
+                        if (controller.loading == false)
+                          Modular.to.pushReplacementNamed("/Home");
                       }
                     },
                     color: Theme.of(context).accentColor,
@@ -186,7 +189,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           onPressed: () async{
                             await controller.signInWithGoogle();
                             await controller.insert(controller.nome, controller.email, controller.usuario);
-                            Modular.to.pushReplacementNamed("/Home");
+                            if (controller.loading == false)
+                              Modular.to.pushReplacementNamed("/Home");
                           },
                           color: Colors.red,
                           child: Row(
@@ -220,21 +224,32 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 Container(
                   child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Esqueci a Senha",
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).accentColor
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Esqueci a Senha",
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).accentColor
+                            ),
                           ),
-                        ),
-                        Icon(Icons.lock,
-                          color: Theme.of(context).accentColor,
-                          size: 15,
-                        )
-                      ],
+                          Icon(Icons.lock,
+                            color: Theme.of(context).accentColor,
+                            size: 15,
+                          )
+                        ],
+                      ),
+                      onTap: (){
+                        if(controller.email != null || (controller.email).trim() != '') {
+                          FirebaseAuth.instance.sendPasswordResetEmail(
+                              email: controller.email);
+                          showToast("E-mail enviado para redefinição de senha!");
+                        }else{
+                          showToast("Preencha o campo E-mail!");
+                        }
+                      },
                     ),
                   ),
                 )

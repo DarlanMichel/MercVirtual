@@ -50,7 +50,7 @@ class AppModule extends MainModule {
             (i) => EnderecoRepository(i.get<HasuraConnect>())),
 
         ///Outros
-        Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
+        Bind((i) => HasuraService().newHasura),
         Bind((i) => shared),
         Bind((i) => FirebaseAuth.instance),
       ];
@@ -59,6 +59,7 @@ class AppModule extends MainModule {
   List<Router> get routers => [
         Router(Modular.initialRoute, module: SplashModule()),
         Router("/homelogin", module: HomeloginModule()),
+//        Router(Modular.initialRoute, module: HomeloginModule()),
         Router("/cadastro", module: CadastroModule()),
         Router("/login", module: LoginModule()),
         Router("/Home", module: HomeModule()),

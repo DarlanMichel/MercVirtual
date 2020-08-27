@@ -4,7 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
 import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
+import 'package:mercadovirtual/app/modules/shared/custom_hasura_connect.dart';
+import 'package:mercadovirtual/app/modules/splash/splash_controller.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_controller.g.dart';
 
@@ -49,7 +52,8 @@ abstract class _LoginControllerBase with Store {
   @action
   Future<bool> login() async {
     setLoading(true);
-
+    await googleSignIn.signOut();
+    HasuraService().removeToken();
     try {
       final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
         email: email,
@@ -57,8 +61,7 @@ abstract class _LoginControllerBase with Store {
       )).user;
 
       store.setToken((await user.getIdToken()).token);
-      //var tokenId = await user.getIdToken();
-      //valid = tokenId != null;
+      //HasuraService().connection;
 
     } catch (e) {
       Modular.to.showDialog(builder: (context) {
@@ -72,6 +75,7 @@ abstract class _LoginControllerBase with Store {
 
   Future<bool> signInWithGoogle() async {
     setLoading(true);
+    HasuraService().removeToken();
     try {
       final GoogleSignInAccount googleUser = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -86,6 +90,7 @@ abstract class _LoginControllerBase with Store {
       final FirebaseUser user = authResult.user;
 
       store.setToken((await user.getIdToken()).token);
+      //HasuraService().connection;
 
       email = user.email;
       usuario = user.uid;

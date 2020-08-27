@@ -107,7 +107,7 @@ class _CadastroPageState extends ModularState<CadastroPage, CadastroController> 
                       ),
                       GestureDetector(
                         onTap: (){
-                          Navigator.pushNamed(context, '/login');
+                          Modular.to.pushReplacementNamed("/login");
                         },
                         child: Text(
                           "Já tem uma Conta?",
@@ -141,7 +141,8 @@ class _CadastroPageState extends ModularState<CadastroPage, CadastroController> 
                       if ( _formkey.currentState.validate()){
                         await controller.criarConta();
                         await controller.insert(controller.nome, controller.email, controller.usuario);
-                        Modular.to.pushReplacementNamed("/Home");
+                        if (controller.valid == false)
+                          Modular.to.pushReplacementNamed("/Home");
                         }
                       },
                     color: Theme.of(context).accentColor,

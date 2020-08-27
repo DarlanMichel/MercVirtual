@@ -34,7 +34,7 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   text: "Cadastre-se grátis",
                   textcolor: Theme.of(context).accentColor,
                   function: (){
-                    Modular.to.pushNamed("cadastro");
+                    Modular.to.pushReplacementNamed("cadastro");
                   },
                   //nav: "cadastro",
                 ),
@@ -46,7 +46,7 @@ class _HomeloginPageState extends State<HomeloginPage> {
                   text: "Entrar",
                   textcolor: Colors.white,
                   function: (){
-                    Modular.to.pushNamed("login");
+                    Modular.to.pushReplacementNamed("login");
                   },
                   //nav: "login",
                 )
