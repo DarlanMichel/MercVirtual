@@ -150,9 +150,10 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                               borderRadius: BorderRadius.circular(30)
                           ),
                           onPressed: () async{
-//                            await controller.signInWithFacebook();
-//                            await controller.insert(controller.nome, controller.email, controller.usuario);
-//                            Modular.to.pushReplacementNamed("/Home");
+                           await controller.signInWithFacebook();
+                           await controller.insert(controller.nome, controller.email, controller.usuario);
+                           if (controller.loading == false)
+                              Modular.to.pushReplacementNamed("/Home");
                           },
                           color: Colors.blue,
                           child: Row(

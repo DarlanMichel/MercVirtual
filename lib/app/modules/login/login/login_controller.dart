@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
@@ -107,49 +108,52 @@ abstract class _LoginControllerBase with Store {
     setLoading(false);
   }
 
-//  Future<bool> signInWithFacebook() async {
-//    setLoading(true);
-//
-//    try{
-//      final LoginResult result = await FacebookAuth.instance.login();
-//      final AuthCredential credential = FacebookAuthProvider.getCredential(
-//        accessToken: result.accessToken.token,
-//      );
-//      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-//
-//      var result = await FacebookLogin().logIn(['email', 'public_profile']);
-//      switch (result.status) {
-//        case FacebookLoginStatus.loggedIn:
-//          final credential = FacebookAuthProvider.getCredential(
-//              accessToken: result.accessToken.token
-//          );
-//
-//          final authResult = await _auth.signInWithCredential(credential);
-//
-//          final FirebaseUser user = authResult.user;
-//          store.setToken((await user.getIdToken()).token);
-//
-//          email = user.email;
-//          usuario = user.uid;
-//          nome = user.displayName;
-//
-//          break;
-//        case FacebookLoginStatus.cancelledByUser:
-//          print("Facebook login cancelled");
-//          break;
-//        case FacebookLoginStatus.error:
-//          print(result.errorMessage);
-//          break;
-//      }
-//
-//    }catch (e) {
-//      Modular.to.showDialog(builder: (context) {
-//        return AlertDialog(
-//          content: Text("Não foi possivel conectar! Tente Novamente!"),
-//        );
-//      });
-//    }
-//
-//    setLoading(false);
-//  }
+ Future<bool> signInWithFacebook() async {
+   setLoading(true);
+   HasuraService().removeToken();
+   // try{
+     final LoginResult result = await FacebookAuth.instance.login();
+     print("result");
+     final AuthCredential credential = FacebookAuthProvider.getCredential(
+       accessToken: result.accessToken.token,
+     );
+   print("credaential");
+     final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+
+     // var result = await FacebookLogin().logIn(['email', 'public_profile']);
+     // switch (result.status) {
+     //   case FacebookLoginStatus.loggedIn:
+     //     final credential = FacebookAuthProvider.getCredential(
+     //         accessToken: result.accessToken.token
+     //     );
+     //
+     //     final authResult = await _auth.signInWithCredential(credential);
+     //
+     //     final FirebaseUser user = authResult.user;
+
+         store.setToken((await user.getIdToken()).token);
+
+         email = user.email;
+         usuario = user.uid;
+         nome = user.displayName;
+
+     //     break;
+     //   case FacebookLoginStatus.cancelledByUser:
+     //     print("Facebook login cancelled");
+     //     break;
+     //   case FacebookLoginStatus.error:
+     //     print(result.errorMessage);
+     //     break;
+     // }
+
+   // }catch (e) {
+   //   Modular.to.showDialog(builder: (context) {
+   //     return AlertDialog(
+   //       content: Text("Não foi possivel conectar! Tente Novamente!"),
+   //     );
+   //   });
+   // }
+
+   setLoading(false);
+ }
 }

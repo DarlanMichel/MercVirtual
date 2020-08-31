@@ -17,7 +17,7 @@ class CardPedidoWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Código do pedido: ${model.id}",
+              "Código do pedido: ${model.idPedido}",
               style: TextStyle(
                 fontWeight: FontWeight.bold
               ),

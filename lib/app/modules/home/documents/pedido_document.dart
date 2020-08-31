@@ -4,6 +4,7 @@ const String pedidoQuery = '''
                             id
                             status
                             valor_total
+                            id_carrinho
                             carrinhos {
                               qtd
                               produto {
