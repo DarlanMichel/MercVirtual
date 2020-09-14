@@ -14,10 +14,9 @@ class PedidoPage extends StatefulWidget {
 }
 
 class _PedidoPageState extends ModularState<PedidoPage, PedidoController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
+    controller.getPedidos();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -31,6 +30,7 @@ class _PedidoPageState extends ModularState<PedidoPage, PedidoController> {
               child: Observer(
                 builder: (_){
                   if(controller.listaPedidos.hasError){
+                    print(controller.listaPedidos.error);
                     return Center(
                         child: RaisedButton(
                           onPressed: controller.getPedidos(),

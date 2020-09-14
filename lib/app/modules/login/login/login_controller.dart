@@ -111,13 +111,11 @@ abstract class _LoginControllerBase with Store {
  Future<bool> signInWithFacebook() async {
    setLoading(true);
    HasuraService().removeToken();
-   // try{
+    try{
      final LoginResult result = await FacebookAuth.instance.login();
-     print("result");
      final AuthCredential credential = FacebookAuthProvider.getCredential(
        accessToken: result.accessToken.token,
      );
-   print("credaential");
      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
 
      // var result = await FacebookLogin().logIn(['email', 'public_profile']);
@@ -146,13 +144,13 @@ abstract class _LoginControllerBase with Store {
      //     break;
      // }
 
-   // }catch (e) {
-   //   Modular.to.showDialog(builder: (context) {
-   //     return AlertDialog(
-   //       content: Text("Não foi possivel conectar! Tente Novamente!"),
-   //     );
-   //   });
-   // }
+    }catch (e) {
+      Modular.to.showDialog(builder: (context) {
+        return AlertDialog(
+          content: Text("Não foi possivel conectar! Tente Novamente!"),
+        );
+      });
+    }
 
    setLoading(false);
  }

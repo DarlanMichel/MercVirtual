@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "733835444983-dlb5jttsl1e5sdo1n93odoenbql2k74s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.silva.darlan.mercadovirtual",
+            "certificate_hash": "36db57f0cc015f9e6cc7b63b45d7a1a65ae735ff"
+          }
+        },
+        {
           "client_id": "733835444983-oqpnisdvnkh45ua3lrl66vr8iddp7u3v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

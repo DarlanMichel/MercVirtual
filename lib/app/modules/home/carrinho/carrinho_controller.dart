@@ -1,7 +1,10 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mercadovirtual/app/modules/home/models/carrinho_model.dart';
 import 'package:mercadovirtual/app/modules/home/models/endereco_model.dart';
 import 'package:mercadovirtual/app/modules/home/models/formaPagto_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/perfil_model.dart';
+import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository_interface.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository_interface.dart';
 import 'package:mobx/mobx.dart';
@@ -33,7 +36,7 @@ abstract class _CarrinhoBase with Store {
   Future update(CarrinhoModel model) => _repository.update(model);
 
   @computed
-  double get subtotal => listaCarrinho.value.map((item) => item.produto.preco * item.qtd).reduce((value, element) => value + element);
+  double get subtotal => listaCarrinho.value.map((item) => ((item.produto.novopreco != null && item.produto.datafim.isAfter(DateTime.now())) ? item.produto.novopreco : item.produto.preco) * item.qtd).reduce((value, element) => value + element);
 
   @observable
   EnderecoModel selectedEndereco;
@@ -59,6 +62,15 @@ abstract class _CarrinhoBase with Store {
   @action
   Future<int> getDesconto() async{
     desconto = await _descontoRepository.getDesconto(codDesconto, DateFormat('yyyy-MM-dd').format(DateTime.now()));
+  }
+
+  @action
+  Future saveCupom() async{
+    if(codDesconto != ''){
+      await _descontoRepository.save(codDesconto);
+    }else{
+      return null;
+    }
   }
 
 }

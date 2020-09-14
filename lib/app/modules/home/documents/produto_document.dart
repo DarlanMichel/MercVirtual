@@ -8,6 +8,9 @@ const String produtoGetQuery = '''
                     codigo
                     estoque
                     unidade_medida
+                    novopreco
+                    dataini
+                    datafim
                   }
                  } ''';
 
@@ -21,5 +24,8 @@ const String produtoCategoriaQuery = '''
                       codigo
                       estoque
                       unidade_medida
+                      novopreco
+                      dataini
+                      datafim
                     }
                   } ''';

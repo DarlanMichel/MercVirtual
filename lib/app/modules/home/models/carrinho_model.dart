@@ -20,9 +20,11 @@ class CarrinhoModel{
    String descricao;
    int ean;
    double preco;
+   double novopreco;
+   DateTime datafim;
 
    ProdutoCart({
-     this.descricao, this.ean, this.preco,
+     this.descricao, this.ean, this.preco, this.novopreco, this.datafim
    });
 
    factory ProdutoCart.fromJson(Map json){
@@ -30,6 +32,8 @@ class CarrinhoModel{
        descricao: json["descricao"],
        ean: json["ean"],
        preco: json["preco"].toDouble(),
+       novopreco: json["novopreco"].toDouble(),
+       datafim: DateTime.parse(json["datafim"]),
      );
    }
  }

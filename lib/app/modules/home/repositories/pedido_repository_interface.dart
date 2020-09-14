@@ -1,7 +1,7 @@
 import 'package:mercadovirtual/app/modules/home/models/pedido_model.dart';
 
 abstract class IPedidoRepository {
-  Stream<List<PedidoModel>> getPedido();
+  Stream<List<PedidoModel>> getPedido(String cliente);
 
   Future save(int formaPagto, int idEnd, double valorTotal);
 

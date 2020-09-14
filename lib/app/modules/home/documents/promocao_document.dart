@@ -1,13 +1,16 @@
 const String promocaoQuery = ''' 
-                subscription getPromocao {
-                    promocao {
+                subscription getPromocao(\$data: date!) {
+                    produtos(where: {datafim: {_gte: \$data}, dataini: {_lte: \$data}}) {
+                      codigo
+                      descricao
                       datafim
+                      dataini
                       novopreco
-                      codprod
-                      produto {
-                        descricao
-                        ean
-                        preco
-                      }
+                      ean
+                      preco
+                      categoria
+                      estoque
+                      unidade_medida
                     }
-                  } ''';
+                  }
+                  ''';

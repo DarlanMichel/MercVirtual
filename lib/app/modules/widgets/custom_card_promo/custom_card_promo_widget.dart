@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
+import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
 
 class CustomCardPromoWidget extends StatelessWidget {
-  final PromocaoModel model;
+  final ProdutoModel model;
 
   const CustomCardPromoWidget({Key key, this.model}) : super(key: key);
 
@@ -12,11 +13,12 @@ class CustomCardPromoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-//        CustomDialogAddProdutoWidget(
-//          idProduto: idProduto,
-//          descricao: descricao,
-//          scaffoldKey: key,
-//        );
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return CustomDialogAddProdutoWidget(model: model,);
+            }
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -39,12 +41,12 @@ class CustomCardPromoWidget extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 3.0),
+                      padding: const EdgeInsets.only(top: 4.0,right: 8, left: 8),
                       child: Text(
-                        model.produto.descricao,
+                        model.descricao,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
-                          fontSize: 24,
+                          fontSize: 20,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -52,15 +54,17 @@ class CustomCardPromoWidget extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    FadeInImage(
-                      image: NetworkImage(
-                        "https://cdn-cosmos.bluesoft.com.br/products/${model.produto.ean}",
-                      ),
-                      placeholder: AssetImage(
-                          "images/notimage.png"
-                      ),
+                    Container(
                       height: 200,
                       width: 200,
+                      child: FadeInImage(
+                        image: NetworkImage(
+                          "https://cdn-cosmos.bluesoft.com.br/products/${model.ean}",
+                        ),
+                        placeholder: AssetImage(
+                            "images/notimage.png"
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 30,
@@ -68,6 +72,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(left: 30),
@@ -82,7 +87,7 @@ class CustomCardPromoWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               Text(
-                                  "De: R\$ ${model.produto.preco.toStringAsFixed(2).replaceAll('.', ',')}",
+                                  "De: R\$ ${model.preco.toStringAsFixed(2).replaceAll('.', ',')}",
                                   style: TextStyle(
                                       color: Theme.of(context).accentColor,
                                       fontSize: 14,

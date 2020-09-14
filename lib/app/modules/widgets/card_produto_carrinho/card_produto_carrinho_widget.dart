@@ -59,7 +59,7 @@ class CardProdutoCarrinhoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "R\$ ${model.produto.preco.toStringAsFixed(2).replaceAll('.', ',')}",
+                        ((model.produto.novopreco != 0) && (model.produto.datafim.isAfter(DateTime.now())) )  ? "R\$ ${model.produto.novopreco.toStringAsFixed(2).replaceAll('.', ',')}" : "R\$ ${model.produto.preco.toStringAsFixed(2).replaceAll('.', ',')}",
                         style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 14,

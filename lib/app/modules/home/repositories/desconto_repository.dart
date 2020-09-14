@@ -13,12 +13,26 @@ class DescontoRepository extends IDescontoRepository{
   Future<int> getDesconto(String codigo, String data) async {
     await _hasuraConnect.query(descontoQuery, variables: {
       "codigo": codigo,
-      "data": data
+      "data": data,
     }).then((event) {
-      desconto = event["data"]["cupomDesc"][0]["desconto"];
+      List recebe = event["data"]["cupomDesc"];
+
+      if(recebe.length > 0){
+        desconto = event["data"]["cupomDesc"][0]["desconto"];
+      }
+      else{
+        desconto = 0;
+      }
     });
 
     return desconto;
+  }
+
+  @override
+  Future save(String codigo) {
+    return _hasuraConnect.mutation(cupomUsadoQuery, variables: {
+      "codigo": codigo
+    });
   }
 
 }

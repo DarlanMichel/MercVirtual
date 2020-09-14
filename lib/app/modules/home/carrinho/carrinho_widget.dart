@@ -93,9 +93,7 @@ class _CarrinhoWidgetState
                       Modular.get<EnderecoController>().listaEndereco.data;
 
                   return CustomComboboxWidget(
-                    itens: listEnd
-                        .map((data) => Model(data.id, data.descricao))
-                        .toList(),
+                    itens:listEnd?.map((data) => Model(data.id, data.descricao))?.toList() ?? [],
                     onChange: (model) => controller.setEndereco(EnderecoModel(
                         id: model.id, descricao: model.descricao)),
                     itemSelecionado: null,
@@ -115,9 +113,7 @@ class _CarrinhoWidgetState
                       Modular.get<PagamentoController>().listaFormaPagto.data;
 
                   return CustomComboboxWidget(
-                    itens: listForma
-                        .map((data) => Model(data.id, data.nome))
-                        .toList(),
+                    itens:listForma?.map((data) => Model(data.id, data.nome))?.toList() ?? [],
                     onChange: (model) => controller.setFormaPagto(
                         FormaPagtoModel(id: model.id, nome: model.descricao)),
                     itemSelecionado: null,

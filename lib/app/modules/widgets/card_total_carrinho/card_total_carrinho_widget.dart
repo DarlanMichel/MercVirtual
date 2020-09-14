@@ -12,7 +12,6 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
     double _total = 0.00;
     double _desconto = 0.00;
     CarrinhoController _carrinhoController = Modular.get<CarrinhoController>();
-    PedidoController _pedidoController = Modular.get<PedidoController>();
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -88,7 +87,7 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                     builder: (_){
                     _total = _carrinhoController.subtotal + 10 - (_carrinhoController.subtotal *(_carrinhoController.desconto/100)); //frete - desconto
                     return Text(
-                      "R\$ ${_total.toStringAsFixed(2).replaceAll('.', ',')}",
+                     "R\$ ${_total.toStringAsFixed(2).replaceAll('.', ',')}",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).accentColor,
@@ -149,11 +148,12 @@ class CardTotalCarrinhoWidget extends StatelessWidget {
                         }
                       );
                     }else {
-                      _pedidoController.save(
+                      Modular.get<PedidoController>().save(
                           _carrinhoController.selectedFormaPagto.id,
                           _carrinhoController.selectedEndereco.id,
                           _total
                       );
+                      _carrinhoController.saveCupom();
                       showToast("Pedido realizado com Sucesso!");
                     }
                   },

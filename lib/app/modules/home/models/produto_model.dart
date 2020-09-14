@@ -6,6 +6,9 @@ class ProdutoModel{
   int codigo;
   double estoque;
   String unidadeMedida;
+  DateTime datafim;
+  DateTime dataini;
+  double novopreco;
 
   ProdutoModel({
     this.descricao,
@@ -15,6 +18,9 @@ class ProdutoModel{
     this.codigo,
     this.estoque,
     this.unidadeMedida,
+    this.datafim,
+    this.novopreco,
+    this.dataini
   });
 
   factory ProdutoModel.fromJson(Map doc){
@@ -26,6 +32,9 @@ class ProdutoModel{
       codigo: doc["codigo"],
       estoque: doc["estoque"].toDouble(),
       unidadeMedida: doc["unidade_medida"],
+      datafim: DateTime.parse(doc["datafim"]),
+      dataini: DateTime.parse(doc["dataini"]),
+      novopreco: doc["novopreco"].toDouble(),
     );
   }
 }

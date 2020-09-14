@@ -12,14 +12,14 @@ mixin _$PromocaoScreenController on _PromocaoScreenBase, Store {
   final _$listaPromocaoAtom = Atom(name: '_PromocaoScreenBase.listaPromocao');
 
   @override
-  ObservableStream<List<PromocaoModel>> get listaPromocao {
+  ObservableStream<List<ProdutoModel>> get listaPromocao {
     _$listaPromocaoAtom.context.enforceReadPolicy(_$listaPromocaoAtom);
     _$listaPromocaoAtom.reportObserved();
     return super.listaPromocao;
   }
 
   @override
-  set listaPromocao(ObservableStream<List<PromocaoModel>> value) {
+  set listaPromocao(ObservableStream<List<ProdutoModel>> value) {
     _$listaPromocaoAtom.context.conditionallyRunInAction(() {
       super.listaPromocao = value;
       _$listaPromocaoAtom.reportChanged();

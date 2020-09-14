@@ -1,19 +1,19 @@
 const String pedidoQuery = '''
-                subscription getPedido {
-                          pedido(order_by: {created_at: desc}) {
-                            id
-                            status
-                            valor_total
-                            id_carrinho
-                            carrinhos {
-                              qtd
-                              produto {
-                                descricao
-                                preco
-                              }
-                            }    
-                          }
-                        } ''';
+                subscription getPedido(\$cliente: String!) {
+                    pedido(order_by: {created_at: desc}, where: {cliente: {id: {_eq: \$cliente}}}) {
+                      id
+                      status
+                      valor_total
+                      id_carrinho
+                      carrinhos {
+                        qtd
+                        produto {
+                          descricao
+                          preco
+                        }
+                      }
+                    }
+                  } ''';
 
 const String selectMaxQuery = '''
                   query selectMax {

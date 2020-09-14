@@ -7,6 +7,8 @@ const String carrinhoQuery = '''
                       descricao
                       ean
                       preco
+                      novopreco
+                      datafim
                     }
                   }
                  } ''';

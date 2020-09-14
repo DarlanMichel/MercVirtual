@@ -10,8 +10,10 @@ class PedidoRepository implements IPedidoRepository{
   PedidoRepository(this._hasuraConnect);
 
   @override
-  Stream<List<PedidoModel>> getPedido() {
-    return _hasuraConnect.subscription(pedidoQuery).map((event) {
+  Stream<List<PedidoModel>> getPedido(String cliente) {
+    return _hasuraConnect.subscription(pedidoQuery, variables: {
+      "cliente": cliente
+    }).map((event) {
       return (event["data"]["pedido"] as List).map((json) {
         return PedidoModel.fromJson(json);
       }).toList();
@@ -25,7 +27,7 @@ class PedidoRepository implements IPedidoRepository{
   Future save(int formaPagto, int idEnd, double valorTotal) async{
 
     await _hasuraConnect.query(selectMaxQuery).then((event) {
-      _max = event["data"]["pedido"][0]["id_carrinho"];
+        _max = event["data"]["pedido"][0]["id_carrinho"];
     });
 
     _max += 1;

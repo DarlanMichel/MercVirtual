@@ -1,5 +1,5 @@
-import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 
 abstract class IPromocaoRepository{
-  Stream<List<PromocaoModel>> getPromocao();
+  Stream<List<ProdutoModel>> getPromocao(String data);
 }

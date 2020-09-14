@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:mercadovirtual/app/modules/home/models/promocao_model.dart';
+import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_promo/custom_card_promo_widget.dart';
 
@@ -25,72 +25,74 @@ class _PromocaoScreenWidgetState extends ModularState<PromocaoScreenWidget, Prom
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  "images/logo2.png",
-                  height: 100,
-                  width: 100,
-                ),
-                Text(
-                  "Bem Vindo(a)!",
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontSize: 16,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    "images/logo2.png",
+                    height: 100,
+                    width: 100,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Confira nossas Ofertas!",
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontSize: 24,
+                  Text(
+                    "Bem Vindo(a)!",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 350,
-                  child: Observer(
-                    builder: (BuildContext context){
-                      if(controller.listaPromocao.hasError){
-                        print(controller.listaPromocao.error);
-                        return Center(
-                            child: RaisedButton(
-                              onPressed: controller.getPromocao,
-                              child: Text('Recarregar'),
-                            )
-                        );
-                      }
-                      if(controller.listaPromocao.data == null){
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      List<PromocaoModel> listPromo = controller.listaPromocao.data;
-
-                      return Swiper(
-                        itemBuilder: (_, index) {
-                          PromocaoModel model = listPromo[index];
-                          return CustomCardPromoWidget(
-                            model: model,
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Confira nossas Ofertas!",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontSize: 24,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 350,
+                    child: Observer(
+                      builder: (BuildContext context){
+                        if(controller.listaPromocao.hasError){
+                          print(controller.listaPromocao.error);
+                          return Center(
+                              child: RaisedButton(
+                                onPressed: controller.getPromocao,
+                                child: Text('Recarregar'),
+                              )
                           );
-                        },
-                        itemCount: listPromo.length,
-                        control: SwiperControl(),
-                        autoplayDelay: 5000,
-                        autoplay: true,
-                      );
-                    },
+                        }
+                        if(controller.listaPromocao.data == null){
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<ProdutoModel> listPromo = controller.listaPromocao.data;
+
+                        return Swiper(
+                          itemBuilder: (_, index) {
+                            ProdutoModel model = listPromo[index];
+                            return CustomCardPromoWidget(
+                              model: model,
+                            );
+                          },
+                          itemCount: listPromo.length,
+                          control: SwiperControl(),
+                          autoplayDelay: 5000,
+                          autoplay: true,
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         ],

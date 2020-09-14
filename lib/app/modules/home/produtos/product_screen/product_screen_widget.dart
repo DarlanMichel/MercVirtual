@@ -5,7 +5,6 @@ import 'package:mercadovirtual/app/modules/home/models/produto_model.dart';
 import 'package:mercadovirtual/app/modules/home/produtos/tabpageprod/tabpageprod_controller.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_card_produto/custom_card_produto_widget.dart';
 import 'package:mercadovirtual/app/modules/widgets/custom_dialog_add_produto/custom_dialog_add_produto_widget.dart';
-import 'package:mobx/mobx.dart';
 
 class ProductScreenWidget extends StatefulWidget {
   final int categoria;
@@ -16,6 +15,8 @@ class ProductScreenWidget extends StatefulWidget {
 }
 
 class _ProductScreenWidgetState extends ModularState<ProductScreenWidget, TabpageprodController> {
+  bool _enabled = true;
+
   @override
   Widget build(BuildContext context) {
     return Container(

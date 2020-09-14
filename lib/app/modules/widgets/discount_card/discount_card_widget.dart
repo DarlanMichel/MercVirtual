@@ -64,9 +64,29 @@ class DiscountCardWidget extends StatelessWidget {
             text: "Validar",
             textcolor: Colors.white,
             cor: Theme.of(context).accentColor,
-            function: (){
-              Modular.get<CarrinhoController>().getDesconto();
-              FocusScope.of(context).unfocus();
+            function: () async {
+              await Modular.get<CarrinhoController>().getDesconto();
+              print(Modular.get<CarrinhoController>().desconto );
+              if(await Modular.get<CarrinhoController>().desconto > 0){
+                FocusScope.of(context).unfocus();
+              }else{
+                showDialog(
+                    context: context,
+                    builder: (_){
+                      return AlertDialog(
+                        title: Text("Cupom inválido ou já usado!"),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    }
+                );
+              }
             },
           ),
           SizedBox(
