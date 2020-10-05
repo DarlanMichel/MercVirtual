@@ -24,10 +24,10 @@ class CadastroModule extends ChildModule {
   ];
 
   @override
-  List<Router> get routers => [
-    Router("/", child: (_, args) => CadastroPage()),
-    Router("/Home", child: (_, args) => HomePage()),
-    Router("/login", child: (_, args) => LoginPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter("/", child: (_, args) => CadastroPage()),
+    ModularRouter("/Home", child: (_, args) => HomePage()),
+    ModularRouter("/login", child: (_, args) => LoginPage()),
   ];
 
   static Inject get to => Inject<CadastroModule>.of();

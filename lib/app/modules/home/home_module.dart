@@ -68,18 +68,18 @@ class HomeModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router("/", child: (_, args) => HomePage()),
-        Router("/promocao", child: (_, args) => PromocaoScreenWidget()),
-        Router("/produtos/:categ",
+  List<ModularRouter> get routers => [
+        ModularRouter("/", child: (_, args) => HomePage()),
+        ModularRouter("/promocao", child: (_, args) => PromocaoScreenWidget()),
+        ModularRouter("/produtos/:categ",
             child: (_, args) => TabpageprodWidget(categoria: args.data)),
-        Router("/carrinho", child: (_, args) => CarrinhoWidget()),
-        Router("/perfil", child: (_, args) => PerfilWidget()),
-        Router("/perfil/endereco", child: (_, args) => EnderecoPage()),
-        Router('/perfil/endereco/endcadastro', child: (_, args) => CadastroEnderecoPage()),
-        Router("/perfil/pedidos", child: (_, args) => PedidoPage()),
-        Router('/perfil/cadastroperfil', child: (_, args) => CadastroPerfilPage()),
-        Router('/perfil/pagamento', child: (_, args) => PagamentoPage()),
+        ModularRouter("/carrinho", child: (_, args) => CarrinhoWidget()),
+        ModularRouter("/perfil", child: (_, args) => PerfilWidget()),
+        ModularRouter("/perfil/endereco", child: (_, args) => EnderecoPage()),
+        ModularRouter('/perfil/endereco/endcadastro', child: (_, args) => CadastroEnderecoPage()),
+        ModularRouter("/perfil/pedidos", child: (_, args) => PedidoPage()),
+        ModularRouter('/perfil/cadastroperfil', child: (_, args) => CadastroPerfilPage()),
+        ModularRouter('/perfil/pagamento', child: (_, args) => PagamentoPage()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

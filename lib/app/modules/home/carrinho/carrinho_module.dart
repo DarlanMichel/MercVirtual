@@ -9,7 +9,7 @@ import 'package:mercadovirtual/app/modules/home/repositories/carrinho_repository
 import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/desconto_repository_interface.dart';
 
-class CarrinhoModule extends ModuleWidget {
+class CarrinhoModule extends WidgetModule {
   @override
   List<Bind> get binds => [
     Bind((i) => CarrinhoController(i.get<CarrinhoRepository>(), i.get<DescontoRepository>())),
@@ -19,8 +19,8 @@ class CarrinhoModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => CarrinhoWidget())
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => CarrinhoWidget())
   ];
 
   static Inject get to => Inject<CarrinhoModule>.of();

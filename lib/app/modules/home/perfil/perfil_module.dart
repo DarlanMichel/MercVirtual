@@ -23,7 +23,7 @@ import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository_i
 
 import 'cadastro_perfil/cadastro_perfil_controller.dart';
 
-class PerfilModule extends ModuleWidget {
+class PerfilModule extends WidgetModule {
   @override
   List<Bind> get binds => [
     Bind((i) => PerfilController(i.get<PerfilRepository>())),
@@ -42,13 +42,13 @@ class PerfilModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => PerfilWidget()),
-    Router('/endereco', child: (_, args) => EnderecoPage()),
-    Router('/endereco/endcadastro', child: (_, args) => CadastroEnderecoPage()),
-    Router('/pedidos', child: (_, args) => PedidoPage()),
-    Router('/cadastroperfil', child: (_, args) => CadastroPerfilPage()),
-    Router('/pagamento', child: (_, args) => PagamentoPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => PerfilWidget()),
+    ModularRouter('/endereco', child: (_, args) => EnderecoPage()),
+    ModularRouter('/endereco/endcadastro', child: (_, args) => CadastroEnderecoPage()),
+    ModularRouter('/pedidos', child: (_, args) => PedidoPage()),
+    ModularRouter('/cadastroperfil', child: (_, args) => CadastroPerfilPage()),
+    ModularRouter('/pagamento', child: (_, args) => PagamentoPage()),
   ];
 
   Widget get view => PerfilWidget();

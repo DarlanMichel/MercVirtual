@@ -5,7 +5,7 @@ import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_
 import 'package:mercadovirtual/app/modules/home/produtos/product_screen/product_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 
-class ProductScreenModule extends ModuleWidget {
+class ProductScreenModule extends WidgetModule {
 
   @override
   List<Bind> get binds => [
@@ -17,8 +17,8 @@ class ProductScreenModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router("/:categ", child: (_, args) => ProductScreenWidget()),
+  List<ModularRouter> get routers => [
+    ModularRouter("/:categ", child: (_, args) => ProductScreenWidget()),
   ];
 
   static Inject get to => Inject<ProductScreenModule>.of();

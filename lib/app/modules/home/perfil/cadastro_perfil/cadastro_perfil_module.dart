@@ -18,8 +18,8 @@ class CadastroPerfilModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => CadastroPerfilPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter(Modular.initialRoute, child: (_, args) => CadastroPerfilPage()),
       ];
 
   static Inject get to => Inject<CadastroPerfilModule>.of();

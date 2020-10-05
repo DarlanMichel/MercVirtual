@@ -57,14 +57,14 @@ class AppModule extends MainModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, module: SplashModule()),
-        Router("/homelogin", module: HomeloginModule()),
+  List<ModularRouter> get routers => [
+    ModularRouter(Modular.initialRoute, module: SplashModule()),
+    ModularRouter("/homelogin", module: HomeloginModule()),
 //        Router(Modular.initialRoute, module: HomeloginModule()),
-        Router("/cadastro", module: CadastroModule()),
-        Router("/login", module: LoginModule()),
-        Router("/Home", module: HomeModule()),
-        Router("/Home/perfil/endereco/endcadastro",
+    ModularRouter("/cadastro", module: CadastroModule()),
+    ModularRouter("/login", module: LoginModule()),
+    ModularRouter("/Home", module: HomeModule()),
+    ModularRouter("/Home/perfil/endereco/endcadastro",
             module: CadastroEnderecoModule()),
       ];
 

@@ -19,9 +19,9 @@ class EnderecoModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router('/', child: (_, args) => EnderecoPage()),
-        Router('/endcadastro', child: (_, args) => CadastroEnderecoPage())
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => EnderecoPage()),
+    ModularRouter('/endcadastro', child: (_, args) => CadastroEnderecoPage())
       ];
 
   static Inject get to => Inject<EnderecoModule>.of();

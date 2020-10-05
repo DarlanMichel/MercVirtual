@@ -23,10 +23,10 @@ class HomeloginModule extends ChildModule {
   ];
 
   @override
-  List<Router> get routers => [
-    Router(Modular.initialRoute, child: (_, args) => HomeloginPage()),
-    Router("/cadastro", child: (_, args) => CadastroPage()),
-    Router("/login", child: (_, args) => LoginPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter(Modular.initialRoute, child: (_, args) => HomeloginPage()),
+    ModularRouter("/cadastro", child: (_, args) => CadastroPage()),
+    ModularRouter("/login", child: (_, args) => LoginPage()),
   ];
 
   static Inject get to => Inject<HomeloginModule>.of();

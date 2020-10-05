@@ -10,7 +10,7 @@ import 'package:mercadovirtual/app/modules/home/repositories/categoria_repositor
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/produto_repository_interface.dart';
 
-class TabpageprodModule extends ModuleWidget {
+class TabpageprodModule extends WidgetModule {
   @override
   List<Bind> get binds => [
     Bind((i) => ProductScreenController()),
@@ -24,8 +24,8 @@ class TabpageprodModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/:categ', child: (_, args) => TabpageprodWidget(categoria: args.data)),
+  List<ModularRouter> get routers => [
+    ModularRouter('/:categ', child: (_, args) => TabpageprodWidget(categoria: args.data)),
   ];
 
   static Inject get to => Inject<TabpageprodModule>.of();

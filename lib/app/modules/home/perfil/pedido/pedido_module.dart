@@ -15,8 +15,8 @@ class PedidoModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => PedidoPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter(Modular.initialRoute, child: (_, args) => PedidoPage()),
       ];
 
   static Inject get to => Inject<PedidoModule>.of();

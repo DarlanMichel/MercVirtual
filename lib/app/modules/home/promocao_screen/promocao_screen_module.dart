@@ -5,7 +5,7 @@ import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_
 import 'package:mercadovirtual/app/modules/home/promocao_screen/promocao_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/promocao_repository.dart';
 
-class PromocaoScreenModule extends ModuleWidget {
+class PromocaoScreenModule extends WidgetModule {
   @override
   List<Bind> get binds => [
     Bind((i) => PromocaoScreenController(i.get<PromocaoRepository>())),
@@ -16,8 +16,8 @@ class PromocaoScreenModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => PromocaoScreenWidget())
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => PromocaoScreenWidget())
   ];
 
   static Inject get to => Inject<PromocaoScreenModule>.of();

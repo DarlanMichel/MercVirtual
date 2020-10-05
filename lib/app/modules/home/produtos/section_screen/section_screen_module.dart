@@ -6,7 +6,7 @@ import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_
 import 'package:mercadovirtual/app/modules/home/produtos/section_screen/section_screen_widget.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/categoria_repository.dart';
 
-class SectionScreenModule extends ModuleWidget {
+class SectionScreenModule extends WidgetModule {
   @override
   List<Bind> get binds => [
     Bind((i) => SectionScreenController()),
@@ -17,9 +17,9 @@ class SectionScreenModule extends ModuleWidget {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => SectionScreenWidget()),
-    Router("/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => SectionScreenWidget()),
+    ModularRouter("/produto/:categ", child: (_, args) => ProductScreenWidget(categoria: args.data)),
   ];
 
   static Inject get to => Inject<SectionScreenModule>.of();
