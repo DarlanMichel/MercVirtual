@@ -50,7 +50,8 @@ class AppModule extends MainModule {
             (i) => EnderecoRepository(i.get<HasuraConnect>())),
 
         ///Outros
-        Bind((i) => HasuraService().newHasura),
+        // Bind((i) => HasuraService().newHasura),
+        Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => shared),
         Bind((i) => FirebaseAuth.instance),
       ];

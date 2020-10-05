@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mercadovirtual/app/modules/home/models/perfil_model.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/cadastro_perfil/cadastro_perfil_page.dart';
 import 'package:mercadovirtual/app/modules/home/perfil/perfil_controller.dart';
+import 'package:mercadovirtual/app/modules/shared/custom_hasura_connect.dart';
 
 class PerfilWidget extends StatefulWidget {
   @override
@@ -170,38 +174,38 @@ class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.account_balance_wallet,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Pagamento",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text("Minhas Formas de Pagamento")
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: (){
-                        Navigator.pushNamed(context, "/Home/perfil/pagamento");
-                      },
-                    )
-                  ],
-                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Row(
+                //   children: <Widget>[
+                //     Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: Icon(
+                //         Icons.account_balance_wallet,
+                //         color: Theme.of(context).primaryColor,
+                //       ),
+                //     ),
+                //     Expanded(
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: <Widget>[
+                //           Text(
+                //             "Pagamento",
+                //             style: TextStyle(fontWeight: FontWeight.bold),
+                //           ),
+                //           Text("Minhas Formas de Pagamento")
+                //         ],
+                //       ),
+                //     ),
+                //     IconButton(
+                //       icon: Icon(Icons.arrow_forward_ios),
+                //       onPressed: (){
+                //         Navigator.pushNamed(context, "/Home/perfil/pagamento");
+                //       },
+                //     )
+                //   ],
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -265,7 +269,41 @@ class _PerfilWidgetState extends ModularState<PerfilWidget, PerfilController> {
                       },
                     )
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        FontAwesomeIcons.signOutAlt,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Sair",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Faça logout para acessar com outra conta")
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: () async{
+                        await FirebaseAuth.instance.signOut();
+                        await CustomHasuraConnect.getConnect(FirebaseAuth.instance).cleanCache();
+                        Modular.to.pushReplacementNamed("/homelogin");
+                      },
+                    )
+                  ],
+                ),
               ],
             ),
           )

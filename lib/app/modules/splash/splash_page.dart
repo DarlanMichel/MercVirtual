@@ -11,7 +11,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends ModularState<SplashPage, SplashController> {
-  checkLogin() async {
+  void checkLogin() async {
     var result = await controller.checkLogin();
 
     if (result) {

@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
 import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
 import 'package:mercadovirtual/app/modules/shared/custom_hasura_connect.dart';
-import 'package:mercadovirtual/app/modules/splash/splash_controller.dart';
+import 'package:mercadovirtual/app/modules/shared/firebase_errors.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_controller.g.dart';
 
@@ -54,7 +54,7 @@ abstract class _LoginControllerBase with Store {
   Future<bool> login() async {
     setLoading(true);
     await googleSignIn.signOut();
-    HasuraService().removeToken();
+    // HasuraService().removeToken();
     try {
       final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
         email: email,
@@ -64,10 +64,10 @@ abstract class _LoginControllerBase with Store {
       store.setToken((await user.getIdToken()).token);
       //HasuraService().connection;
 
-    } catch (e) {
+    } on PlatformException catch (e) {
       Modular.to.showDialog(builder: (context) {
         return AlertDialog(
-          content: Text("E-mail ou senha inválida!"),
+          content: Text("${getErrorString(e.code)}"),
         );
       });
     }
@@ -76,7 +76,7 @@ abstract class _LoginControllerBase with Store {
 
   Future<bool> signInWithGoogle() async {
     setLoading(true);
-    HasuraService().removeToken();
+    // HasuraService().removeToken();
     try {
       final GoogleSignInAccount googleUser = await googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -97,10 +97,10 @@ abstract class _LoginControllerBase with Store {
       usuario = user.uid;
       nome = user.displayName;
 
-    } catch (e) {
+    } on PlatformException catch (e) {
       Modular.to.showDialog(builder: (context) {
         return AlertDialog(
-          content: Text("Não foi possivel conectar! Tente Novamente!"),
+          content: Text("${getErrorString(e.code)}"),
         );
       });
     }
@@ -110,7 +110,7 @@ abstract class _LoginControllerBase with Store {
 
  Future<bool> signInWithFacebook() async {
    setLoading(true);
-   HasuraService().removeToken();
+   // HasuraService().removeToken();
     try{
      final LoginResult result = await FacebookAuth.instance.login();
      final AuthCredential credential = FacebookAuthProvider.getCredential(
@@ -144,10 +144,10 @@ abstract class _LoginControllerBase with Store {
      //     break;
      // }
 
-    }catch (e) {
+    } on PlatformException catch (e) {
       Modular.to.showDialog(builder: (context) {
         return AlertDialog(
-          content: Text("Não foi possivel conectar! Tente Novamente!"),
+          content: Text("${getErrorString(e.code)}"),
         );
       });
     }

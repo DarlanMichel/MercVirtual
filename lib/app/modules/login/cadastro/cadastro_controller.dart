@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mercadovirtual/app/modules/home/repositories/perfil_repository.dart';
 import 'package:mercadovirtual/app/modules/login/store/login_store_controller.dart';
+import 'package:mercadovirtual/app/modules/shared/firebase_errors.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastro_controller.g.dart';
@@ -63,7 +65,12 @@ abstract class _CadastroControllerBase with Store{
     try{
       final FirebaseAuth _auth = FirebaseAuth.instance;
 
-      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: senha,
+      );
+
+      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
         email: email,
         password: senha,
       )).user;
@@ -74,15 +81,15 @@ abstract class _CadastroControllerBase with Store{
       //var tokenId = await user.getIdToken();
       //valid = tokenId != null;
 
-    }catch (e){
+    } on PlatformException catch (e){
       Modular.to.showDialog(builder: (context){
         return AlertDialog (
-          content: Text("Erro de Conexão"),
+          content: Text("${getErrorString(e.code)}"),
         );
       });
     }
 
-    setvalid(true);
+    setvalid(false);
 
   }
 }

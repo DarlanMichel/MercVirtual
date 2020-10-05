@@ -32,8 +32,8 @@ class PerfilRepository implements IPerfilRepository {
   void dispose() {}
 
   @override
-  Future insert(String nome, String email, String id) {
-    return _hasuraConnect.mutation(insertClienteQuery, variables: {
+  Future insert(String nome, String email, String id) async{
+    return await _hasuraConnect.mutation(insertClienteQuery, variables: {
       "nome": nome,
       "email": email,
       "id": id,
